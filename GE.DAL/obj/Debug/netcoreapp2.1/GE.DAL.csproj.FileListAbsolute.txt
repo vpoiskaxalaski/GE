@@ -1,0 +1,10 @@
+E:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.deps.json
+E:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.dll
+E:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.pdb
+E:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.csproj.CoreCompileInputs.cache
+E:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.AssemblyInfoInputs.cache
+E:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.AssemblyInfo.cs
+E:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.dll
+E:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.pdb
+E:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.runtimeconfig.json
+E:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.runtimeconfig.dev.json

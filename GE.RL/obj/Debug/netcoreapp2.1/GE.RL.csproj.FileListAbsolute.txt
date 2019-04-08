@@ -1,0 +1,9 @@
+E:\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.RL.deps.json
+E:\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.RL.dll
+E:\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.RL.pdb
+E:\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.csproj.CoreCompileInputs.cache
+E:\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.AssemblyInfoInputs.cache
+E:\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.AssemblyInfo.cs
+E:\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.dll
+E:\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.pdb
+E:\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.csproj.CopyComplete
