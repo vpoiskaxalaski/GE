@@ -24,13 +24,13 @@
     ".NETCoreApp,Version=v2.1": {
       "GE.WEB/1.0.0": {
         "dependencies": {
+          "GE.DAL": "1.0.0",
+          "GE.RL": "1.0.0",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
           "Ninject": "3.3.4",
-          "Ninject.MVC5": "3.2.1",
-          "GE.DAL": "1.0.0.0",
-          "GE.RL": "1.0.0.0"
+          "Ninject.MVC5": "3.2.1"
         },
         "runtime": {
           "GE.WEB.dll": {}
@@ -286,23 +286,25 @@
           "lib/net40/WebActivatorEx.dll": {}
         }
       },
-      "GE.DAL/1.0.0.0": {
+      "GE.DAL/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.App": "2.1.1",
+          "System.Runtime.InteropServices": "4.3.0"
+        },
         "runtime": {
-          "GE.DAL.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "GE.DAL.dll": {}
         },
         "compile": {
           "GE.DAL.dll": {}
         }
       },
-      "GE.RL/1.0.0.0": {
+      "GE.RL/1.0.0": {
+        "dependencies": {
+          "GE.DAL": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "2.1.1"
+        },
         "runtime": {
-          "GE.RL.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "GE.RL.dll": {}
         },
         "compile": {
           "GE.RL.dll": {}
@@ -3354,13 +3356,13 @@
       "path": "webactivatorex/2.0.0",
       "hashPath": "webactivatorex.2.0.0.nupkg.sha512"
     },
-    "GE.DAL/1.0.0.0": {
-      "type": "reference",
+    "GE.DAL/1.0.0": {
+      "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "GE.RL/1.0.0.0": {
-      "type": "reference",
+    "GE.RL/1.0.0": {
+      "type": "project",
       "serviceable": false,
       "sha512": ""
     },

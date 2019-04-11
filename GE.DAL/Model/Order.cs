@@ -13,6 +13,6 @@ namespace GE.DAL.Model
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
 
-        public Lot Lot { get; set; }
+        public List<Lot> Lot { get; set; }
     }
 }

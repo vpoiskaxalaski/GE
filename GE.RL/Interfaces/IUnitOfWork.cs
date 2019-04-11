@@ -9,6 +9,9 @@ namespace GE.RL.Interfaces
     {
         IRepository<Lot> Lots { get; }
         IRepository<Order> Orders { get; }
+        IRepository<Category> Categories { get; }
+        IRepository<Subcategory> Subcategories { get; }
         void Save();
+        void CategoriesInit();
     }
 }

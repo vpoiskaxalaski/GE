@@ -22,18 +22,20 @@ namespace GE.WEB.Controllers
         public HomeController()
         {
             IKernel ninjectKernel = new StandardKernel();
-            DbConnection dbConnection = new DbConnection("DefaultConnection");
+            DbConnection dbConnection = new DbConnection("MyConnection");
 
             ninjectKernel.Bind<IUnitOfWork>().To<UnitOfWork>().WithConstructorArgument(dbConnection.GetOptions());
             unitOfWork = ninjectKernel.Get<IUnitOfWork>();
+            unitOfWork.CategoriesInit();
         }
 
         public IActionResult Index()
         {
-
-            ViewBag.lots = unitOfWork.Lots.GetAll();
+            ViewBag.categories = unitOfWork.Categories.GetAll();
             return View();
         }
+
+
 
         public IActionResult About()
         {

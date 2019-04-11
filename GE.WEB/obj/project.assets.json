@@ -4399,6 +4399,34 @@
         "runtime": {
           "lib/net40/WebActivatorEx.dll": {}
         }
+      },
+      "GE.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "Microsoft.AspNetCore.App": "2.1.0",
+          "System.Runtime.InteropServices": "4.3.0"
+        },
+        "compile": {
+          "bin/placeholder/GE.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GE.DAL.dll": {}
+        }
+      },
+      "GE.RL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "GE.DAL": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "2.1.0"
+        },
+        "compile": {
+          "bin/placeholder/GE.RL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GE.RL.dll": {}
+        }
       }
     }
   },
@@ -11933,10 +11961,22 @@
         "webactivatorex.2.0.0.nupkg.sha512",
         "webactivatorex.nuspec"
       ]
+    },
+    "GE.DAL/1.0.0": {
+      "type": "project",
+      "path": "../GE.DAL/GE.DAL.csproj",
+      "msbuildProject": "../GE.DAL/GE.DAL.csproj"
+    },
+    "GE.RL/1.0.0": {
+      "type": "project",
+      "path": "../GE.RL/GE.RL.csproj",
+      "msbuildProject": "../GE.RL/GE.RL.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "GE.DAL >= 1.0.0",
+      "GE.RL >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.0",
@@ -11973,7 +12013,14 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\UNIVER\\CourseProject\\GE\\GE.DAL\\GE.DAL.csproj": {
+              "projectPath": "E:\\UNIVER\\CourseProject\\GE\\GE.DAL\\GE.DAL.csproj"
+            },
+            "E:\\UNIVER\\CourseProject\\GE\\GE.RL\\GE.RL.csproj": {
+              "projectPath": "E:\\UNIVER\\CourseProject\\GE\\GE.RL\\GE.RL.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

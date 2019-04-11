@@ -46,5 +46,10 @@ namespace GE.RL.Repositories
             if (order != null)
                 db.Orders.Remove(order);
         }
+
+        public int GetCount()
+        {
+            return db.Orders.Count();
+        }
     }
 }

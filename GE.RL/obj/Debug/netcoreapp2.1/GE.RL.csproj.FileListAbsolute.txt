@@ -7,3 +7,15 @@ E:\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.AssemblyInfo.cs
 E:\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.dll
 E:\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.pdb
 E:\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.csproj.CopyComplete
+E:\UNIVER\CourseProject\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.csproj.CoreCompileInputs.cache
+E:\UNIVER\CourseProject\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.AssemblyInfoInputs.cache
+E:\UNIVER\CourseProject\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.AssemblyInfo.cs
+E:\UNIVER\CourseProject\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.csproj.CopyComplete
+E:\UNIVER\CourseProject\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.dll
+E:\UNIVER\CourseProject\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.pdb
+E:\UNIVER\CourseProject\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.RL.deps.json
+E:\UNIVER\CourseProject\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.RL.dll
+E:\UNIVER\CourseProject\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.RL.pdb
+E:\UNIVER\CourseProject\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.csprojAssemblyReference.cache
+E:\UNIVER\CourseProject\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.DAL.dll
+E:\UNIVER\CourseProject\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.DAL.pdb

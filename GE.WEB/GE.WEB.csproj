@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="bin\**" />
     <Content Remove="obj\**" />
+    <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="obj\**" />
   </ItemGroup>
 
@@ -23,16 +25,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="bin\Debug\netcoreapp2.1\GE.WEB.deps.json" />
-    <Content Include="bin\Debug\netcoreapp2.1\GE.WEB.runtimeconfig.dev.json" />
-    <Content Include="bin\Debug\netcoreapp2.1\GE.WEB.runtimeconfig.json" />
+    <Content Include="Content\bootstrap-sortable.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\pfdindisplayprobold.woff" />
+    <Content Include="Content\fonts\pfdindisplaypromedium.woff" />
+    <Content Include="Content\fonts\pfdindisplayproregular.woff" />
+    <Content Include="Content\img\avatar\g.png" />
+    <Content Include="Content\img\icon-arrow-8x12.png" />
+    <Content Include="Content\img\icon-close-12x12.png" />
+    <Content Include="Content\img\icon-close-24x24.png" />
+    <Content Include="Content\img\icon-ok-20.png" />
+    <Content Include="Content\img\icon-search-16x16.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\plus.png" />
+    <Content Include="Content\img\remove.png" />
+    <Content Include="Content\img\rotate.png" />
+    <Content Include="Content\img\star23x21.png" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Site.css" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="bin\Debug\netcoreapp2.1\GE.WEB.dll" />
-    <None Include="bin\Debug\netcoreapp2.1\GE.WEB.pdb" />
-    <None Include="bin\Debug\netcoreapp2.1\GE.WEB.Views.dll" />
-    <None Include="bin\Debug\netcoreapp2.1\GE.WEB.Views.pdb" />
+    <None Include="Content\fonts\glyphicons-halflings-regular.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,12 +60,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="GE.DAL">
-      <HintPath>..\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.dll</HintPath>
-    </Reference>
-    <Reference Include="GE.RL">
-      <HintPath>..\GE.RL\bin\Debug\netcoreapp2.1\GE.RL.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\GE.DAL\GE.DAL.csproj" />
+    <ProjectReference Include="..\GE.RL\GE.RL.csproj" />
   </ItemGroup>
 
 </Project>

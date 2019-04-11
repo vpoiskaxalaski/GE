@@ -48,5 +48,10 @@ namespace GE.RL.Repositories
             if (lot != null)
                 db.Lots.Remove(lot);
         }
+
+        public int GetCount()
+        {
+            return db.Lots.Count();
+        }
     }
 }

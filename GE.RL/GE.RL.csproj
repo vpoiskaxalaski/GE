@@ -5,49 +5,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.1\GE.RL.AssemblyInfo.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.1\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.1\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.1\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\LotRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\SubcategoryRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="bin\Debug\netcoreapp2.1\GE.RL.deps.json" />
-    <Content Include="obj\Debug\netcoreapp2.1\GE.RL.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\project.assets.json" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="bin\Debug\netcoreapp2.1\GE.DAL.dll" />
-    <None Include="bin\Debug\netcoreapp2.1\GE.DAL.pdb" />
-    <None Include="bin\Debug\netcoreapp2.1\GE.RL.dll" />
-    <None Include="bin\Debug\netcoreapp2.1\GE.RL.pdb" />
-    <None Include="obj\Debug\netcoreapp2.1\GE.RL.AssemblyInfoInputs.cache" />
-    <None Include="obj\Debug\netcoreapp2.1\GE.RL.assets.cache" />
-    <None Include="obj\Debug\netcoreapp2.1\GE.RL.csproj.CopyComplete" />
-    <None Include="obj\Debug\netcoreapp2.1\GE.RL.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\netcoreapp2.1\GE.RL.csprojAssemblyReference.cache" />
-    <None Include="obj\Debug\netcoreapp2.1\GE.RL.dll" />
-    <None Include="obj\Debug\netcoreapp2.1\GE.RL.pdb" />
-    <None Include="obj\GE.RL.csproj.nuget.cache" />
-    <None Include="obj\GE.RL.csproj.nuget.g.props" />
-    <None Include="obj\GE.RL.csproj.nuget.g.targets" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="GE.DAL">
-      <HintPath>..\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\GE.DAL\GE.DAL.csproj" />
   </ItemGroup>
 
 </Project>

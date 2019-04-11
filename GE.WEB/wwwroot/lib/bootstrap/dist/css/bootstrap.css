@@ -1409,7 +1409,7 @@ a.bg-danger:focus {
 }
 .page-header {
   padding-bottom: 9px;
-  margin: 40px 0 20px;
+  margin: 0;
   border-bottom: 1px solid #eeeeee;
 }
 ul,
@@ -3018,6 +3018,7 @@ select[multiple].input-lg {
     display: inline-block;
     margin-bottom: 0;
     vertical-align: middle;
+    align-content:flex-end;
   }
   .form-inline .form-control {
     display: inline-block;
@@ -4240,7 +4241,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-top-right-radius: 0;
 }
 .navbar {
-  position: relative;
+  position: fixed;
+  margin-top: 0;
   min-height: 50px;
   margin-bottom: 20px;
   border: 1px solid transparent;

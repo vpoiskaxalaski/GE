@@ -10,15 +10,13 @@ namespace GE.RL
     {
         public DbSet<Lot> Lots { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Subcategory> Subcategories { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
             Database.EnsureCreated();
-            Lots.Add(new Lot { Name = "Nokia Lumia 630", Description = "Nokia", Price = 220 });
-            Lots.Add(new Lot { Name = "Plate", Description = "White plate", Price = 22 });
-            Lots.Add(new Lot { Name = "Suit", Description = "For kid", Price = 112 });
-            SaveChanges();
         }
     }
 }
