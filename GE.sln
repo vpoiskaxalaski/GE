@@ -12,6 +12,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GE.DAL", "GE.DAL\GE.DAL.csproj", "{4DD25D3A-8577-46A2-A0CB-00AD5F59983A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GE.RL", "GE.RL\GE.RL.csproj", "{CC68E7A8-F5E5-4264-BB92-3EC48E4FDE40}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4DD25D3A-8577-46A2-A0CB-00AD5F59983A} = {4DD25D3A-8577-46A2-A0CB-00AD5F59983A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

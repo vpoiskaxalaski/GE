@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "5940cc945b1572630314ba4f7a42666212a54dc1"
+    "signature": "143b8b76c41fb652116f82ea4e46b4cb3778b54a"
   },
   "compilationOptions": {
     "defines": [
@@ -29,8 +29,11 @@
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
-          "Ninject": "3.3.4",
-          "Ninject.MVC5": "3.2.1"
+          "Ninject": "3.3.0",
+          "Ninject.MVC5": "3.2.1",
+          "Ninject.Web.Common.WebHost": "3.3.0",
+          "PagedList.Mvc": "4.5.0",
+          "System.Runtime.Caching": "4.5.0"
         },
         "runtime": {
           "GE.WEB.dll": {}
@@ -206,31 +209,20 @@
       },
       "Microsoft.NETCore.Platforms/2.1.0": {},
       "Microsoft.NETCore.Targets/2.1.0": {},
-      "Microsoft.Web.Infrastructure/1.0.0": {
-        "runtime": {
-          "lib/net40/Microsoft.Web.Infrastructure.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.20105.407"
-          }
-        },
-        "compile": {
-          "lib/net40/Microsoft.Web.Infrastructure.dll": {}
-        }
-      },
       "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.1.0"
         }
       },
-      "Ninject/3.3.4": {
+      "Ninject/3.3.0": {
         "dependencies": {
           "System.Reflection.Emit.ILGeneration": "4.3.0",
           "System.Reflection.Emit.Lightweight": "4.3.0"
         },
         "runtime": {
           "lib/netstandard2.0/Ninject.dll": {
-            "assemblyVersion": "3.3.4.0",
-            "fileVersion": "3.3.4.0"
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.3.0.0"
           }
         },
         "compile": {
@@ -239,8 +231,8 @@
       },
       "Ninject.MVC5/3.2.1": {
         "dependencies": {
-          "Ninject": "3.3.4",
-          "Ninject.Web.Common.WebHost": "3.2.0"
+          "Ninject": "3.3.0",
+          "Ninject.Web.Common.WebHost": "3.3.0"
         },
         "runtime": {
           "lib/net45-full/Ninject.Web.Mvc.dll": {
@@ -252,38 +244,97 @@
           "lib/net45-full/Ninject.Web.Mvc.dll": {}
         }
       },
-      "Ninject.Web.Common/3.2.0": {
-        "dependencies": {
-          "Ninject": "3.3.4"
-        },
+      "Ninject.Web.Common.WebHost/3.3.0": {
         "runtime": {
-          "lib/net45-full/Ninject.Web.Common.dll": {
-            "assemblyVersion": "3.2.0.0",
-            "fileVersion": "3.2.0.0"
+          "lib/net45/Ninject.Web.Common.WebHost.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.3.0.0"
           }
         },
         "compile": {
-          "lib/net45-full/Ninject.Web.Common.dll": {}
+          "lib/net45/Ninject.Web.Common.WebHost.dll": {}
         }
       },
-      "Ninject.Web.Common.WebHost/3.2.0": {
-        "dependencies": {
-          "Ninject.Web.Common": "3.2.0",
-          "WebActivatorEx": "2.0.0"
-        }
-      },
-      "WebActivatorEx/2.0.0": {
-        "dependencies": {
-          "Microsoft.Web.Infrastructure": "1.0.0"
-        },
+      "PagedList/1.17.0": {
         "runtime": {
-          "lib/net40/WebActivatorEx.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.0.0"
+          "lib/net40/PagedList.dll": {
+            "assemblyVersion": "1.17.0.0",
+            "fileVersion": "1.17.0.0"
           }
         },
         "compile": {
-          "lib/net40/WebActivatorEx.dll": {}
+          "lib/net40/PagedList.dll": {}
+        }
+      },
+      "PagedList.Mvc/4.5.0": {
+        "dependencies": {
+          "PagedList": "1.17.0"
+        },
+        "runtime": {
+          "lib/net40/PagedList.Mvc.dll": {
+            "assemblyVersion": "4.5.0.0",
+            "fileVersion": "4.5.0.0"
+          }
+        },
+        "compile": {
+          "lib/net40/PagedList.Mvc.dll": {}
+        }
+      },
+      "System.Configuration.ConfigurationManager/4.5.0": {
+        "dependencies": {
+          "System.Security.Cryptography.ProtectedData": "4.5.0",
+          "System.Security.Permissions": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        }
+      },
+      "System.Runtime.Caching/4.5.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.1.0",
+          "System.Configuration.ConfigurationManager": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Runtime.Caching.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netcoreapp2.0/System.Runtime.Caching.dll": {
+            "rid": "unix",
+            "assetType": "runtime",
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.6.26515.6"
+          },
+          "runtimes/win/lib/netcoreapp2.0/System.Runtime.Caching.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Runtime.Caching.dll": {}
+        }
+      },
+      "System.Security.Cryptography.ProtectedData/4.5.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.6.26515.6"
+          }
         }
       },
       "GE.DAL/1.0.0": {
@@ -3307,13 +3358,6 @@
       "path": "microsoft.netcore.targets/2.1.0",
       "hashPath": "microsoft.netcore.targets.2.1.0.nupkg.sha512"
     },
-    "Microsoft.Web.Infrastructure/1.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-FNmvLn5m2LTU/Rs2KWVo0SIIh9Ek+U0ojex7xeDaSHw/zgEP77A8vY5cVWgUtBGS8MJfDGNn8rpXJWEIQaPwTg==",
-      "path": "microsoft.web.infrastructure/1.0.0",
-      "hashPath": "microsoft.web.infrastructure.1.0.0.nupkg.sha512"
-    },
     "NETStandard.Library/2.0.3": {
       "type": "package",
       "serviceable": true,
@@ -3321,12 +3365,12 @@
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
     },
-    "Ninject/3.3.4": {
+    "Ninject/3.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-CmbWW97FfJuh4LEOVZM/spqXl4KAulRUjqeMwRd5J9rDMQArmIYaDMU3pyzXXHT062tbF0OPIMwI7tSOtprPfg==",
-      "path": "ninject/3.3.4",
-      "hashPath": "ninject.3.3.4.nupkg.sha512"
+      "sha512": "sha512-iBW79OXhkaOmjwhdMQX0AlrLIVAji5XwfOMD5gHcitUuxuaA2apRxTzju8Z1r8buo98BTWxjkiYvPpvenjYoOA==",
+      "path": "ninject/3.3.0",
+      "hashPath": "ninject.3.3.0.nupkg.sha512"
     },
     "Ninject.MVC5/3.2.1": {
       "type": "package",
@@ -3335,26 +3379,47 @@
       "path": "ninject.mvc5/3.2.1",
       "hashPath": "ninject.mvc5.3.2.1.nupkg.sha512"
     },
-    "Ninject.Web.Common/3.2.0": {
+    "Ninject.Web.Common.WebHost/3.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-0isoniPCLBWDzFo3f3DrTfo2p/hDxmTzY7sqkIpJuTfXwzDmpRJmfJbK2FqHCgPKmgbsQKPB1JSK0e1HN2FbHw==",
-      "path": "ninject.web.common/3.2.0",
-      "hashPath": "ninject.web.common.3.2.0.nupkg.sha512"
+      "sha512": "sha512-x+ZLbaWElOeCECywQlw4oLoSqu9m6uATiN3fJ7FhJWc49gAYuNlmdFIJWYG2bZT4PsLFxDu5IctXZIeQT0D3aA==",
+      "path": "ninject.web.common.webhost/3.3.0",
+      "hashPath": "ninject.web.common.webhost.3.3.0.nupkg.sha512"
     },
-    "Ninject.Web.Common.WebHost/3.2.0": {
+    "PagedList/1.17.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ridsl0COq/FwJt+7MEmp2AJ74ysopHpEb6hhEBuXg8dJCgfD2gd/hvXHPls3dDgYaVqoAfTn9JwCgzQ2t3z1EQ==",
-      "path": "ninject.web.common.webhost/3.2.0",
-      "hashPath": "ninject.web.common.webhost.3.2.0.nupkg.sha512"
+      "sha512": "sha512-Ou6F3WKXh49hOo0TxWM+SkIGuKllYPuPPvnSYOlQ1sTrtuEyuDUhYbSJd5Sdb06i/sWUJZTjiUecEs3Ht/Hx3g==",
+      "path": "pagedlist/1.17.0",
+      "hashPath": "pagedlist.1.17.0.nupkg.sha512"
     },
-    "WebActivatorEx/2.0.0": {
+    "PagedList.Mvc/4.5.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-B3ZbOEaGCqa7BLjZZw6wqprOJJMvP39h7Lr5ADkJOCPKHppAaCre34kR63/gfgpM4htzTfgm/pEw7r7qqqMgIA==",
-      "path": "webactivatorex/2.0.0",
-      "hashPath": "webactivatorex.2.0.0.nupkg.sha512"
+      "sha512": "sha512-D0M4qW2g4a9cwG8ozIKUnJheCrm5GpFTceqUl63AXWaAVnTgk+TysZYUOGMsBRuzid8aF+/E8b0bXM6+90jiEw==",
+      "path": "pagedlist.mvc/4.5.0",
+      "hashPath": "pagedlist.mvc.4.5.0.nupkg.sha512"
+    },
+    "System.Configuration.ConfigurationManager/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UIFvaFfuKhLr9u5tWMxmVoDPkFeD+Qv8gUuap4aZgVGYSYMdERck4OhLN/2gulAc0nYTEigWXSJNNWshrmxnng==",
+      "path": "system.configuration.configurationmanager/4.5.0",
+      "hashPath": "system.configuration.configurationmanager.4.5.0.nupkg.sha512"
+    },
+    "System.Runtime.Caching/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-95j9KShuaAENf2gLbQ/9YoJDHIWAnoaFYA71xo4QVQyLkOMginn34cD1+6RcYIrqJamLkMXgvgUnOzwzBk+U0w==",
+      "path": "system.runtime.caching/4.5.0",
+      "hashPath": "system.runtime.caching.4.5.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.ProtectedData/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wLBKzFnDCxP12VL9ANydSYhk59fC4cvOr9ypYQLPnAj48NQIhqnjdD2yhP8yEKyBJEjERWS9DisKL7rX5eU25Q==",
+      "path": "system.security.cryptography.protecteddata/4.5.0",
+      "hashPath": "system.security.cryptography.protecteddata.4.5.0.nupkg.sha512"
     },
     "GE.DAL/1.0.0": {
       "type": "project",

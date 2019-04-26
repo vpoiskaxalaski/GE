@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GE.RL;
+using GE.WEB.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -30,10 +32,10 @@ namespace GE.WEB
             return config.GetConnectionString(connectionName);
         }
 
-        public DbContextOptions<RL.DatabaseContext> GetOptions()
+        public DbContextOptions<DatabaseContext> GetOptions()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<RL.DatabaseContext>();
-            DbContextOptions<RL.DatabaseContext> options = optionsBuilder.UseSqlServer(GetConnectionString()).Options;
+            var optionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
+            DbContextOptions<DatabaseContext> options = optionsBuilder.UseSqlServer(GetConnectionString()).Options;
 
             return options;
         }

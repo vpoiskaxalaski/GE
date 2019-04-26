@@ -6,13 +6,10 @@ namespace GE.DAL.Model
 {
     public class Order
     {
-        public int Id { get; set; }
-        public DateTime Adopted { get; set; }
-        public int Count { get; set; }
-        public decimal FinalPrice { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Address { get; set; }
-
-        public List<Lot> Lot { get; set; }
+        public string Id { get; set; }
+        public string PostId { get; set; }
+        public virtual Post Post { get; set; }
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

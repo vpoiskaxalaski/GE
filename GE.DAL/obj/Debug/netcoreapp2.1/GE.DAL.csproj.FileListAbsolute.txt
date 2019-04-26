@@ -8,6 +8,16 @@ E:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.dll
 E:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.pdb
 E:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.runtimeconfig.json
 E:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.runtimeconfig.dev.json
+D:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.deps.json
+D:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.runtimeconfig.json
+D:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.runtimeconfig.dev.json
+D:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.dll
+D:\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.pdb
+D:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.csproj.CoreCompileInputs.cache
+D:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.AssemblyInfoInputs.cache
+D:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.AssemblyInfo.cs
+D:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.dll
+D:\GE\GE.DAL\obj\Debug\netcoreapp2.1\GE.DAL.pdb
 E:\UNIVER\CourseProject\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.deps.json
 E:\UNIVER\CourseProject\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.runtimeconfig.json
 E:\UNIVER\CourseProject\GE\GE.DAL\bin\Debug\netcoreapp2.1\GE.DAL.runtimeconfig.dev.json

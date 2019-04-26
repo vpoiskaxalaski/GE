@@ -10,25 +10,23 @@ namespace GE.RL.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private DatabaseContext db;
-        private LotRepository lotRepository;
-        private OrderRepository orderRepository;
         private CategoryRepository categoryRepository;
         private SubcategoryRepository subcategoryRepository;
+        private PostRepository postRepository;
+        private CityRepository cityRepository;
+        private RegionRepository regionRepository;
+        /*
+  private OrderRepository orderRepository;
+  private ImagesGalleryRepository imagesGlleryRepository;
+  private PointRepository pointRepository;
+
+  */
 
         public UnitOfWork(DbContextOptions<DatabaseContext> options)
         {
             db = new DatabaseContext(options);
         }
-        public IRepository<Lot> Lots
-        {
-            get
-            {
-                if (lotRepository == null)
-                    lotRepository = new LotRepository(db);
-                return lotRepository;
-            }
-        }
-
+        /*
         public IRepository<Order> Orders
         {
             get
@@ -38,7 +36,7 @@ namespace GE.RL.Repositories
                 return orderRepository;
             }
         }
-
+        */
         public IRepository<Subcategory> Subcategories
         {
             get
@@ -60,12 +58,60 @@ namespace GE.RL.Repositories
                 {
                     categoryRepository = new CategoryRepository(db, Subcategories);
                 }
-                    
+
                 return categoryRepository;
             }
         }
 
+        public IRepository<Post> Posts
+        {
+            get
+            {
+                if (postRepository == null)
+                {
+                    postRepository = new PostRepository(db);
+                }
 
+                return postRepository;
+            }
+        }
+
+        public IRepository<City> Cities
+         {
+            get
+            {
+                if (cityRepository == null)
+                {
+                    cityRepository = new CityRepository(db);
+                }
+
+                return cityRepository;
+            }
+        }
+
+        public IRepository<Region> Regions
+        {
+            get
+            {
+                if (regionRepository == null)
+                {
+                   regionRepository = new RegionRepository(db);
+                }
+
+                return regionRepository;
+            }
+        }
+        /*
+
+
+
+
+
+
+       public IRepository<Point> Points => throw new NotImplementedException();
+
+       public IRepository<ImagesGallery> ImagesGallery => throw new NotImplementedException();
+       */
         public void Save()
         {
             db.SaveChanges();

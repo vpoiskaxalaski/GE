@@ -59,24 +59,24 @@
                     <li><a href="#">Главная</a></li>
                     @foreach (var item in ViewBag.categories)
                     {
-                    <li>
-                        <a href="#">@item.Name</a>
-                        <ul class="sub-menu">
-                            @foreach (var subitem in @item.Subcategories)
-                            {
-                                <li><a href="#">@subitem.Name</a></li>
-                            }
-                        </ul>
-                    </li>
+                        <li>
+                            <a href="#">@item.Name</a>
+                            <ul class="sub-menu">
+                                @foreach (var subitem in @item.Subcategories)
+                                {
+                                    <li><a href="#">@subitem.Name</a></li>
+                                }
+                            </ul>
+                        </li>
                     }
                 </ul>
             </div>
         </nav>
     </header>
     <!-- Header section end -->
+    @RenderBody()
     <partial name="_CookieConsentPartial" />
-    <div class="container body-content">
-        @RenderBody()
+    <div class="footer-section">
         <hr />
         <footer>
             <p>&copy; 2019 - Gyre</p>

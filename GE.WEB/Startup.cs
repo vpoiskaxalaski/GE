@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using GE.WEB.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using GE.WEB.Services;
 
 namespace GE.WEB
 {
@@ -36,11 +37,13 @@ namespace GE.WEB
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("MyConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

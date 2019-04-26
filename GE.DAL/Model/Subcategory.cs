@@ -12,8 +12,9 @@ namespace GE.DAL.Model
         public string Name { get; set; }
         public int Points { get; set; }
         public string CategoryName { get; set; }
+        public Category Category { get; set; }
 
-        public Subcategory(string Name, int Points, string CategoryName )
+        public Subcategory(string Name, int Points, string CategoryName)
         {
             this.Name = Name;
             this.Points = Points;

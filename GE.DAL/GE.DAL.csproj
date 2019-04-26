@@ -10,10 +10,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Model\ApplicationUser.cs" />
     <Compile Include="Model\Category.cs" />
-    <Compile Include="Model\Lot.cs" />
+    <Compile Include="Model\City.cs" />
+    <Compile Include="Model\ImagesGallery.cs" />
+    <Compile Include="Model\Operation.cs" />
     <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\Point.cs" />
+    <Compile Include="Model\Post.cs" />
+    <Compile Include="Model\Region.cs" />
     <Compile Include="Model\Subcategory.cs" />
+    <Compile Include="Model\Video.cs" />
   </ItemGroup>
 
   <ItemGroup>
