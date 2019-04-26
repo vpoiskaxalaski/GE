@@ -1,0 +1,67 @@
+﻿@model diplom.Models.ApplicationUser
+@{
+    Layout = null;
+}
+<h2>Информация о пользователе</h2>
+<div class="F__category" style="padding-bottom:0px">
+</div>
+<div class="profile-header" style="margin:10px 0;">
+    <div class="profile-header-inner container">
+        <div class="box box_bonuses">
+            <div class="image">
+                <i class="icon"></i>
+            </div>
+            <div class="title">
+                Бонусы:
+                <span class="count"> @Model.Points.Points</span>
+            </div>
+        </div>
+        <div class="profile-user">
+            <div class="profile-avatar">
+                <img class="i-avatar" src="~/Content/img/avatar/g.png" width="90" height="90" alt="">
+            </div>
+            <div class="profile-user-row">
+                <div class="profile-user-email">
+                    @Model.Email
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="profile-content">
+    <div class="profile-content-inner container">
+        <div class="tab-content" id="userPanel">
+            <hr style="    color: #ddd;">
+            <div class="tab-pane fade active in" id="profileEdit">
+                <div class="profile-edit" id="changeProfile">
+                    <div class="formi formi_left">
+                        <div class="form-group">
+                            <label for="profileUsername">
+                                Логин: @Model.UserName
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileUsername">
+                                Подтверждение email: @Model.EmailConfirmed
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="formi formi_right">
+                        <div class="form-group">
+                            <label for="profileEmail">
+                                Номер телефона: @Model.PhoneNumber
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profileEmail">
+                                Количество постов: @Model.Posts.Count
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+        </div>
+    </div>
+</div>

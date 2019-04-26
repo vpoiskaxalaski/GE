@@ -1,0 +1,53 @@
+﻿@model PagedList.IPagedList<diplom.Models.Post>
+@using PagedList.Mvc;
+<div class="videos-inner">
+    <div class="view-header">
+        <div class="container">
+            <h1 class="view__title">
+                Панель модератора
+            </h1>
+        </div>
+    </div>
+    <div align="center">
+        <h3 style="color:red">
+            @ViewBag.Message
+        </h3>
+    </div>
+    <div class="F__category">
+    </div>
+
+    <table class="table table-bordered table-striped sortable">
+        <thead>
+            <tr><th>Наименование объявления</th><th>Дата создания объявления</th><th>Логин пользователя</th></tr>
+        </thead>
+        <tbody>
+            @foreach (diplom.Models.Post post in Model)
+            {
+                <tr>
+                    <td>@Ajax.ActionLink((string)post.Name, "PostInformation", "Manage", new { id = post.Id }, new AjaxOptions { UpdateTargetId = "postInformation" })</td>
+                    <td>@post.DateCreatePost</td>
+                    <td>@post.User.UserName</td>
+                    <td>
+                        @using (Html.BeginForm("ResolvePost", "Manage", FormMethod.Post))
+                        {
+                            <input type="hidden" name="Id" value="@post.Id" />
+                            <button style=" -webkit-border-radius: 4px; border-color: #ff6600 !important; background-color: #ff6600 !important; color:white; width:inherit; border: 1px solid #cccccc;" type="submit">Одобрить</button>
+
+                        }
+                    <td>
+                    <td>
+                        @using (Html.BeginForm("RejectPost", "Manage", FormMethod.Post))
+                        {
+                            <input type="hidden" name="Id" value="@post.Id" />
+                            <button style=" -webkit-border-radius: 4px; border-color: crimson !important; background-color: crimson !important; color:white; width:inherit; border: 1px solid #cccccc;" type="submit">Отклонить</button>
+                        }
+                    <td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <hr style="    color: #ddd;">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new PagedList.Mvc.PagedListRenderOptions { MaximumPageNumbersToDisplay = 10 })
+    <div id="postInformation"></div>
+</div>

@@ -1,0 +1,204 @@
+﻿@model diplom.Models.RegisterPostViewModel
+<div class="videos-inner">
+    <div class="view-header">
+        <div class="container">
+            <h1 class="view__title">
+                Подача объявления
+            </h1>
+        </div>
+    </div>
+    <div class="videos-mask">
+        @using (Html.BeginForm("CreatePost", "Manage", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+        {
+            @Html.ValidationSummary("", new { @class = "text-danger", @style = "color:red;" })
+            //<p class="text-success">@ViewBag.StatusMessage</p>
+            <div class="form_section">
+                <label class="form_section form_tag">Имя продукта</label>
+                @Html.TextBoxFor(m => m.Name, new { @class = "form_controlinput", @placeholder = "например HTC" })
+            </div>
+            <br />
+            <div class="form_section">
+                <label class="form_section form_tag">Выбор дополнительных параметров</label>
+                <div id="filter" style="padding:0px 0px 0px 10px">
+                    <div class="F F__category" style="margin:0px 0; padding-bottom: 0px" data-filter-types="city,category,subcategory,region">
+                        <div class="container">
+                            <div id="categoryFilterExtended" class="Fis Fis__main">
+                                <div class="Fi Fi__dropdown Fi__category">
+                                    <div class="Fi_title" data-toggle="dropdown">
+                                        <a class="_link" href="#">
+                                            <span style="max-width:none" class="_value ncat">
+                                                Категория
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="Fi_menu">
+                                        <div class="F-sub">
+                                            <ul class="F-subis" id="categoryPart">
+                                                @foreach (var category in ViewBag.Categories)
+                                                {
+                                                    <li id="@category.Name" class="F-subi valueSub" data-filter="category:@category.Name">
+                                                        <div class="F-subi_title">
+                                                            <a class="_link" id="@category.Name" title="@category.Name">
+                                                                <span class="_value">
+                                                                    @category.Name
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="Fi Fi__dropdown Fi__subcategory" style="display: none">
+                                    @Html.TextBoxFor(m => m.Subcategory, new { @style = "display: none" })
+                                    <div class="Fi_title" data-toggle="dropdown">
+                                        <a class="_link" href="#">
+                                            <span style="max-width:none" class="_value nsub">
+                                                Подкатегории
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="Fi_menu">
+                                        <div class="F-sub">
+                                            <ul class="F-subis" id="subcategoryPart"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="Fi Fi__dropdown Fi__region">
+                                    <div class="Fi_title" data-toggle="dropdown">
+                                        <a class="_link" href="#">
+                                            <span style="max-width:none" class="_value nreg">
+                                                Область
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="Fi_menu">
+                                        <div class="F-sub">
+                                            <ul class="F-subis" id="regionPart">
+                                                @foreach (var region in ViewBag.Regions)
+                                                {
+                                                    <li id="@region.Name" class="F-subi valueSub" data-filter="region:@region.Name">
+                                                        <div class="F-subi_title">
+                                                            <a class="_link" id="@region.Name" title="@region.Name">
+                                                                <span class="_value">
+                                                                    @region.Name
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="Fi Fi__dropdown Fi__city" style="display: none">
+                                    @Html.TextBoxFor(m => m.City, new { @style = "display: none" })
+                                    <div class="Fi_title" data-toggle="dropdown">
+                                        <a class="_link" href="#">
+                                            <span style="max-width:none" class="_value ncit">
+                                                Города
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="Fi_menu">
+                                        <div class="F-sub" id="cityPart">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="form_section">
+                <label class="form_section form_tag">Описание</label>
+                @Html.TextAreaFor(m => m.Description, new { @class = "form_control form_controlinputarea", @style = "resize:none", @placeholder = "Описание должно быть не меньше 5 и не больше 200 символов", @maxlength = "200", @rows = "3" })
+            </div>
+            <br />
+            <div class="form_section">
+
+                <label class="form_section form_tag">Фотография</label>
+                <ul class="image_list" id="sortable" rotation="0">
+                    <li class="image_upload image_item imgAdd" id="image-1" onclick="$('#1').click();"></li>
+                    <li class="image_upload image_item imgAdd" id="image-2" onclick="$('#2').click();"></li>
+                    <li class="image_upload image_item imgAdd" id="image-3" onclick="$('#3').click();"></li>
+                </ul>
+                <input type="file" style="display: none" name="images" accept=".jpg" multiple="" id="1"> @*.jpeg,.gif,.png,.bmp*@
+                <input type="file" style="display: none" name="images" accept=".jpg" multiple="" id="2">
+                <input type="file" style="display: none" name="images" accept=".jpg" multiple="" id="3">
+                <output style="margin-left:10px">Поле должно содержать хотя бы одну фотографию*</output>
+            </div>
+            <br />
+            <div class="form_section">
+                <label class="form_section form_tag">Видео</label>
+                <br />
+                <input type="file" accept=".mp4" name="video" id="loadVideo" />
+            </div>
+            <br />
+            <button style="margin-bottom: 30px;border-color: #ff6600 !important; background-color: #ff6600 !important; color:white; padding: 6px 12px; width: 100%; border: 1px solid #cccccc;" type="submit">Добавить</button>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $("#categoryPart").on("click", ".valueSub", function () {
+            var id = $(this).attr('id');
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetSubcategories")/' + id,
+                    success: function (data) {
+                        $('#subcategoryPart').replaceWith(data);
+                    }
+            });
+                $(".Fi__subcategory").css("display", "block");
+                $("span.ncat").text(id);
+                //$("div").find("li#" + id).addClass("__active");
+
+        });
+        $("#regionPart").on("click", ".valueSub", function () {
+            var id = $(this).attr('id');
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetCities")/' + id,
+                    success: function (data) {
+                        $('#cityPart').replaceWith(data);
+                    }
+            });
+                $(".Fi__city").css("display", "block");
+                $("span.nreg").text(id);
+        });
+        function handleFileSelect(evt) {
+            var files = evt.target.files;
+            for (var i = 0, f; f = files[i]; i++) {
+                if (!f.type.match('image.*')) {continue;}
+                var reader = new FileReader();
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        document.getElementById('image-' + evt.target.id).innerHTML = ['<div id="' + evt.target.id + '"> <img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/><b  class="image_delete" id="' + evt.target.id + '" onclick="removeImg(this);"></b><b  class="image_rotate" id="' + evt.target.id + '" onclick="rotateImg(this);"></b></div>'].join('');
+                    };
+                })(f);
+                reader.readAsDataURL(f);
+                //document.getElementById("image-" + evt.target.id).onclick = "none";
+            }
+        }
+        document.getElementById('1').addEventListener('change', handleFileSelect, false);
+        document.getElementById('2').addEventListener('change', handleFileSelect, false);
+        document.getElementById('3').addEventListener('change', handleFileSelect, false);
+        function removeImg(elem) {
+            $('div#' + elem.id + '').remove();
+        }
+        function getValueSub(elem) {
+            $("#Subcategory").val(elem.id);
+            $("span.nsub").text(elem.id);
+        }
+        function getValueCit(elem) {
+            $("#City").val(elem.id);
+            $("span.ncit").text(elem.id);
+        }
+    </script>
+}
+
+

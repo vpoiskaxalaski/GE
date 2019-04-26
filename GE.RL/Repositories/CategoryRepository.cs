@@ -11,10 +11,12 @@ namespace GE.RL.Repositories
     class CategoryRepository : IRepository<Category>
     {
         private DatabaseContext db;
+        IRepository<Subcategory> subcategoryRepository;
 
-        public CategoryRepository(DatabaseContext context)
+        public CategoryRepository(DatabaseContext context, IRepository<Subcategory> subcategoryRepository)
         {
             this.db = context;
+            this.subcategoryRepository = subcategoryRepository;
         }
         public void Create(Category item)
         {
@@ -30,17 +32,19 @@ namespace GE.RL.Repositories
 
         public IEnumerable<Category> Find(Func<Category, bool> predicate)
         {
-            return db.Categories.Where(predicate).ToList();
+            return db.Categories.Include(s => subcategoryRepository.GetAll().Where(i => s.Name == i.CategoryName )).ToList();
         }
 
         public Category Get(int id)
         {
-            return db.Categories.Find(id);
+            Category category = db.Categories.Find(id);
+            category.Subcategories.AddRange(subcategoryRepository.GetAll().Where(i => category.Name == i.CategoryName));
+            return category;
         }
 
         public IEnumerable<Category> GetAll()
         {
-            return db.Categories;
+            return db.Categories.Include(s => s.Subcategories );
         }
 
         public int GetCount()

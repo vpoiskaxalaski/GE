@@ -39,19 +39,6 @@ namespace GE.RL.Repositories
             }
         }
 
-        public IRepository<Category> Categories 
-        {
-            get
-            {
-                if (categoryRepository == null)
-                {
-                    categoryRepository = new CategoryRepository(db);
-                }
-                    
-                return categoryRepository;
-            }
-        }
-
         public IRepository<Subcategory> Subcategories
         {
             get
@@ -62,6 +49,19 @@ namespace GE.RL.Repositories
                 }
 
                 return subcategoryRepository;
+            }
+        }
+
+        public IRepository<Category> Categories 
+        {
+            get
+            {
+                if (categoryRepository == null)
+                {
+                    categoryRepository = new CategoryRepository(db, Subcategories);
+                }
+                    
+                return categoryRepository;
             }
         }
 

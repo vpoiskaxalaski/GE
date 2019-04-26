@@ -1,0 +1,58 @@
+﻿@model IEnumerable<diplom.Models.City>
+@if (((IEnumerable<dynamic>)ViewBag.Cities).Count() > 12)
+{
+    <div class="F-sub" id="cityPart">
+        <ul class="F-subis">
+            @for (int i = 0; i < 11; i++)
+            {
+                <li class="F-subi valueSub" data-filter="city:@ViewBag.Cities[i].Name">
+                    <div class="F-subi_title">
+                        <a class="_link"  href="/Home/Sorting/@ViewBag.Cities[i].Name" title="@ViewBag.Cities[i].Name">
+                            <span class="_value"  style="font-size:19px">
+                                @ViewBag.Cities[i].Name
+                            </span>
+                        </a>
+                    </div>
+                </li>
+
+            }
+        </ul>
+        <ul class="F-subis">
+            @for (int i = 11; i < ((IEnumerable<dynamic>)ViewBag.Cities).Count(); i++)
+            {
+                <li class="F-subi valueSub" data-filter="city:@ViewBag.Cities[i].Name">
+                    <div class="F-subi_title">
+                        <a class="_link"  href="/Home/Sorting/@ViewBag.Cities[i].Name" title="@ViewBag.Cities[i].Name">
+                            <span class="_value"  style="font-size:19px">
+                                @ViewBag.Cities[i].Name
+                            </span>
+                        </a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <div class="F-sub" id="cityPart">
+        <ul class="F-subis">
+            @foreach (var city in ViewBag.Cities)
+            {
+                <li class="F-subi valueSub" data-filter="city:@city.Name">
+                    <div class="F-subi_title">
+                        <a class="_link" href="/Home/Sorting/@city.Name" title="@city.Name">
+                            <span class="_value"  style="font-size:19px">
+                                @city.Name
+                            </span>
+                        </a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}
+        
+
+
+

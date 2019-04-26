@@ -1,0 +1,101 @@
+﻿@model PagedList.IPagedList<diplom.Models.ApplicationUser>
+@using PagedList.Mvc;
+<div class="videos-inner">
+    <div class="view-header">
+        <div class="container">
+            <h1 class="view__title">
+                Администрирование
+            </h1>
+        </div>
+    </div>
+    <div align="center">
+        <h3 style="color:red">
+            @ViewBag.Message
+        </h3>
+    </div>
+    <div class="F__category">
+    </div>
+
+    <div class="profile-menu">
+        <div class="profile-menu-inner container">
+            <ul class="tabs" id="profileTabs">
+                <li class="tabsi active">
+                    <a class="tabsi__title" href="#listUsers" data-toggle="tab" aria-expanded="false">
+                        Список пользователей
+                    </a>
+                </li>
+                <li class="tabsi">
+                    <a class="tabsi__title" href="#addModerator" data-toggle="tab" aria-expanded="true">
+                        Добавить модератора
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="tab-content">
+        <div class="tab-pane fade" id="addModerator">
+            @using (Html.BeginForm("CreateModerator", "Admin", null, FormMethod.Post, new { @class = "form", @style = "margin: 10px 40px;" }))
+            {
+                <div class="form-group">
+                    <input class="form-control" data-val="true" required id="login" name="login" placeholder="Логин" type="text" pattern=".{3,}" value="">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" data-val="true" required id="email" name="email" placeholder="Email" type="text" value="">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn_color" type="submit">
+                        Зарегистрироваться
+                    </button>
+                </div>
+            }
+        </div>
+        <div class="tab-pane fade active in" id="listUsers">
+            <div>
+                <table class="table table-bordered table-striped sortable">
+                    <thead>
+                        <tr><th>Логин пользователя</th><th>Подтверждение email</th><th>Номер телефона</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach (diplom.Models.ApplicationUser user in Model)
+                        {
+                            <tr>
+                                <td>@Ajax.ActionLink((string)user.UserName, "UserInformation", "Admin", new { id = user.Id }, new AjaxOptions { UpdateTargetId = "userInformation" })</td>
+                                <td>@user.EmailConfirmed</td>
+                                <td>@user.PhoneNumber</td>
+                                <td>
+                                    @using (Html.BeginForm("DeleteUser", "Admin", FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="Id" value="@user.Id" />
+                                        <button style=" -webkit-border-radius: 4px; border-color: #ff6600 !important; background-color: #ff6600 !important; color:white; width:inherit; border: 1px solid #cccccc;" type="submit">Удалить</button>
+
+                                    }
+                                <td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <hr style="    color: #ddd;">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new PagedList.Mvc.PagedListRenderOptions { MaximumPageNumbersToDisplay = 10 })
+            </div>
+            <div id="userInformation"></div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $(".viewDialog").click(function (e) {
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+    </script>
+}

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<diplom.Models.Subcategory>
+<ul class="F-subis" id="subcategoryPart">
+    @foreach (var subcategory in ViewBag.Subcategories)
+    {
+        <li class="F-subi valueSub" data-filter="subcategory:@subcategory.Name">
+            <div class="F-subi_title">
+                <a class="_link" href="/Home/Sorting/@subcategory.Name" title="@subcategory.Name">
+                    <span class="_value"  style="font-size:19px">
+                        @subcategory.Name
+                    </span>
+                </a>
+            </div>
+        </li>
+    }
+</ul>
+

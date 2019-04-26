@@ -10,7 +10,7 @@ namespace GE.DAL.Model
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Subcategory> Subcategories { get; set; }
+        public virtual List<Subcategory> Subcategories { get; set; }
 
         public Category(){ }
 
