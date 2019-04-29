@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GE.RL.Repositories
 {
-    /*
+
     public class OrderRepository : IRepository<Order>
     {
         private DatabaseContext db;
@@ -39,7 +39,7 @@ namespace GE.RL.Repositories
         }
         public IEnumerable<Order> Find(Func<Order, Boolean> predicate)
         {
-            return db.Orders.Where(predicate).ToList();
+            return db.Orders;
         }
         public void Delete(int id)
         {
@@ -53,5 +53,4 @@ namespace GE.RL.Repositories
             return db.Orders.Count();
         }
     }
-    */
 }

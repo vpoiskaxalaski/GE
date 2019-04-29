@@ -38,7 +38,7 @@ namespace GE.RL.Repositories
         public Category Get(int id)
         {
             Category category = db.Categories.Find(id);
-            category.Subcategories.AddRange(subcategoryRepository.GetAll().Where(i => category.Name == i.CategoryName));
+            //category.Subcategories.AddRange(subcategoryRepository.GetAll().Where(i => category.Name == i.CategoryName));
             return category;
         }
 

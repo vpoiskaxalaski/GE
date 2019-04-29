@@ -12,7 +12,10 @@ using Microsoft.EntityFrameworkCore;
 using GE.WEB.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using GE.WEB.Services;
+using GE.RL;
+using GE.RL.Interfaces;
+using GE.RL.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace GE.WEB
 {
@@ -35,15 +38,24 @@ namespace GE.WEB
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+
+            services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("MyConnection")));
+
+            // установка конфигурации подключения
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<DatabaseContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            services.AddDbService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

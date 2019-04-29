@@ -27,26 +27,26 @@ namespace GE.RL.Repositories
             return db.Posts.Find(id);
         }
 
-        public void Create(Post post)
+        public void Create(Post lot)
         {
-            db.Posts.Add(post);
+            db.Posts.Add(lot);
         }
 
-        public void Update(Post post)
+        public void Update(Post lot)
         {
-            db.Entry(post).State = EntityState.Modified;
+            db.Entry(lot).State = EntityState.Modified;
         }
 
         public IEnumerable<Post> Find(Func<Post, Boolean> predicate)
         {
-            return db.Posts.Where(predicate);
+            return db.Posts.Where(predicate).ToList();
         }
 
         public void Delete(int id)
         {
-            Post post  = db.Posts.Find(id);
-            if (post != null)
-                db.Posts.Remove(post);
+            Post lot  = db.Posts.Find(id);
+            if (lot != null)
+                db.Posts.Remove(lot);
         }
 
         public int GetCount()

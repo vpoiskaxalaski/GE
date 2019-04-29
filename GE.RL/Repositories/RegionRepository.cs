@@ -17,42 +17,42 @@ namespace GE.RL.Repositories
         {
             this.db = context;
         }
-
-        public IEnumerable<Region> GetAll()
+        public void Create(Region item)
         {
-            return db.Regions;
-        }
-
-        public Region Get(int id)
-        {
-            return db.Regions.Find(id);
-        }
-
-        public void Create(Region region)
-        {
-            db.Regions.Add(region);
-        }
-
-        public void Update(Region region)
-        {
-            db.Entry(region).State = EntityState.Modified;
-        }
-
-        public IEnumerable<Region> Find(Func<Region, Boolean> predicate)
-        {
-            return db.Regions.Where(predicate);
+            db.Add(item);
         }
 
         public void Delete(int id)
         {
-            Region region = db.Regions.Find(id);
-            if (region != null)
-                db.Regions.Remove(region);
+            Region item = db.Regions.Find(id);
+            if (item != null)
+                db.Regions.Remove(item);
+        }
+
+        public IEnumerable<Region> Find(Func<Region, bool> predicate)
+        {
+            return db.Regions.ToList();
+        }
+
+        public Region Get(int id)
+        {
+            Region item = db.Regions.Find(id);
+            return item;
+        }
+
+        public IEnumerable<Region> GetAll()
+        {
+            return db.Regions.Include(s => s.Cities);
         }
 
         public int GetCount()
         {
             return db.Regions.Count();
+        }
+
+        public void Update(Region item)
+        {
+            db.Entry(item).State = EntityState.Modified;
         }
     }
 }

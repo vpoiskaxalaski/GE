@@ -5,14 +5,16 @@
     <meta name="description" content=" Divisima | eCommerce Template">
     <meta name="keywords" content="divisima, eCommerce, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gyre</title>
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="shortcut icon" />
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
-
-
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="~/../Content/bootstrap-sortable.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
+
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/font-awesome.min.css" />
     <link rel="stylesheet" href="~/css/flaticon.css" />
@@ -21,66 +23,173 @@
     <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="~/css/animate.css" />
     <link rel="stylesheet" href="~/css/style.css" />
+
     <title>Gyre</title>
 </head>
-<body>
-    <!-- Header section -->
-    <header class="header-section">
-        <div class="header-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-2 text-center text-lg-left">
-                        <!-- logo -->
-                        <div class="site-logo">
-                            <img src="~/images/2013gyre_logo_final-1024x359.jpg" width="200px" />
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-5">
-                        <form class="header-search-form">
-                            <input type="text" placeholder="Search on divisima ....">
-                            <button><i class="flaticon-search"></i></button>
-                        </form>
-                    </div>
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="user-panel">
-                            <div class="up-item">
-                                <i class="flaticon-profile"></i>
-                                <a href="#">Sign</a> In or <a href="#">Create Account</a>
+<body class="brand brand_embed">
+    <script type="text/javascript">
+        function getBon() {
+            $.ajax({
+                url: '/Manage/GetBonus',
+                type: 'GET',
+                success: function (result) {
+                    $('#BonusValue').text(result);
+
+                }
+            });
+            return false;
+        }
+        function enableFocus() {
+            $('div.search-hint').addClass("focus");
+        }
+        function disableFocus() {
+            $('div.search-hint').removeClass("focus");
+        }
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("#serviceLoginLink").on("click", function (e) {
+                $(e.target).closest('.btn-group').children('.dropdown-toggle').dropdown('toggle');
+                $('#dialogContent').load(this.href, function () {
+                    $('#modDialog').modal({
+                        keyboard: true
+                    }, 'show');
+                    bindFormLogin(this);
+                });
+                return false;
+            });
+        });
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("#serviceRegisterLink").on("click", function (e) {
+                $(e.target).closest('.btn-group').children('.dropdown-toggle').dropdown('toggle');
+                $('#dialogContent').load(this.href, function () {
+                    $('#modDialog').modal({
+                        keyboard: true
+                    }, 'show');
+                    bindFormRegister(this);
+                });
+                return false;
+            });
+        });
+        function bindFormLogin(dialog) {
+            $('form', dialog).submit(function () {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        if (result.success) {
+                            $('#modDialog').modal('hide');
+                            location.reload();
+                        } else {
+                            $('#dialogContent').html(result);
+                            bindForm();
+                        }
+                    }
+                });
+                return false;
+            });
+        }
+        function bindFormRegister(dialog) {
+            $('form', dialog).submit(function () {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        if (result.success) {
+                            $('#modDialog').modal('hide');
+                            location.reload();
+                        } else {
+                            $('#dialogContent').html(result);
+                            bindForm();
+                        }
+                    }
+                });
+                return false;
+            });
+        }
+    </script>
+    <div id="wrapper" class="wrapper">
+        <div id="header" class="header">
+            <!-- Header section -->
+            <header class="header-section">
+                <div class="header-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2 text-center text-lg-left">
+                                <!-- logo -->
+                                <div class="site-logo">
+                                    <img src="~/images/2013gyre_logo_final-1024x359.jpg" width="200px" />
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-5">
+                                <form class="header-search-form">
+                                    <input type="text" placeholder="Search on divisima ....">
+                                    <button><i class="flaticon-search"></i></button>
+                                </form>
+                            </div>
+                            <div class="col-xl-4 col-lg-5">
+                                <div class="user-panel">
+                                    <div class="up-item">
+                                        <i class="flaticon-profile"></i>
+                                        @Html.ActionLink("Войти", "LoginModal", "Account", null, new { @class = "link loginLink", @id = "serviceLoginLink" })
+                                        или
+                                        @Html.ActionLink("Зарегестрироваться", "RegisterModal", "Account", null, new { @class = "link registerLink", @id = "serviceRegisterLink" })
+                                        @*<a href="/Account/LoginModal">Sign In</a> or <a href="/Acco">Create Account</a>*@
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <nav class="main-navbar">
+                    <div class="container">
+                        <!-- menu -->
+                        <ul class="main-menu">
+                            <li><a href="#">Главная</a></li>
+                            @foreach (var item in ViewBag.categories)
+                            {
+                                <li>
+                                    <a href="#">@item.Name</a>
+                                    <ul class="sub-menu">
+                                        @foreach (var subitem in @item.Subcategories)
+                                        {
+                                            <li><a href="#">@subitem.Name</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- Header section end -->
+        </div>
+        <div class="page">
+            @RenderBody()
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-item footer-item--left">
+                    <div class="mU mU--color mU--footer">
+                        <ul class="mU-list">
+                            <li class="mU-item mU-item--main">
+                                <a class="link mU-item-link" id="menuFooterMainLink" href="http://localhost:52723/">Gyre</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <nav class="main-navbar">
-            <div class="container">
-                <!-- menu -->
-                <ul class="main-menu">
-                    <li><a href="#">Главная</a></li>
-                    @foreach (var item in ViewBag.categories)
-                    {
-                        <li>
-                            <a href="#">@item.Name</a>
-                            <ul class="sub-menu">
-                                @foreach (var subitem in @item.Subcategories)
-                                {
-                                    <li><a href="#">@subitem.Name</a></li>
-                                }
-                            </ul>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <!-- Header section end -->
-    @RenderBody()
+    </div>
+
     <partial name="_CookieConsentPartial" />
-    <div class="footer-section">
-        <hr />
-        <footer>
-            <p>&copy; 2019 - Gyre</p>
-        </footer>
+        <div id="modDialog" class="modal fade">
+        <div id="dialogContent" class="modal-dialog"></div>
+    </div>
+    <div id="modDialog1" class="modal fade">
+        <div id="dialogContent1" class="modal-dialog"></div>
     </div>
     <!--====== Javascripts & Jquery ======-->
     <script src="~/js/jquery-3.2.1.min.js"></script>

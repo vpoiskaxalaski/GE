@@ -9,7 +9,9 @@
       "GE.RL/1.0.0": {
         "dependencies": {
           "GE.DAL": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "2.1.0"
+          "Microsoft.EntityFrameworkCore.Design": "2.1.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.1.0",
+          "Microsoft.EntityFrameworkCore.Tools": "2.1.0"
         },
         "runtime": {
           "GE.RL.dll": {}

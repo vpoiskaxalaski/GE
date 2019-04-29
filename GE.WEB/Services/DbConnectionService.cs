@@ -1,7 +1,8 @@
-﻿using GE.RL;
-using GE.WEB.Data;
+﻿using GE.RL.Interfaces;
+using GE.RL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace GE.WEB
 {
-    public class DbConnection
+    public class DbConnectionService
     {
         private string connectionName;
 
-        public DbConnection(string connectionName)
+        public DbConnectionService(string connectionName)
         {
             this.connectionName = connectionName;
         }
@@ -32,12 +33,20 @@ namespace GE.WEB
             return config.GetConnectionString(connectionName);
         }
 
-        public DbContextOptions<DatabaseContext> GetOptions()
+        public DbContextOptions<RL.DatabaseContext> GetOptions()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
-            DbContextOptions<DatabaseContext> options = optionsBuilder.UseSqlServer(GetConnectionString()).Options;
+            var optionsBuilder = new DbContextOptionsBuilder<RL.DatabaseContext>();
+            DbContextOptions<RL.DatabaseContext> options = optionsBuilder.UseSqlServer(GetConnectionString()).Options;
 
             return options;
+        }
+
+        public IUnitOfWork GetUnitOfWork()
+        {
+            IKernel ninjectKernel = new StandardKernel();
+            ninjectKernel.Bind<IUnitOfWork>().To<UnitOfWork>().WithConstructorArgument(this.GetOptions());
+
+            return ninjectKernel.Get<IUnitOfWork>();
         }
     }
 }

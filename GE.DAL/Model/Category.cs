@@ -10,19 +10,6 @@ namespace GE.DAL.Model
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public virtual List<Subcategory> Subcategories { get; set; }
-
-        public Category(){ }
-
-        public Category(string Name)
-        {
-            this.Name = Name;
-        }
-
-        public Category(int Id, string Name)
-        {
-            this.Id = Id;
-            this.Name = Name;
-        }
+        public virtual ICollection<Subcategory> Subcategories { get; set; }
     }
 }

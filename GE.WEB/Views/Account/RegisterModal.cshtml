@@ -1,0 +1,66 @@
+﻿@model GE.WEB.Models.RegisterViewModel
+
+<div class="modal-content">
+    <div class="autH">
+        <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">
+                <i class="icon icon_default"></i>
+                <i class="icon icon_hover"></i>
+            </button>
+            <h3 class="title">
+                Регистрация
+            </h3>
+        </div>
+    <form asp-action="RegisterModal">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber" class="control-label"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password" class="control-label"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ConfirmPassword" class="control-label"></label>
+        <input asp-for="ConfirmPassword" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script src="~/Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function showPassword() {
+        $('a.autH-toggle-password').addClass('on');
+        $('#Password').attr('type', 'text');
+    }
+    function hidePassword() {
+        $('a.autH-toggle-password').removeClass('on');
+        $('#Password').attr('type', 'password');
+    }
+    $(function ($) {
+        $("#Phone").mask("+375(99) 999-99-99");
+    });
+</script>

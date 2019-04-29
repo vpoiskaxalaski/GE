@@ -76,4 +76,5 @@ E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.Views.pdb
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.csproj.CopyComplete
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.dll
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.pdb
-E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Shared\RegisterModal.g.cshtml.cs
+E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Account\RegisterModal.g.cshtml.cs
