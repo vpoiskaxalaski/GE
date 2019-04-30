@@ -29,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Content\bootstrap-sortable.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -54,6 +53,25 @@
 
   <ItemGroup>
     <None Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\Scripts\bootstrap-sortable.js" />
+    <None Include="wwwroot\Scripts\bootstrap.js" />
+    <None Include="wwwroot\Scripts\bootstrap.min.js" />
+    <None Include="wwwroot\Scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="wwwroot\Scripts\jquery-1.10.2.js" />
+    <None Include="wwwroot\Scripts\jquery-1.10.2.min.js" />
+    <None Include="wwwroot\Scripts\jquery-1.10.2.min.map" />
+    <None Include="wwwroot\Scripts\jquery.maskedinput.js" />
+    <None Include="wwwroot\Scripts\jquery.maskedinput.min.js" />
+    <None Include="wwwroot\Scripts\jquery.unobtrusive-ajax.js" />
+    <None Include="wwwroot\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="wwwroot\Scripts\jquery.validate-vsdoc.js" />
+    <None Include="wwwroot\Scripts\jquery.validate.js" />
+    <None Include="wwwroot\Scripts\jquery.validate.min.js" />
+    <None Include="wwwroot\Scripts\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\Scripts\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\Scripts\modernizr-2.6.2.js" />
+    <None Include="wwwroot\Scripts\respond.js" />
+    <None Include="wwwroot\Scripts\respond.min.js" />
     <None Include="wwwroot\icon-fonts\Flaticon.svg" />
     <None Include="wwwroot\icon-fonts\fontawesome-webfont.svg" />
     <None Include="wwwroot\icon-fonts\fontawesome-webfont.woff2" />
@@ -69,9 +87,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ajax.helper" Version="1.1.1" />
+    <PackageReference Include="jQuery" Version="1.10.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.4" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="PagedList.Core.Mvc" Version="1.2.0" />

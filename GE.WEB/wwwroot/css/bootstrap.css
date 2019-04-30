@@ -1836,7 +1836,7 @@ img {
 
     .btn_color.hover, .btn_color:hover {
         background-color: #58cef5;
-        color: #fff
+        color: #fdae55
     }
 
     .btn_color.active, .btn_color:active {

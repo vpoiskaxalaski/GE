@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GE.WEB.Controllers
 {
+
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -24,27 +26,61 @@ namespace GE.WEB.Controllers
         {
             this.db = unitOfWork;
         }
+
         [HttpGet]
-        public IActionResult Login()
+        [AllowAnonymous]
+        public ActionResult LoginModal()
         {
             return PartialView();
         }
+
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<ActionResult> LoginModal(LoginViewModel model)
         {
+            /*
             if (ModelState.IsValid)
             {
-                ApplicationUser user = db.Users.GetAll().FirstOrDefault(u => u.UserName == model.Name && u.PasswordHash == model.Password);
+                ApplicationUser user = await UserManager.FindAsync(model.Name, model.Password);
+
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "Неверный логин или пароль.");
+                }
+                else
+                {
+                    ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user,
+                                            DefaultAuthenticationTypes.ApplicationCookie);
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    }, claim);
+                    if (String.IsNullOrEmpty(returnUrl))
+                        return RedirectToAction("Index", "Home");
+                    return Redirect(returnUrl);
+                }
+            }
+            ViewBag.returnUrl = returnUrl;
+            
+            return View(model);
+   
+            var user = await a.FindByLoginAsync(model.Name, model.Password); //.FindAsync(model.Name, model.Password);
                 if (user != null)
                 {
-                    await Authenticate(model.Name); // аутентификация
-
-                    return RedirectToAction("Index", "Home");
+                    if (user.EmailConfirmed == true)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return Json(new { success = true });
+                    }
+                    else ModelState.AddModelError("", "Не подтвержден email.");
                 }
-                ModelState.AddModelError("", "Некорректные логин и(или) пароль");
-            }
-            return View(model);
+                else ModelState.AddModelError("", "Неверный логин или пароль");
+        }
+         */
+            return PartialView(model);
+           
         }
 
         [HttpGet]

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "efd8c1a4055d0b8235960dacf2517ecd0195adae"
+    "signature": "66cf34fc91bc868d0dba9efac9b6490b9647b5f5"
   },
   "compilationOptions": {
     "defines": [
@@ -27,19 +27,29 @@
           "GE.DAL": "1.0.0",
           "GE.RL": "1.0.0",
           "Microsoft.AspNetCore.App": "2.1.1",
+          "Microsoft.AspNetCore.Identity": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.9",
+          "Microsoft.jQuery.Unobtrusive.Ajax": "3.2.4",
+          "Microsoft.jQuery.Unobtrusive.Validation": "3.2.3",
           "Ninject": "3.3.4",
           "PagedList.Core.Mvc": "1.2.0",
           "System.Data.Common": "4.3.0",
-          "X.PagedList.Mvc.Core": "7.6.0"
+          "X.PagedList.Mvc.Core": "7.6.0",
+          "jQuery": "1.10.2"
         },
         "runtime": {
           "GE.WEB.dll": {}
         },
         "compile": {
           "GE.WEB.dll": {}
+        }
+      },
+      "jQuery/1.10.2": {},
+      "jQuery.Validation/1.8.0.1": {
+        "dependencies": {
+          "jQuery": "1.10.2"
         }
       },
       "Microsoft.AspNetCore.Mvc.Abstractions/2.1.2": {
@@ -209,6 +219,17 @@
         },
         "compile": {
           "lib/netstandard1.6/Microsoft.Extensions.DependencyModel.dll": {}
+        }
+      },
+      "Microsoft.jQuery.Unobtrusive.Ajax/3.2.4": {
+        "dependencies": {
+          "jQuery": "1.10.2"
+        }
+      },
+      "Microsoft.jQuery.Unobtrusive.Validation/3.2.3": {
+        "dependencies": {
+          "jQuery": "1.10.2",
+          "jQuery.Validation": "1.8.0.1"
         }
       },
       "Microsoft.NETCore.App/2.1.0": {
@@ -3612,6 +3633,20 @@
       "serviceable": false,
       "sha512": ""
     },
+    "jQuery/1.10.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uPspgAZqsXYOwLW+Kf3uRxdFAyX1EiEd6AWJhCsnZNVsUJmEbsZSxA0P+ku6oAhHI682TOSwkbmmJPwFgdY5cA==",
+      "path": "jquery/1.10.2",
+      "hashPath": "jquery.1.10.2.nupkg.sha512"
+    },
+    "jQuery.Validation/1.8.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cSBTW8FiNcFYy7h8jY38ffnJGia25HQH/z1TP3f8OKZhn1ZSGS7Bebz9nMevKbtsAjzHhDFp/Cq0cT+ixwiB5A==",
+      "path": "jquery.validation/1.8.0.1",
+      "hashPath": "jquery.validation.1.8.0.1.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Mvc.Abstractions/2.1.2": {
       "type": "package",
       "serviceable": true,
@@ -3681,6 +3716,20 @@
       "sha512": "sha512-nS2XKqi+1A1umnYNLX2Fbm/XnzCxs5i+zXVJ3VC6r9t2z0NZr9FLnJN4VQpKigdcWH/iFTbMuX6M6WQJcTjVIg==",
       "path": "microsoft.extensions.dependencymodel/2.1.0",
       "hashPath": "microsoft.extensions.dependencymodel.2.1.0.nupkg.sha512"
+    },
+    "Microsoft.jQuery.Unobtrusive.Ajax/3.2.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-U0PMbbBXcSy0KeZqwk9pvCw1fAUfzCDIGXv3chB/Jo3/foD6GTmOeP4GxSRZ/QOrJzCl2L9HIOR069/AxWsfdQ==",
+      "path": "microsoft.jquery.unobtrusive.ajax/3.2.4",
+      "hashPath": "microsoft.jquery.unobtrusive.ajax.3.2.4.nupkg.sha512"
+    },
+    "Microsoft.jQuery.Unobtrusive.Validation/3.2.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zA9SHI3B0+JKcQDybm62TOK546TeqipYDGA1ytUUOVPHUbxOb80h5LxtMKuWph9NpsTqvsarV1ZPf/v9TB2sdA==",
+      "path": "microsoft.jquery.unobtrusive.validation/3.2.3",
+      "hashPath": "microsoft.jquery.unobtrusive.validation.3.2.3.nupkg.sha512"
     },
     "Microsoft.NETCore.App/2.1.0": {
       "type": "package",

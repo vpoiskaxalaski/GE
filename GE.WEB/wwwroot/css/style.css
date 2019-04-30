@@ -15,7 +15,6 @@ body {
 	height: 100%;
 	font-family: 'Josefin Sans', sans-serif;
 	-webkit-font-smoothing: antialiased;
-	font-smoothing: antialiased;
 }
 
 h1,
@@ -387,6 +386,7 @@ ol {
     .user-panel .up-item:first-child {
         margin-top: 12px;
         width: max-content;
+        color: #fdae55;
     }
 
 .shopping-card {
@@ -418,7 +418,8 @@ ol {
 }
 
 .main-menu {
-	list-style: none;
+    list-style: none;
+    width: max-content;
 }
 
 .main-menu li {
@@ -640,7 +641,7 @@ ol {
 }
 
 .hero-slider .owl-dots {
-	display: -ms-flex;
+	display: flex;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -776,7 +777,7 @@ ol {
 
 .feature .feature-inner {
 	padding: 20px 25px;
-	display: -ms-flex;
+	display: flex;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
