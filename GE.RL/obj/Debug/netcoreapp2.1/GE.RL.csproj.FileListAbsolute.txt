@@ -25,3 +25,7 @@ E:\UNIVER\CourseProject\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.dll
 E:\UNIVER\CourseProject\GE\GE.RL\obj\Debug\netcoreapp2.1\GE.RL.pdb
 E:\UNIVER\CourseProject\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.RL.runtimeconfig.json
 E:\UNIVER\CourseProject\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.RL.runtimeconfig.dev.json
+E:\UNIVER\CourseProject\GE\GE.RL\bin\Debug\netcoreapp2.1\Crypto.dll
+E:\UNIVER\CourseProject\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.SL.dll
+E:\UNIVER\CourseProject\GE\GE.RL\bin\Debug\netcoreapp2.1\Crypto.pdb
+E:\UNIVER\CourseProject\GE\GE.RL\bin\Debug\netcoreapp2.1\GE.SL.pdb

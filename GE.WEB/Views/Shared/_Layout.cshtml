@@ -41,7 +41,7 @@
         $(function () {
             $.ajaxSetup({ cache: false });
             $("#serviceLoginLink").on("click", function (e) {
-                $(e.target).closest('.btn-group').children('.dropdown-toggle').dropdown('toggle');
+                $(e.target).closest('.btn-group').children('.dropdown - toggle').dropdown('toggle');
                 $('#dialogContent').load(this.href, function () {
                     $('#modDialog').modal({
                         keyboard: true
@@ -76,7 +76,7 @@
                             location.reload();
                         } else {
                             $('#dialogContent').html(result);
-                            bindForm();
+                            bindFormLogin();
                         }
                     }
                 });
@@ -124,60 +124,114 @@
                             </div>
                             <div class="col-xl-4 col-lg-5">
                                 <div class="user-panel">
-                                    <div class="up-item">
-                                        <i class="flaticon-profile"></i>
-                                        @Html.ActionLink("Войти", "LoginModal", "Account", null, new { @class = "link loginLink", @id = "serviceLoginLink" })
-                                        или
-                                        @Html.ActionLink("Зарегестрироваться", "RegisterModal", "Account", null, new { @class = "link registerLink", @id = "serviceRegisterLink" })
-                                        @*<a href="/Account/LoginModal">Sign In</a> or <a href="/Acco">Create Account</a>*@
-                                    </div>
+                                    @if ( User.IsInRole("User"))
+                                    {
+                                        @*<div class="header-item header-item--right">*@
+                                            <div class="dropdown dropdown--right langs">
+                                                <a class="dropdown-toggle langs-title" data-toggle="dropdown">
+                                                    @User.Claims.First().Value
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <ul class="langs-list">
+                                                        @if (User.IsInRole("Administrator"))
+                                                        {
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Admin/Index">Админ панель</a></li>
+                                                            <li class="langs-item">
+                                                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                                                {
+                                                                    <a class="langs-item-title" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                                                                }
+                                                            </li>
+                                                        }
+                                                        else if (User.IsInRole("User"))
+                                                        {
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/CreatePost">Создать объявление</a></li>
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/Posts">Мои объявления</a></li>
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/RequestPost">Запрошенные объявления</a></li>
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/ResponsePost">Запросы для одобрения</a></li>
+                                                        }
+                                                        else if (User.IsInRole("Moderator"))
+                                                        {
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Moderator/Index">Панель модератора</a></li>
+                                                            <li class="langs-item">
+                                                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                                                {
+                                                                    <a class="langs-item-title" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                                                                }
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        @*</div>*@
+                                    }
+                                    else
+                                    {
+                                        <div class="up-item">
+                                            <i class="flaticon-profile"></i>
+                                            @Html.ActionLink("Войти", "LoginModal", "Account", null, new { @class = "link loginLink", @id = "serviceLoginLink" })
+                                            или
+                                            @Html.ActionLink("Зарегестрироваться", "RegisterModal", "Account", null, new { @class = "link registerLink", @id = "serviceRegisterLink" })
+                                            @*<a href="/Account/LoginModal">Sign In</a> or <a href="/Acco">Create Account</a>*@
+                                        </div>
+                                    }
+                                    @*<div class="up-item">
+
+        <i class="flaticon-profile"></i>
+        @Html.ActionLink("Войти", "LoginModal", "Account", null, new { @class = "link loginLink", @id = "serviceLoginLink" })
+        или
+        @Html.ActionLink("Зарегестрироваться", "RegisterModal", "Account", null, new { @class = "link registerLink", @id = "serviceRegisterLink" })
+        @*<a href="/Account/LoginModal">Sign In</a> or <a href="/Acco">Create Account</a>*@
+                                    @*</div>*@
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <nav class="main-navbar">
-                    <div class="container">
-                        <!-- menu -->
-                        <ul class="main-menu">
-                            @foreach (var item in ViewBag.categories)
-                            {
-                                <li>
-                                    <a href="#">@item.Name</a>
-                                    <ul class="sub-menu">
-                                        @foreach (var subitem in @item.Subcategories)
-                                        {
-                                            <li><a href="#">@subitem.Name</a></li>
-                                        }
-                                    </ul>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-            <!-- Header section end -->
         </div>
-        <div class="page">
-            @RenderBody()
-        </div>
-        <div class="footer-bottom">
+        <nav class="main-navbar">
             <div class="container">
-                <div class="footer-item footer-item--left">
-                    <div class="mU mU--color mU--footer">
-                        <ul class="mU-list">
-                            <li class="mU-item mU-item--main">
-                                <a class="link mU-item-link" id="menuFooterMainLink" href="http://localhost:52723/">Gyre</a>
-                            </li>
-                        </ul>
-                    </div>
+                <!-- menu -->
+                <ul class="main-menu">
+                    @{
+                        IList<CategoryVM> categories = System.Runtime.Caching.MemoryCache.Default["Categories"] as IList<CategoryVM>;
+                    }
+                    @foreach (var item in categories)
+                    {
+                        <li>
+                            <a href="#">@item.Name</a>
+                            <ul class="sub-menu">
+                                @foreach (var subitem in @item.Subcategories)
+                                {
+                                    <li><a href="#">@subitem.Name</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+        </header>
+        <!-- Header section end -->
+    </div>
+    <!--<div class="footer-bottom">
+        <div class="container">
+            <div class="footer-item footer-item--left">
+                <div class="mU mU--color mU--footer">
+                    <ul class="mU-list">
+                        <li class="mU-item mU-item--main">
+                            <a class="link mU-item-link" id="menuFooterMainLink" href="http://localhost:52723/">Gyre</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>-->
     </div>
 
-    <partial name="_CookieConsentPartial" />
-
+    @*<partial name="_CookieConsentPartial" />*@
+    <div class="page">
+        @RenderBody()
+    </div>
 
     <div id="modDialog" class="modal fade">
         <div id="dialogContent" class="modal-dialog"></div>

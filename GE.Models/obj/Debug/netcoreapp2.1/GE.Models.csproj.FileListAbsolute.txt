@@ -1,0 +1,10 @@
+E:\UNIVER\CourseProject\GE\GE.Models\bin\Debug\netcoreapp2.1\GE.Models.deps.json
+E:\UNIVER\CourseProject\GE\GE.Models\bin\Debug\netcoreapp2.1\GE.Models.runtimeconfig.json
+E:\UNIVER\CourseProject\GE\GE.Models\bin\Debug\netcoreapp2.1\GE.Models.runtimeconfig.dev.json
+E:\UNIVER\CourseProject\GE\GE.Models\bin\Debug\netcoreapp2.1\GE.Models.dll
+E:\UNIVER\CourseProject\GE\GE.Models\bin\Debug\netcoreapp2.1\GE.Models.pdb
+E:\UNIVER\CourseProject\GE\GE.Models\obj\Debug\netcoreapp2.1\GE.Models.csproj.CoreCompileInputs.cache
+E:\UNIVER\CourseProject\GE\GE.Models\obj\Debug\netcoreapp2.1\GE.Models.AssemblyInfoInputs.cache
+E:\UNIVER\CourseProject\GE\GE.Models\obj\Debug\netcoreapp2.1\GE.Models.AssemblyInfo.cs
+E:\UNIVER\CourseProject\GE\GE.Models\obj\Debug\netcoreapp2.1\GE.Models.dll
+E:\UNIVER\CourseProject\GE\GE.Models\obj\Debug\netcoreapp2.1\GE.Models.pdb

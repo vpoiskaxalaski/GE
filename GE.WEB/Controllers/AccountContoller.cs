@@ -1,129 +1,149 @@
 ﻿using GE.DAL.Model;
-using GE.RL.Interfaces;
-using GE.WEB.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
+using GE.Models;
+using GE.SL.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace GE.WEB.Controllers
 {
 
-
-    [Authorize]
     public class AccountController : Controller
     {
-        private IUnitOfWork db;
+        private readonly IAccountService _accountService;
+        private readonly IEmailService _emailService;
+        private readonly UserManager<ApplicationUserVM> _userManager;
 
-        public AccountController(IUnitOfWork unitOfWork)
+        public AccountController(IAccountService accountService, IEmailService emailService, UserManager<ApplicationUserVM> userManager)
         {
-            this.db = unitOfWork;
+            _accountService = accountService;
+            _emailService = emailService;
+            _userManager = userManager;
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public ActionResult LoginModal()
+        public IActionResult LoginModal()
         {
             return PartialView();
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> LoginModal(LoginViewModel model)
+        public async Task<IActionResult> LoginModal(LoginViewModel model)
         {
-            /*
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await UserManager.FindAsync(model.Name, model.Password);
-
-                if (user == null)
+                if (_accountService.Login(model) != false)
                 {
-                    ModelState.AddModelError("", "Неверный логин или пароль.");
+                    await Authenticate(model.Email);
+                    return Json(new { success = true });
                 }
-                else
-                {
-                    ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user,
-                                            DefaultAuthenticationTypes.ApplicationCookie);
-                    AuthenticationManager.SignOut();
-                    AuthenticationManager.SignIn(new AuthenticationProperties
-                    {
-                        IsPersistent = true
-                    }, claim);
-                    if (String.IsNullOrEmpty(returnUrl))
-                        return RedirectToAction("Index", "Home");
-                    return Redirect(returnUrl);
-                }
+                ModelState.AddModelError("", "Неверный Email или пароль");
+                ModelState.AddModelError("", "Подтвердите Email");
             }
-            ViewBag.returnUrl = returnUrl;
-            
-            return View(model);
-   
-            var user = await a.FindByLoginAsync(model.Name, model.Password); //.FindAsync(model.Name, model.Password);
-                if (user != null)
-                {
-                    if (user.EmailConfirmed == true)
-                    {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return Json(new { success = true });
-                    }
-                    else ModelState.AddModelError("", "Не подтвержден email.");
-                }
-                else ModelState.AddModelError("", "Неверный логин или пароль");
-        }
-         */
             return PartialView(model);
-           
+
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public ActionResult RegisterModal()
+        public IActionResult RegisterModal()
         {
             return PartialView();
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> RegisterModal(RegisterViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterModal(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = db.Users.GetAll().FirstOrDefault(u => u.Email == model.Email && u.PasswordHash == model.Password);
-                if (user == null)
+                if (_accountService.Registration(model) == true)
                 {
-                    // добавляем пользователя в бд
-                    db.Users.Create(CreateUser(model));
-                    await Authenticate(model.Email); // аутентификация
+                    await Authenticate(model.Email);
+                    SendMessage(model);
+                    ViewBag.Message = "На указанный электронный адрес отправлены дальнейшие инструкции по завершению регистрации";
+                    return PartialView();
+                }
+                ModelState.AddModelError("", "Еmail уже существует");
+            }
+            return PartialView(model);
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_accountService.Login(model) != false)
+                {
+                   await Authenticate(model.Email);
 
                     return RedirectToAction("Index", "Home");
                 }
-                else
-                    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+//Check for EmailConfirm I wrote in ApplicationUserRepository.
+//If you want to separate errors, you should change login method
+                ModelState.AddModelError("", "Неверный Email или пароль");
+                ModelState.AddModelError("", "Подтвердите Email");
             }
             return View(model);
 
         }
 
-
-        private async Task Authenticate(string userName)
+        [HttpGet]
+        public IActionResult Register()
         {
-            // создаем один claim
-            var claims = new List<Claim>
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                if (_accountService.Registration(model) == true)
+                {
+                    await Authenticate(model.Email);
+                    SendMessage(model);
+                    return View("DisplayEmail");
+                }
+                ModelState.AddModelError("", "Еmail уже существует");
+            }
+            return View(model);
+        }
+
+        private async Task Authenticate(string mail)
+        {
+
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, mail),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, _accountService.GetRole(mail))
             };
-            // создаем объект ClaimsIdentity
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-            // установка аутентификационных куки
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+
+            var authProperties = new AuthenticationProperties
+            {
+                AllowRefresh = true,
+                ExpiresUtc = DateTimeOffset.Now.AddDays(1),
+                IsPersistent = true,
+            };
+
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
+                ClaimsIdentity.DefaultRoleClaimType);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id), authProperties);
         }
 
         public async Task<IActionResult> Logout()
@@ -132,67 +152,28 @@ namespace GE.WEB.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = CreateUser(model);
-        //        var result = await UserManager.CreateAsync(user, model.Password);
-        //        if (result.Succeeded)
-        //        {
-        //            var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-        //            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-        //            await UserManager.SendEmailAsync(user.Id, "Подтверждение электронной почты", "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\"> завершить регистрацию</a>");
-        //            ViewBag.Message = "На указанный электронный адрес отправлены дальнейшие инструкции по завершению регистрации";
-        //            return PartialView();
-        //        }
-        //        AddErrors(result);
-        //    }
-        //    return PartialView(model);
-        //}
-
-
-        private ApplicationUser CreateUser(RegisterViewModel model)
+        public async void SendMessage(RegisterViewModel model)
         {
-            var user = new ApplicationUser
-            {
-                UserName = model.Name,
-                Email = model.Email,
-                Posts = new List<Post>(),
-                Points = new Point
-                { 
-                    Points = 25,
-                    Operations = new List<Operation>()
-                    {
-                        new Operation
-                        {
-                            Earned = 25,
-                            Date = HomeController.GetTime()
-                        }
-                    }
-                },
-                PhoneNumber = model.PhoneNumber
-            };
-            return user;
+            var user = _userManager.CreateAsync(new ApplicationUserVM { UserName = model.Name, Email = model.Email, PhoneNumber = model.PhoneNumber });
+            //var t = _userManager.FindByEmailAsync(model.Email);
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(_accountService.GetByEmail(model.Email));
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { email = model.Email, code }, protocol: Request.Scheme);
+            ViewBag.Messages = callbackUrl.ToString();
+            await _emailService.SendEmailAsync(model.Email, "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\"> завершить регистрацию</a>");
         }
 
+        public IActionResult ConfirmEmail(string email, string code)
+        {
+            if (email != null && code != null)
+            {
+                bool result = _accountService.ConfirmEmail(email);
 
-        //[AllowAnonymous]
-        //public async Task<ActionResult> ConfirmEmail(string userId, string code)
-        //{
-        //    if (userId == null || code == null)
-        //    {
-        //        return View("Error");
-        //    }
-        //    var result = await UserManager.ConfirmEmailAsync(userId, code);
-        //    await UserManager.AddToRoleAsync(userId, "User");
-        //    return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        //}
+                return View(result ? "ConfirmEmail" : "Error");
+            }
+ 
+            return View("Error");
 
-        //[HttpPost]
-        //public ActionResult LogOff()
-        //{
-        //    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-        //    return RedirectToAction("Index", "Home");
-        //}
+        }
+
     }
 }

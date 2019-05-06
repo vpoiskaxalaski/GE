@@ -8,7 +8,9 @@
     ".NETCoreApp,Version=v2.1": {
       "GE.RL/1.0.0": {
         "dependencies": {
+          "Crypto": "1.0.0",
           "GE.DAL": "1.0.0",
+          "GE.SL": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "2.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.1.0",
           "Microsoft.EntityFrameworkCore.Tools": "2.1.0"
@@ -3333,6 +3335,11 @@
           "System.Xml.XPath": "4.3.0"
         }
       },
+      "Crypto/1.0.0": {
+        "runtime": {
+          "Crypto.dll": {}
+        }
+      },
       "GE.DAL/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.App": "2.1.0",
@@ -3340,6 +3347,11 @@
         },
         "runtime": {
           "GE.DAL.dll": {}
+        }
+      },
+      "GE.SL/1.0.0": {
+        "runtime": {
+          "GE.SL.dll": {}
         }
       }
     }
@@ -5240,7 +5252,17 @@
       "path": "system.xml.xpath.xdocument/4.3.0",
       "hashPath": "system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
     },
+    "Crypto/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "GE.DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GE.SL/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

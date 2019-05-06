@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="ApplicationUserVM.cs" />
+    <Compile Include="CategoryVM.cs" />
+    <Compile Include="CityVM.cs" />
+    <Compile Include="ErrorViewModel.cs" />
+    <Compile Include="ImagesGalleryVM.cs" />
+    <Compile Include="LoginViewModel.cs" />
+    <Compile Include="OperationVM.cs" />
+    <Compile Include="OrderVM.cs" />
+    <Compile Include="PointVM.cs" />
+    <Compile Include="PostVM.cs" />
+    <Compile Include="RegionVM.cs" />
+    <Compile Include="RegisterViewModel.cs" />
+    <Compile Include="SubcategoryVM.cs" />
+    <Compile Include="VideoVM.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
+  </ItemGroup>
+
+</Project>

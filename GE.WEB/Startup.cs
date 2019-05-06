@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GE.WEB.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using GE.RL;
-using GE.RL.Interfaces;
-using GE.RL.Repositories;
+using GE.DAL.Interfaces;
+using GE.DAL.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using GE.DAL;
+using GE.SL.Servives;
+using GE.SL.Interfaces;
+using AutoMapper;
+using GE.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using GE.DAL.Model;
 
 namespace GE.WEB
 {
@@ -39,22 +39,30 @@ namespace GE.WEB
             });
 
 
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAccountService, AccountService>();
+
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("MyConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")));
 
-            // установка конфигурации подключения
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => //CookieAuthenticationOptions
-                {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
-                });
+            .AddCookie(options =>
+            {
+                options.LoginPath = new PathString("/Account/Login");
+                options.LoginPath = new PathString("/Account/LoginModal");
+                options.AccessDeniedPath = new PathString("/Account/Login");
+            });
 
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddIdentity<ApplicationUserVM, IdentityRole>()
+                .AddEntityFrameworkStores<DatabaseContext>()
+                .AddDefaultTokenProviders();
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<DatabaseContext>();
-
+            services.AddAutoMapper();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICacheService, CacheService>();
+            services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -72,6 +80,7 @@ namespace GE.WEB
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -84,6 +93,7 @@ namespace GE.WEB
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

@@ -10,23 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="DatabaseContext.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Repositories\ApplicationUserRepository.cs" />
-    <Compile Include="Repositories\CategoryRepository.cs" />
-    <Compile Include="Repositories\CityRepository.cs" />
-    <Compile Include="Repositories\ImagesGalleryRepository.cs" />
-    <Compile Include="Repositories\OperationRepository.cs" />
-    <Compile Include="Repositories\OrderRepository.cs" />
-    <Compile Include="Repositories\PointRepository.cs" />
-    <Compile Include="Repositories\PostRepository.cs" />
-    <Compile Include="Repositories\RegionRepository.cs" />
-    <Compile Include="Repositories\SubcategoryRepository.cs" />
-    <Compile Include="Repositories\UnitOfWork.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0">
@@ -36,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Crypto\Crypto.csproj" />
     <ProjectReference Include="..\GE.DAL\GE.DAL.csproj" />
   </ItemGroup>
 

@@ -4,41 +4,36 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using GE.WEB.Models;
-using GE.RL.Interfaces;
 using Microsoft.Extensions.Configuration;
-using Ninject;
-using GE.RL.Repositories;
 using Microsoft.EntityFrameworkCore;
-using GE.RL;
-using GE.WEB.Data;
 using System.Net.Sockets;
 using System.IO;
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
+using GE.SL.Interfaces;
+using GE.Models;
+using AutoMapper;
 
 namespace GE.WEB.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IPostService _postsService;
 
-        private IUnitOfWork unitOfWork;
 
-        public HomeController(IUnitOfWork unitOfWork)
+        public HomeController(IPostService postService)
         {
-            //DbConnectionService dbConnection = new DbConnectionService("MyConnection");
-            //unitOfWork = dbConnection.GetUnitOfWork();
-            this.unitOfWork = unitOfWork;
+            _postsService = postService;
+            
         }
-
-
-
 
         public IActionResult Index()
-        {
-            ViewBag.categories = unitOfWork.Categories.GetAll();
+        {         
+            ViewBag.posts = _postsService.GetAll();
+
             return View();
         }
-  
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -76,5 +71,7 @@ namespace GE.WEB.Controllers
             }
             return localDateTime;
         }
+
+
     }
 }

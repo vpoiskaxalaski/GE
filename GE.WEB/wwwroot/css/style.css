@@ -2134,7 +2134,7 @@ ol {
 }
 
 .contact-social {
-	display: -ms-flex;
+	display: flex;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -2143,7 +2143,7 @@ ol {
 }
 
 .contact-social a {
-	display: -ms-inline-flex;
+	display: inline-flex;
 	display: -webkit-inline-box;
 	display: -ms-inline-flexbox;
 	display: inline-flex;

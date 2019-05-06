@@ -1,0 +1,16 @@
+E:\UNIVER\CourseProject\GE\GE.SL\bin\Debug\netcoreapp2.1\GE.SL.deps.json
+E:\UNIVER\CourseProject\GE\GE.SL\bin\Debug\netcoreapp2.1\GE.SL.dll
+E:\UNIVER\CourseProject\GE\GE.SL\bin\Debug\netcoreapp2.1\GE.SL.pdb
+E:\UNIVER\CourseProject\GE\GE.SL\bin\Debug\netcoreapp2.1\Crypto.dll
+E:\UNIVER\CourseProject\GE\GE.SL\bin\Debug\netcoreapp2.1\GE.DAL.dll
+E:\UNIVER\CourseProject\GE\GE.SL\bin\Debug\netcoreapp2.1\GE.Models.dll
+E:\UNIVER\CourseProject\GE\GE.SL\bin\Debug\netcoreapp2.1\GE.DAL.pdb
+E:\UNIVER\CourseProject\GE\GE.SL\bin\Debug\netcoreapp2.1\GE.Models.pdb
+E:\UNIVER\CourseProject\GE\GE.SL\bin\Debug\netcoreapp2.1\Crypto.pdb
+E:\UNIVER\CourseProject\GE\GE.SL\obj\Debug\netcoreapp2.1\GE.SL.csprojAssemblyReference.cache
+E:\UNIVER\CourseProject\GE\GE.SL\obj\Debug\netcoreapp2.1\GE.SL.csproj.CoreCompileInputs.cache
+E:\UNIVER\CourseProject\GE\GE.SL\obj\Debug\netcoreapp2.1\GE.SL.AssemblyInfoInputs.cache
+E:\UNIVER\CourseProject\GE\GE.SL\obj\Debug\netcoreapp2.1\GE.SL.AssemblyInfo.cs
+E:\UNIVER\CourseProject\GE\GE.SL\obj\Debug\netcoreapp2.1\GE.SL.csproj.CopyComplete
+E:\UNIVER\CourseProject\GE\GE.SL\obj\Debug\netcoreapp2.1\GE.SL.dll
+E:\UNIVER\CourseProject\GE\GE.SL\obj\Debug\netcoreapp2.1\GE.SL.pdb

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GE.DAL.Model
+﻿namespace GE.DAL.Model
 {
     public class ImagesGallery
     {

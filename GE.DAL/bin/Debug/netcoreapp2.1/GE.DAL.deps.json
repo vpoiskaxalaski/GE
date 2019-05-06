@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v2.1": {
       "GE.DAL/1.0.0": {
         "dependencies": {
+          "Crypto": "1.0.0",
           "Microsoft.NETCore.App": "2.1.0"
         },
         "runtime": {
@@ -38,6 +39,11 @@
       "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.1.0"
+        }
+      },
+      "Crypto/1.0.0": {
+        "runtime": {
+          "Crypto.dll": {}
         }
       }
     }
@@ -96,6 +102,11 @@
       "sha512": "sha512-rm6bZ7KeNj07GKXnnRAGfViuYFTw/X5CDtFVD6fWhJ/fvP+rgS0Hocy/JkrSJpLGSjduGDOGPY+nR0EWtUuvQw==",
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "Crypto/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

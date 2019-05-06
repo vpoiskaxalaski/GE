@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using GE.RL;
-using GE.WEB.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using GE.DAL;
+using GE.DAL.Initialize;
+using GE.WEB.Controllers;
+using GE.SL.Servives;
+using GE.SL.Interfaces;
 
 namespace GE.WEB
 {
@@ -25,8 +23,13 @@ namespace GE.WEB
                 var services = scope.ServiceProvider;
                 try
                 {
+
                     var context = services.GetRequiredService<DatabaseContext>();
                     SampleData.Initialize(context);
+
+                    ICategoryService categoryService = services.GetRequiredService<ICategoryService>();
+                    ICacheService cacheService = new CacheService();
+                    cacheService.CacheCategories(categoryService);
                 }
                 catch (Exception ex)
                 {

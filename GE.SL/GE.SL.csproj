@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Interfaces\IAccountService.cs" />
+    <Compile Include="Interfaces\ICacheService.cs" />
+    <Compile Include="Interfaces\ICategoryService.cs" />
+    <Compile Include="Interfaces\IEmailService.cs" />
+    <Compile Include="Interfaces\IPostService.cs" />
+    <Compile Include="Servives\AccountService.cs" />
+    <Compile Include="Servives\CacheService.cs" />
+    <Compile Include="Servives\CategoryService.cs" />
+    <Compile Include="Servives\EmailService.cs" />
+    <Compile Include="Servives\PostService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.0" />
+    <PackageReference Include="MailKit" Version="2.1.4" />
+    <PackageReference Include="System.Runtime.Caching" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GE.DAL\GE.DAL.csproj" />
+    <ProjectReference Include="..\GE.Models\GE.Models.csproj" />
+  </ItemGroup>
+
+</Project>

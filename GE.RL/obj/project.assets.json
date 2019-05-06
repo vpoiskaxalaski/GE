@@ -4329,6 +4329,16 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "Crypto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Crypto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Crypto.dll": {}
+        }
+      },
       "GE.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
@@ -11819,6 +11829,11 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "Crypto/1.0.0": {
+      "type": "project",
+      "path": "../Crypto/Crypto.csproj",
+      "msbuildProject": "../Crypto/Crypto.csproj"
+    },
     "GE.DAL/1.0.0": {
       "type": "project",
       "path": "../GE.DAL/GE.DAL.csproj",
@@ -11827,6 +11842,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "Crypto >= 1.0.0",
       "GE.DAL >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 2.1.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.1.0",
@@ -11864,6 +11880,9 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
+            "E:\\UNIVER\\CourseProject\\GE\\Crypto\\Crypto.csproj": {
+              "projectPath": "E:\\UNIVER\\CourseProject\\GE\\Crypto\\Crypto.csproj"
+            },
             "E:\\UNIVER\\CourseProject\\GE\\GE.DAL\\GE.DAL.csproj": {
               "projectPath": "E:\\UNIVER\\CourseProject\\GE\\GE.DAL\\GE.DAL.csproj"
             }

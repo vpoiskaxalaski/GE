@@ -15,15 +15,6 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountContoller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Data\ApplicationDbContext.cs" />
-    <Compile Include="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
-    <Compile Include="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
-    <Compile Include="Data\Migrations\ApplicationDbContextModelSnapshot.cs" />
-    <Compile Include="Data\SampleData.cs" />
-    <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\RegisterViewModel.cs" />
-    <Compile Include="Services\DbConnectionService.cs" />
-    <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -87,21 +78,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.0" />
     <PackageReference Include="jQuery" Version="1.10.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.4" />
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
-    <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="PagedList.Core.Mvc" Version="1.2.0" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Caching" Version="4.5.0" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="7.6.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\GE.DAL\GE.DAL.csproj" />
-    <ProjectReference Include="..\GE.RL\GE.RL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -222,6 +209,12 @@
     <Content Update="wwwroot\img\single-product\thumb-4.jpg">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GE.DAL\GE.DAL.csproj" />
+    <ProjectReference Include="..\GE.Models\GE.Models.csproj" />
+    <ProjectReference Include="..\GE.SL\GE.SL.csproj" />
   </ItemGroup>
 
 </Project>

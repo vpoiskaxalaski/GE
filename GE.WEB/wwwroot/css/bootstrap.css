@@ -290,7 +290,7 @@
 }
 
 .closebtn {
-    background-image: url(img/remove.png);
+    background-image: url(~/img/remove.png);
     background-size: 30px;
     position: absolute;
     top: 10px;
@@ -523,13 +523,13 @@
 
 
 .image_rotate {
-    background-image: url(img/rotate.png);
+    background-image: url(~/img/rotate.png);
     background-size: 28px 24px;
     right: 30%;
 }
 
 .image_delete {
-    background-image: url(img/remove.png);
+    background-image: url(~/img/remove.png);
     background-size: 19px;
     left: 30%;
 }
@@ -543,9 +543,6 @@
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
-    -o-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -khtml-border-radius: 50%;
     background-color: white;
     display: block;
     background-repeat: no-repeat;
@@ -556,7 +553,7 @@
 }
 
 .header__button_add {
-    background-image: url(img/plus.png);
+    background-image: url(~/img/plus.png);
     background-size: 50px 50px;
     width: 50px;
     height: 50px;
@@ -621,7 +618,6 @@ sub, sup, video {
     overflow: hidden;
     -webkit-transition: height .2s;
     -moz-transition: height .2s;
-    -ms-transition: height .2s;
     -o-transition: height .2s;
     transition: height .2s
 }
@@ -642,7 +638,7 @@ pre, textarea {
     opacity: 0;
     -webkit-transition: opacity .11s linear;
     -moz-transition: opacity .11s linear;
-    -ms-transition: opacity .11s linear;
+
     -o-transition: opacity .11s linear;
     transition: opacity .11s linear
 }
@@ -820,13 +816,12 @@ button, input, select, textarea {
     text-decoration: none;
     -webkit-transition: color .11s;
     -moz-transition: color .11s;
-    -ms-transition: color .11s;
     -o-transition: color .11s;
     transition: color .11s
 }
 
     .link:hover, a:hover {
-        color: #00b0eb;
+        color: #fdae55;
         text-decoration: none
     }
 
@@ -1036,7 +1031,7 @@ img {
 }
 
 .page {
-    padding: 50px 0 1px;
+    padding: 50px;
 }
 
 .page_pt_20 {
@@ -1070,7 +1065,7 @@ img {
             margin-right: 3px;
             width: 10px;
             height: 10px;
-            background-image: url(img/icon-arrow-bold-10x10.png);
+            background-image: url(~/img/icon-arrow-bold-10x10.png);
             background-repeat: no-repeat;
             background-position: 0 -40px;
             background-size: 40px 60px
@@ -1300,7 +1295,6 @@ img {
         background-color: #ccc;
         -webkit-transition: background-color .11s;
         -moz-transition: background-color .11s;
-        -ms-transition: background-color .11s;
         -o-transition: background-color .11s;
         transition: background-color .11s
     }
@@ -1445,7 +1439,7 @@ img {
         margin-top: -30px;
         width: 60px;
         height: 60px;
-        background-image: url(img/icon-adb-60x60.png);
+        background-image: url(~/img/icon-adb-60x60.png);
         background-repeat: no-repeat;
         background-position: 0 center;
         background-size: 60px 60px
@@ -1767,7 +1761,6 @@ img {
     font-size: 16px;
     -webkit-transition: all .2s;
     -moz-transition: all .2s;
-    -ms-transition: all .2s;
     -o-transition: all .2s;
     transition: all .2s;
     font-weight: 600
@@ -2018,7 +2011,6 @@ input[type=checkbox], input[type=radio] {
     background-image: none;
     -webkit-transition: border-color .2s;
     -moz-transition: border-color .2s;
-    -ms-transition: border-color .2s;
     -o-transition: border-color .2s;
     transition: border-color .2s;
     line-height: 20px;
@@ -2162,7 +2154,7 @@ textarea.form-control, textarea.select-control {
         margin-top: -2px;
         width: 9px;
         height: 6px;
-        background-image: url(img/icon-arrow-9x6.png);
+        background-image: url(~/img/icon-arrow-9x6.png);
         background-size: 40px 40px;
         background-repeat: no-repeat;
         background-position: -30px -12px
@@ -2193,7 +2185,6 @@ textarea.form-control, textarea.select-control {
     color: #333;
     -webkit-transition: background-color .11s;
     -moz-transition: background-color .11s;
-    -ms-transition: background-color .11s;
     -o-transition: background-color .11s;
     transition: background-color .11s
 }
@@ -2272,7 +2263,7 @@ textarea.form-control, textarea.select-control {
 
 @media only screen and (-webkit-min-device-pixel-ratio:2),only screen and (min--moz-device-pixel-ratio:2),only screen and (-o-min-device-pixel-ratio:2/1),only screen and (min-device-pixel-ratio:2),only screen and (min-resolution:192dpi),only screen and (min-resolution:2dppx) {
     .select-control:after {
-        background-image: url(img/icon-arrow-9x6@2x.png)
+        background-image: url(~/img/icon-arrow-9x6@2x.png)
     }
 }
 
@@ -2594,20 +2585,19 @@ a.label.active, a.label:active {
     height: 100%;
     -webkit-transition: opacity .11s,visibility .11s,background-color .11s;
     -moz-transition: opacity .11s,visibility .11s,background-color .11s;
-    -ms-transition: opacity .11s,visibility .11s,background-color .11s;
     -o-transition: opacity .11s,visibility .11s,background-color .11s;
     transition: opacity .11s,visibility .11s,background-color .11s
 }
 
 .dropdown-menu {
     float: left;
+    display: flex;
     top: 100%;
     -webkit-box-shadow: 0 1px 2px -1px #777;
     -moz-box-shadow: 0 1px 2px -1px #777;
     box-shadow: 0 1px 2px -1px #777;
     -webkit-transition: opacity .11s,visibility .11s,background-color .11s;
     -moz-transition: opacity .11s,visibility .11s,background-color .11s;
-    -ms-transition: opacity .11s,visibility .11s,background-color .11s;
     -o-transition: opacity .11s,visibility .11s,background-color .11s;
     transition: opacity .11s,visibility .11s,background-color .11s
 }
@@ -2773,7 +2763,6 @@ a.label.active, a.label:active {
         color: #bfbfbf;
         -webkit-transition: color .2s;
         -moz-transition: color .2s;
-        -ms-transition: color .2s;
         -o-transition: color .2s;
         transition: color .2s
     }
@@ -3111,7 +3100,6 @@ a.label.active, a.label:active {
 
 .modal-open .modal {
     overflow: auto;
-    overflow-y: scroll
 }
 
 .modal {
@@ -3148,7 +3136,7 @@ a.label.active, a.label:active {
 
     .modal.loading .modal-content {
         background-color: #fff;
-        background-image: url(img/loader.gif);
+        background-image: url(~/img/loader.gif);
         background-repeat: no-repeat;
         background-position: center center
     }
@@ -3157,6 +3145,12 @@ a.label.active, a.label:active {
     position: relative;
     margin: 0 auto;
     width: 390px
+}
+
+.message{
+    align-self : center;
+    color: red;
+    font-size: 10px
 }
 
 .modal-content {
@@ -3191,18 +3185,17 @@ a.label.active, a.label:active {
     }
 
         .modal-header .close .icon {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: fixed;
+            right: 15px;
+            top: 15px;
             width: 24px;
             height: 24px;
-            background-image: url(img/icon-close-24x24.png);
+            background-image: url(../img/icon-close-24x24.png);
             background-size: 90px 30px;
             opacity: 0;
             filter: alpha(opacity=0);
             -webkit-transition: opacity .2s;
             -moz-transition: opacity .2s;
-            -ms-transition: opacity .2s;
             -o-transition: opacity .2s;
             transition: opacity .2s
         }
@@ -3228,7 +3221,7 @@ a.label.active, a.label:active {
         }
 
     .modal-header .title {
-        margin: 0 60px 0 0;
+        margin: 0 120px 0 0;
         line-height: 24px;
         font-size: 24px;
         font-weight: 400
@@ -3314,7 +3307,7 @@ a.label.active, a.label:active {
 
 @media only screen and (-webkit-min-device-pixel-ratio:2),only screen and (min--moz-device-pixel-ratio:2),only screen and (-o-min-device-pixel-ratio:2/1),only screen and (min-device-pixel-ratio:2),only screen and (min-resolution:192dpi),only screen and (min-resolution:2dppx) {
     .modal-header .close .icon {
-        background-image: url(img/icon-close-24x24@2x.png)
+        background-image: url(~/img/icon-close-24x24@2x.png)
     }
 }
 
@@ -3335,7 +3328,6 @@ a.label.active, a.label:active {
     filter: alpha(opacity=0);
     -webkit-transition: opacity .11s;
     -moz-transition: opacity .11s;
-    -ms-transition: opacity .11s;
     -o-transition: opacity .11s;
     transition: opacity .11s;
     background-color: rgba(0,0,0,.6)
@@ -3584,7 +3576,7 @@ a.label.active, a.label:active {
         margin: -8px 0 0 -12px;
         width: 24px;
         height: 16px;
-        background-image: url(img/you-tube-icon.png) !important;
+        background-image: url(~/img/you-tube-icon.png) !important;
         background-position: 0 0;
         background-size: 24px 34px !important
     }
@@ -3751,7 +3743,6 @@ a.label.active, a.label:active {
         filter: alpha(opacity=0);
         -webkit-transition: opacity .11s;
         -moz-transition: opacity .11s;
-        -ms-transition: opacity .11s;
         -o-transition: opacity .11s;
         transition: opacity .11s
     }
@@ -3879,7 +3870,6 @@ a.label.active, a.label:active {
     background-color: #ccc;
     -webkit-transition: background-color .2s;
     -moz-transition: background-color .2s;
-    -ms-transition: background-color .2s;
     -o-transition: background-color .2s;
     transition: background-color .2s
 }
@@ -3968,7 +3958,7 @@ a.label.active, a.label:active {
     margin-right: 6px;
     width: 13px;
     height: 15px;
-    background-image: url(img/icon-vote-13x15.png);
+    background-image: url(~/img/icon-vote-13x15.png);
     background-repeat: no-repeat;
     background-size: 60px 40px
 }
@@ -3979,7 +3969,6 @@ a.label.active, a.label:active {
     border-radius: 4px;
     -webkit-transition: all 0s;
     -moz-transition: all 0s;
-    -ms-transition: all 0s;
     -o-transition: all 0s;
     transition: all 0s
 }
@@ -3990,7 +3979,7 @@ a.label.active, a.label:active {
     }
 
         .vote-buttons .btn.like:hover .icon {
-            background-image: url(img/icon-vote-13x15.png);
+            background-image: url(~/img/icon-vote-13x15.png);
             background-position: -3px -2px
         }
 
@@ -4027,7 +4016,6 @@ a.label.active, a.label:active {
     border-radius: 4px;
     -webkit-transition: all 0s;
     -moz-transition: all 0s;
-    -ms-transition: all 0s;
     -o-transition: all 0s;
     transition: all 0s
 }
@@ -4432,7 +4420,7 @@ a.label.active, a.label:active {
 }
 
     .langs-title:hover {
-        color: #fff
+        color: #fdae55;
     }
 
 .langs {
@@ -4469,7 +4457,6 @@ a.label.active, a.label:active {
     color: #333;
     -webkit-transition: background-color .2s;
     -moz-transition: background-color .2s;
-    -ms-transition: background-color .2s;
     -o-transition: background-color .2s;
     transition: background-color .2s
 }
@@ -4483,7 +4470,6 @@ a.label.active, a.label:active {
     color: #a6a6a6;
     -webkit-transition: color .11s;
     -moz-transition: color .11s;
-    -ms-transition: color .11s;
     -o-transition: color .11s;
     transition: color .11s
 }
@@ -4515,7 +4501,6 @@ a.label.active, a.label:active {
         left: 50%;
         -webkit-transition: opacity .11s;
         -moz-transition: opacity .11s;
-        -ms-transition: opacity .11s;
         -o-transition: opacity .11s;
         transition: opacity .11s
     }
@@ -4568,7 +4553,6 @@ a.label.active, a.label:active {
     overflow: hidden;
     -webkit-transition: width .2s;
     -moz-transition: width .2s;
-    -ms-transition: width .2s;
     -o-transition: width .2s;
     transition: width .2s
 }
@@ -4586,7 +4570,6 @@ a.label.active, a.label:active {
     visibility: hidden;
     -webkit-transition: opacity .2s,visibility .2s;
     -moz-transition: opacity .2s,visibility .2s;
-    -ms-transition: opacity .2s,visibility .2s;
     -o-transition: opacity .2s,visibility .2s;
     transition: opacity .2s,visibility .2s
 }
@@ -4616,7 +4599,6 @@ a.label.active, a.label:active {
         padding-left: 15px;
         -webkit-transition: background-color .11s;
         -moz-transition: background-color .11s;
-        -ms-transition: background-color .11s;
         -o-transition: background-color .11s;
         transition: background-color .11s
     }
@@ -4750,7 +4732,7 @@ a.label.active, a.label:active {
     }
 
 .header {
-    position: fixed;
+    position: unset; /*fixed*/
     z-index: 1080;
     top: 0;
     right: 0;
@@ -4839,6 +4821,10 @@ a.label.active, a.label:active {
     float: right
 }
 
+    .header-item--right:hover {
+        color: #fdae55;
+    }
+
 .touch .header {
     position: relative !important
 }
@@ -4912,7 +4898,6 @@ a.label.active, a.label:active {
         right: 10px;
         width: 30px;
         height: 30px;
-        -webkit-background-size: 30px auto;
         background-size: 30px auto;
         display: block;
         background-image: url(/s/css/v3/img/app/close-icon.png)
@@ -5238,7 +5223,6 @@ html.welcome-banner {
         filter: alpha(opacity=50);
         -webkit-transition: opacity .2s;
         -moz-transition: opacity .2s;
-        -ms-transition: opacity .2s;
         -o-transition: opacity .2s;
         transition: opacity .2s;
         background: url(img/icon-deaf-toggle.png) -40px 0;
@@ -5667,7 +5651,6 @@ html.welcome-banner {
             filter: alpha(opacity=0);
             -webkit-transition: all .3s;
             -moz-transition: all .3s;
-            -ms-transition: all .3s;
             -o-transition: all .3s;
             transition: all .3s
         }
@@ -5714,7 +5697,6 @@ html.welcome-banner {
     color: #fff;
     -webkit-transition: background-color .1s;
     -moz-transition: background-color .1s;
-    -ms-transition: background-color .1s;
     -o-transition: background-color .1s;
     transition: background-color .1s
 }
@@ -5819,7 +5801,6 @@ html.welcome-banner {
     background-color: #fff;
     -webkit-transition: opacity .11s,visibility .11s;
     -moz-transition: opacity .11s,visibility .11s;
-    -ms-transition: opacity .11s,visibility .11s;
     -o-transition: opacity .11s,visibility .11s;
     transition: opacity .11s,visibility .11s
 }
@@ -5874,7 +5855,6 @@ html.welcome-banner {
         filter: alpha(opacity=0);
         -webkit-transition: opacity .11s,visibility .11s;
         -moz-transition: opacity .11s,visibility .11s;
-        -ms-transition: opacity .11s,visibility .11s;
         -o-transition: opacity .11s,visibility .11s;
         transition: opacity .11s,visibility .11s
     }
@@ -5894,7 +5874,6 @@ html.welcome-banner {
         filter: alpha(opacity=0);
         -webkit-transition: opacity .2s;
         -moz-transition: opacity .2s;
-        -ms-transition: opacity .2s;
         -o-transition: opacity .2s;
         transition: opacity .2s
     }
@@ -6116,7 +6095,6 @@ html.welcome-banner {
         color: #a6a6a6;
         -webkit-transition: color .11s;
         -moz-transition: color .11s;
-        -ms-transition: color .11s;
         -o-transition: color .11s;
         transition: color .11s
     }
@@ -6142,7 +6120,6 @@ html.welcome-banner {
         filter: alpha(opacity=0);
         -webkit-transition: opacity .2s;
         -moz-transition: opacity .2s;
-        -ms-transition: opacity .2s;
         -o-transition: opacity .2s;
         transition: opacity .2s
     }
@@ -6282,11 +6259,10 @@ html.welcome-banner {
     background-size: 88px 22px;
     opacity: .5;
     filter: alpha(opacity=50);
-    -webkit-transition: opacity .2;
-    -moz-transition: opacity .2;
-    -ms-transition: opacity .2;
-    -o-transition: opacity .2;
-    transition: opacity .2;
+    -webkit-transition: opacity ;
+    -moz-transition: opacity ;
+    -o-transition: opacity ;
+    transition: opacity ;
     cursor: pointer;
     -webkit-touch-callout: none;
     user-select: none
@@ -6472,7 +6448,6 @@ ul.pagination li a:hover:not(.active) {
         background-color: #ccc;
         -webkit-transition: background-color .11s;
         -moz-transition: background-color .11s;
-        -ms-transition: background-color .11s;
         -o-transition: background-color .11s;
         transition: background-color .11s
     }
@@ -6522,7 +6497,6 @@ ul.pagination li a:hover:not(.active) {
         box-shadow: inset 0 1px 0 rgba(0,0,0,.1),0 1px 0 #fff;
         -webkit-transition: background-color .2s;
         -moz-transition: background-color .2s;
-        -ms-transition: background-color .2s;
         -o-transition: background-color .2s;
         transition: background-color .2s
     }
@@ -7064,7 +7038,6 @@ ul.pagination li a:hover:not(.active) {
             filter: alpha(opacity=0);
             -webkit-transition: opacity .11s;
             -moz-transition: opacity .11s;
-            -ms-transition: opacity .11s;
             -o-transition: opacity .11s;
             transition: opacity .11s
         }
@@ -7277,7 +7250,6 @@ ul.pagination li a:hover:not(.active) {
         background-color: #30c2f2;
         -webkit-transition: background-color .11s;
         -moz-transition: background-color .11s;
-        -ms-transition: background-color .11s;
         -o-transition: background-color .11s;
         transition: background-color .11s
     }
@@ -7365,7 +7337,6 @@ ul.pagination li a:hover:not(.active) {
     background-color: #ddd;
     -webkit-transition: none;
     -moz-transition: none;
-    -ms-transition: none;
     -o-transition: none;
     transition: none;
     white-space: nowrap;
@@ -7407,7 +7378,6 @@ ul.pagination li a:hover:not(.active) {
     height: 80px;
     -webkit-transition: background-color .11s linear,opacity .11s linear;
     -moz-transition: background-color .11s linear,opacity .11s linear;
-    -ms-transition: background-color .11s linear,opacity .11s linear;
     -o-transition: background-color .11s linear,opacity .11s linear;
     transition: background-color .11s linear,opacity .11s linear
 }
@@ -7487,7 +7457,6 @@ ul.pagination li a:hover:not(.active) {
     left: 0;
     -webkit-transition: left ease-out .5s;
     -moz-transition: left ease-out .5s;
-    -ms-transition: left ease-out .5s;
     -o-transition: left ease-out .5s;
     transition: left ease-out .5s;
     white-space: nowrap
@@ -8637,7 +8606,6 @@ ul.pagination li a:hover:not(.active) {
     background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,rgba(0,0,0,0)),color-stop(100%,rgba(0,0,0,.7)));
     background-image: -webkit-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,.7) 100%);
     background-image: -o-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,.7) 100%);
-    background-image: -ms-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,.7) 100%);
     background-image: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.7) 100%);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#b3000000', GradientType=1)
@@ -8761,7 +8729,6 @@ ul.pagination li a:hover:not(.active) {
     border-radius: 3px;
     -webkit-transition: background-color .11s;
     -moz-transition: background-color .11s;
-    -ms-transition: background-color .11s;
     -o-transition: background-color .11s;
     transition: background-color .11s
 }
@@ -8775,7 +8742,6 @@ ul.pagination li a:hover:not(.active) {
     visibility: visible;
     -webkit-transition: opacity .11s,visibility .11s,border-color .11s;
     -moz-transition: opacity .11s,visibility .11s,border-color .11s;
-    -ms-transition: opacity .11s,visibility .11s,border-color .11s;
     -o-transition: opacity .11s,visibility .11s,border-color .11s;
     transition: opacity .11s,visibility .11s,border-color .11s
 }
@@ -8789,7 +8755,6 @@ ul.pagination li a:hover:not(.active) {
 .Sni .__hover {
     -webkit-transition: opacity .11s,visibility .11s,border-color .11s;
     -moz-transition: opacity .11s,visibility .11s,border-color .11s;
-    -ms-transition: opacity .11s,visibility .11s,border-color .11s;
     -o-transition: opacity .11s,visibility .11s,border-color .11s;
     transition: opacity .11s,visibility .11s,border-color .11s
 }
@@ -9289,7 +9254,7 @@ ul.pagination li a:hover:not(.active) {
 .pQuality__i-link {
     position: absolute;
     top: 0;
-    lef: 0;
+    left: 0;
     display: block;
     width: 100%;
     height: 100%;
@@ -10275,7 +10240,6 @@ ul.pagination li a:hover:not(.active) {
             display: block;
             -webkit-transition: opacity .11s,visibility .11s;
             -moz-transition: opacity .11s,visibility .11s;
-            -ms-transition: opacity .11s,visibility .11s;
             -o-transition: opacity .11s,visibility .11s;
             transition: opacity .11s,visibility .11s
         }
@@ -10420,7 +10384,6 @@ ul.pagination li a:hover:not(.active) {
                 background-size: 40px 40px;
                 -webkit-transition: opacity .2s;
                 -moz-transition: opacity .2s;
-                -ms-transition: opacity .2s;
                 -o-transition: opacity .2s;
                 transition: opacity .2s
             }
@@ -10656,7 +10619,6 @@ ul.pagination li a:hover:not(.active) {
         filter: alpha(opacity=0);
         -webkit-transition: opacity .11s;
         -moz-transition: opacity .11s;
-        -ms-transition: opacity .11s;
         -o-transition: opacity .11s;
         transition: opacity .11s
     }
@@ -10796,7 +10758,6 @@ ul.pagination li a:hover:not(.active) {
         visibility: hidden;
         -webkit-transition: opacity .11s,visibility .11s;
         -moz-transition: opacity .11s,visibility .11s;
-        -ms-transition: opacity .11s,visibility .11s;
         -o-transition: opacity .11s,visibility .11s;
         transition: opacity .11s,visibility .11s
     }
@@ -10870,7 +10831,6 @@ ul.pagination li a:hover:not(.active) {
         line-height: 22px;
         -webkit-transition: height .2s;
         -moz-transition: height .2s;
-        -ms-transition: height .2s;
         -o-transition: height .2s;
         transition: height .2s
     }
@@ -10912,7 +10872,6 @@ ul.pagination li a:hover:not(.active) {
         filter: alpha(opacity=0);
         -webkit-transition: opacity .2s;
         -moz-transition: opacity .2s;
-        -ms-transition: opacity .2s;
         -o-transition: opacity .2s;
         transition: opacity .2s
     }
@@ -11015,7 +10974,6 @@ ul.pagination li a:hover:not(.active) {
         background-color: #ddd;
         -webkit-transition: background-color .2s;
         -moz-transition: background-color .2s;
-        -ms-transition: background-color .2s;
         -o-transition: background-color .2s;
         transition: background-color .2s
     }
@@ -11032,7 +10990,6 @@ ul.pagination li a:hover:not(.active) {
             background-size: 40px 20px;
             -webkit-transition: opacity .11s;
             -moz-transition: opacity .11s;
-            -ms-transition: opacity .11s;
             -o-transition: opacity .11s;
             transition: opacity .11s
         }
@@ -11057,7 +11014,6 @@ ul.pagination li a:hover:not(.active) {
             color: #333;
             -webkit-transition: color .11s;
             -moz-transition: color .11s;
-            -ms-transition: color .11s;
             -o-transition: color .11s;
             transition: color .11s
         }
@@ -11183,7 +11139,6 @@ ul.pagination li a:hover:not(.active) {
         visibility: hidden;
         -webkit-transition: opacity .11s,visibility .11s;
         -moz-transition: opacity .11s,visibility .11s;
-        -ms-transition: opacity .11s,visibility .11s;
         -o-transition: opacity .11s,visibility .11s;
         transition: opacity .11s,visibility .11s
     }
@@ -11295,7 +11250,6 @@ ul.pagination li a:hover:not(.active) {
         background-color: #ddd;
         -webkit-transition: background-color .2s;
         -moz-transition: background-color .2s;
-        -ms-transition: background-color .2s;
         -o-transition: background-color .2s;
         transition: background-color .2s
     }
@@ -11312,7 +11266,6 @@ ul.pagination li a:hover:not(.active) {
             background-size: 72px 14px;
             -webkit-transition: opacity .11s;
             -moz-transition: opacity .11s;
-            -ms-transition: opacity .11s;
             -o-transition: opacity .11s;
             transition: opacity .11s
         }
@@ -11337,7 +11290,6 @@ ul.pagination li a:hover:not(.active) {
             color: #333;
             -webkit-transition: color .11s;
             -moz-transition: color .11s;
-            -ms-transition: color .11s;
             -o-transition: color .11s;
             transition: color .11s
         }
@@ -11618,7 +11570,6 @@ ul.pagination li a:hover:not(.active) {
         filter: alpha(opacity=0);
         -webkit-transition: opacity .2s;
         -moz-transition: opacity .2s;
-        -ms-transition: opacity .2s;
         -o-transition: opacity .2s;
         transition: opacity .2s
     }
@@ -11893,7 +11844,6 @@ ul.pagination li a:hover:not(.active) {
     width: 690px;
     -webkit-transition: width .4s;
     -moz-transition: width .4s;
-    -ms-transition: width .4s;
     -o-transition: width .4s;
     transition: width .4s
 }
@@ -11902,7 +11852,6 @@ ul.pagination li a:hover:not(.active) {
     height: 390px;
     -webkit-transition: height .4s;
     -moz-transition: height .4s;
-    -ms-transition: height .4s;
     -o-transition: height .4s;
     transition: height .4s
 }
@@ -12476,7 +12425,6 @@ ul.pagination li a:hover:not(.active) {
     filter: alpha(opacity=80);
     -webkit-transition: opacity .2s;
     -moz-transition: opacity .2s;
-    -ms-transition: opacity .2s;
     -o-transition: opacity .2s;
     transition: opacity .2s
 }
@@ -12664,7 +12612,6 @@ ul.pagination li a:hover:not(.active) {
         filter: alpha(opacity=0);
         -webkit-transition: opacity .25s,visibility .25s;
         -moz-transition: opacity .25s,visibility .25s;
-        -ms-transition: opacity .25s,visibility .25s;
         -o-transition: opacity .25s,visibility .25s;
         transition: opacity .25s,visibility .25s
     }
@@ -12781,7 +12728,6 @@ ul.pagination li a:hover:not(.active) {
     height: 80px;
     -webkit-transition: background-color .11s linear,opacity .11s linear;
     -moz-transition: background-color .11s linear,opacity .11s linear;
-    -ms-transition: background-color .11s linear,opacity .11s linear;
     -o-transition: background-color .11s linear,opacity .11s linear;
     transition: background-color .11s linear,opacity .11s linear
 }
@@ -12847,7 +12793,6 @@ ul.pagination li a:hover:not(.active) {
     height: 520px;
     -webkit-transition: opacity .25s,visibility .25s;
     -moz-transition: opacity .25s,visibility .25s;
-    -ms-transition: opacity .25s,visibility .25s;
     -o-transition: opacity .25s,visibility .25s;
     transition: opacity .25s,visibility .25s
 }
@@ -12862,7 +12807,6 @@ ul.pagination li a:hover:not(.active) {
         background-size: 108px auto;
         -webkit-transition: opacity .11s linear;
         -moz-transition: opacity .11s linear;
-        -ms-transition: opacity .11s linear;
         -o-transition: opacity .11s linear;
         transition: opacity .11s linear
     }
@@ -12916,7 +12860,6 @@ ul.pagination li a:hover:not(.active) {
     text-shadow: 0 1px 1px rgba(0,0,0,.8);
     -webkit-transition: opacity .4s linear .35s;
     -moz-transition: opacity .4s linear .35s;
-    -ms-transition: opacity .4s linear .35s;
     -o-transition: opacity .4s linear .35s;
     transition: opacity .4s linear .35s
 }
@@ -12938,7 +12881,6 @@ ul.pagination li a:hover:not(.active) {
     text-shadow: 0 1px 1px rgba(0,0,0,.8);
     -webkit-transition: opacity .45s linear .5s;
     -moz-transition: opacity .45s linear .5s;
-    -ms-transition: opacity .45s linear .5s;
     -o-transition: opacity .45s linear .5s;
     transition: opacity .45s linear .5s
 }
@@ -12971,7 +12913,6 @@ ul.pagination li a:hover:not(.active) {
     text-shadow: 0 1px 1px rgba(0,0,0,.8);
     -webkit-transition: opacity .4s linear .45s;
     -moz-transition: opacity .4s linear .45s;
-    -ms-transition: opacity .4s linear .45s;
     -o-transition: opacity .4s linear .45s;
     transition: opacity .4s linear .45s
 }
@@ -12981,7 +12922,6 @@ ul.pagination li a:hover:not(.active) {
     filter: alpha(opacity=0);
     -webkit-transition: opacity .4s linear .35s;
     -moz-transition: opacity .4s linear .35s;
-    -ms-transition: opacity .4s linear .35s;
     -o-transition: opacity .4s linear .35s
 }
 
@@ -13017,7 +12957,6 @@ ul.pagination li a:hover:not(.active) {
 .Sli_tv_programm .Sli-channel-title, .Sli_tv_programm .Sli-info {
     -webkit-transition: opacity .4s linear .35s;
     -moz-transition: opacity .4s linear .35s;
-    -ms-transition: opacity .4s linear .35s;
     -o-transition: opacity .4s linear .35s;
     margin-left: 95px
 }
@@ -13029,7 +12968,6 @@ ul.pagination li a:hover:not(.active) {
 .Sli_tv_programm .Sli-description {
     -webkit-transition: opacity .4s linear .45s;
     -moz-transition: opacity .4s linear .45s;
-    -ms-transition: opacity .4s linear .45s;
     -o-transition: opacity .4s linear .45s;
     transition: opacity .4s linear .45s
 }
@@ -13043,7 +12981,6 @@ ul.pagination li a:hover:not(.active) {
     margin-left: 95px;
     -webkit-transition: opacity .4s linear .35s;
     -moz-transition: opacity .4s linear .35s;
-    -ms-transition: opacity .4s linear .35s;
     -o-transition: opacity .4s linear .35s;
     transition: opacity .4s linear .35s
 }
@@ -14293,7 +14230,6 @@ ul.pagination li a:hover:not(.active) {
 
 @media only screen and (-webkit-min-device-pixel-ratio:2),only screen and (min--moz-device-pixel-ratio:2),only screen and (-o-min-device-pixel-ratio:2/1),only screen and (min-device-pixel-ratio:2),only screen and (min-resolution:192dpi),only screen and (min-resolution:2dppx) {
     .page_cooperation .statistic i {
-        -webkit-background-size: 16px auto;
         background-size: 16px auto;
         background-image: url(/s/img2/icon-stat@x3.png)
     }
@@ -15596,14 +15532,12 @@ ul.pagination li a:hover:not(.active) {
     font-weight: 600;
     -webkit-transition: none;
     -moz-transition: none;
-    -ms-transition: none;
     -o-transition: none;
     transition: none
 }
 
 .pmTbi__content, .pmTti {
     -moz-transition: border-color .11s;
-    -ms-transition: border-color .11s;
     -o-transition: border-color .11s;
     overflow: hidden
 }
@@ -16410,7 +16344,6 @@ ul.pagination li a:hover:not(.active) {
         background-color: #fff;
         -webkit-transition: border-color .11s;
         -moz-transition: border-color .11s;
-        -ms-transition: border-color .11s;
         -o-transition: border-color .11s;
         transition: border-color .11s
     }
@@ -17230,7 +17163,6 @@ ul.pagination li a:hover:not(.active) {
             filter: alpha(opacity=0);
             -webkit-transition: opacity .2s;
             -moz-transition: opacity .2s;
-            -ms-transition: opacity .2s;
             -o-transition: opacity .2s;
             transition: opacity .2s
         }

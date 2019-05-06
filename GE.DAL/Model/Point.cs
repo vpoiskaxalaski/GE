@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GE.DAL.Model
+﻿namespace GE.DAL.Model
 {
     public class Point
     {
@@ -11,7 +7,7 @@ namespace GE.DAL.Model
 
         //[System.ComponentModel.DataAnnotations.Required]
        // public virtual ApplicationUser User { get; set; }
-        public int Points { get; set; }
-        public virtual ICollection<Operation> Operations { get; set; }
+       // public int Points { get; set; }
+       // public virtual ICollection<Operation> Operations { get; set; }
     }
 }
