@@ -13,8 +13,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Manage\ChangePost.cshtml" />
+    <Content Remove="Views\Manage\Post.cshtml" />
+    <Content Remove="Views\Manage\PostInformation.cshtml" />
+    <Content Remove="Views\Manage\Posts.cshtml" />
+    <Content Remove="Views\Manage\RequestPost.cshtml" />
+    <Content Remove="Views\Manage\ResponsePost.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="Controllers\AccountContoller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -44,6 +54,7 @@
 
   <ItemGroup>
     <None Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="Views\Manage\CreatePost.cshtml" />
     <None Include="wwwroot\Scripts\bootstrap-sortable.js" />
     <None Include="wwwroot\Scripts\bootstrap.js" />
     <None Include="wwwroot\Scripts\bootstrap.min.js" />
@@ -80,8 +91,9 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.0" />
     <PackageReference Include="jQuery" Version="1.10.2" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.1.1" />
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.4" />
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />

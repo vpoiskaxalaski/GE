@@ -74,6 +74,7 @@ E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Home\Conta
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Home\Post.g.cshtml.cs
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Home\Privacy.g.cshtml.cs
+E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\CreatePost.g.cshtml.cs
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Error.g.cshtml.cs
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
@@ -86,3 +87,5 @@ E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.Views.pdb
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.csproj.CopyComplete
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.dll
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.pdb
+E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\GetCities.g.cshtml.cs
+E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\GetSubcategories.g.cshtml.cs

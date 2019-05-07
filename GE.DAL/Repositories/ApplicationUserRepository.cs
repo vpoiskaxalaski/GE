@@ -2,6 +2,8 @@
 using GE.DAL.Model;
 using GE.DAL.Interfaces;
 using System.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace GE.DAL.Repositories
 {
@@ -13,6 +15,21 @@ namespace GE.DAL.Repositories
         public ApplicationUserRepository(DatabaseContext context)
         {
             _context = context;
+        }
+
+        public List<ApplicationUser> Find(Func<ApplicationUser, bool> predicate)
+        {
+            return _context.ApplicationUsers.Where(predicate).ToList();
+        }
+
+        public ApplicationUser GetByUserName(string name)
+        {
+            if (name != null)
+            {
+                return _context.ApplicationUsers.FirstOrDefault(x => x.UserName == name);
+            }
+
+            return new ApplicationUser();
         }
 
         public ApplicationUser GetByEmail(string email)
@@ -42,7 +59,7 @@ namespace GE.DAL.Repositories
 
         public bool Login(string email, string password)
         {
-           string passwordHash = Crypto.Crypto.Sha256(password + email);
+            string passwordHash = Crypto.Crypto.Sha256(password + email);
             var user = _context.ApplicationUsers.Where(x => x.Email == email && x.PasswordHash == passwordHash).FirstOrDefault();
             if (user != null && user.EmailConfirmed == true)
                 return true;
@@ -67,18 +84,6 @@ namespace GE.DAL.Repositories
             }
 
             return false;
-        }
-
-        public void Update(ApplicationUser entity)
-        {
-           // ApplicationUser account = _context.ApplicationUsers.Find(entity.ApplicationUserId);
-
-            //if (account != null)
-            //{
-            //    account.Name = entity.Name;
-            //    account.Surname = entity.Surname;
-            //}
-
         }
 
     }

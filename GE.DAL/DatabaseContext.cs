@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GE.DAL
 {
-    public class DatabaseContext : DbContext// IdentityDbContext<ApplicationUser>
+    public class DatabaseContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Subcategory> Subcategories { get; set; }

@@ -34,6 +34,16 @@ namespace GE.WEB.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Post(string Id)
+        {
+          
+            var post = _postsService.GetAll().FirstOrDefault(i => i.Id == int.Parse(Id));
+            if (post != null)
+                return View(post);
+            else return RedirectToAction("Index");
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -57,19 +67,6 @@ namespace GE.WEB.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public static string GetTime()
-        {
-            var client = new TcpClient("time.nist.gov", 13);
-            string localDateTime = "";
-            using (var streamReader = new StreamReader(client.GetStream()))
-            {
-                var response = streamReader.ReadToEnd();
-                var utcDateTimeString = response.Substring(7, 17);
-                localDateTime = DateTime.ParseExact(utcDateTimeString, "yy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToString();
-            }
-            return localDateTime;
         }
 
 

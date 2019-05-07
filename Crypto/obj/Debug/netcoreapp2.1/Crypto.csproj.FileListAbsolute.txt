@@ -1,7 +1,6 @@
 E:\UNIVER\CourseProject\GE\Crypto\bin\Debug\netcoreapp2.1\Crypto.deps.json
 E:\UNIVER\CourseProject\GE\Crypto\bin\Debug\netcoreapp2.1\Crypto.dll
 E:\UNIVER\CourseProject\GE\Crypto\bin\Debug\netcoreapp2.1\Crypto.pdb
-E:\UNIVER\CourseProject\GE\Crypto\obj\Debug\netcoreapp2.1\Crypto.csprojAssemblyReference.cache
 E:\UNIVER\CourseProject\GE\Crypto\obj\Debug\netcoreapp2.1\Crypto.csproj.CoreCompileInputs.cache
 E:\UNIVER\CourseProject\GE\Crypto\obj\Debug\netcoreapp2.1\Crypto.AssemblyInfoInputs.cache
 E:\UNIVER\CourseProject\GE\Crypto\obj\Debug\netcoreapp2.1\Crypto.AssemblyInfo.cs

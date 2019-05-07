@@ -16,6 +16,7 @@ using GE.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using GE.DAL.Model;
+using Microsoft.AspNetCore.Hosting.Internal;
 
 namespace GE.WEB
 {
@@ -38,7 +39,6 @@ namespace GE.WEB
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAccountService, AccountService>();
 
@@ -46,23 +46,20 @@ namespace GE.WEB
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(options =>
-            {
-                options.LoginPath = new PathString("/Account/Login");
-                options.LoginPath = new PathString("/Account/LoginModal");
-                options.AccessDeniedPath = new PathString("/Account/Login");
-            });
-
-            services.AddIdentity<ApplicationUserVM, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<DatabaseContext>()
                 .AddDefaultTokenProviders();
 
+
             services.AddAutoMapper();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IRegionService, RegionService>();
             services.AddScoped<ICacheService, CacheService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IEmailService, EmailService>();
+
+            //services.AddSingleton<IHostingEnvironment>(new HostingEnvironment());
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

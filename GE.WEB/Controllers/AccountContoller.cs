@@ -1,4 +1,5 @@
-﻿using GE.DAL.Model;
+﻿using AutoMapper;
+using GE.DAL.Model;
 using GE.Models;
 using GE.SL.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -17,13 +18,22 @@ namespace GE.WEB.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly IEmailService _emailService;
-        private readonly UserManager<ApplicationUserVM> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(IAccountService accountService, IEmailService emailService, UserManager<ApplicationUserVM> userManager)
+        public AccountController(
+            IAccountService accountService, 
+            IEmailService emailService,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _accountService = accountService;
             _emailService = emailService;
             _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         [HttpGet]
@@ -38,11 +48,16 @@ namespace GE.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_accountService.Login(model) != false)
+                var user = _userManager.FindByEmailAsync(model.Email).Result;
+                var result = _signInManager.SignInAsync(user, false);
+                await _signInManager.CreateUserPrincipalAsync(user);
+
+                if (result!=null)
                 {
-                    await Authenticate(model.Email);
+                   // Authenticate(model.Email);
                     return Json(new { success = true });
                 }
+
                 ModelState.AddModelError("", "Неверный Email или пароль");
                 ModelState.AddModelError("", "Подтвердите Email");
             }
@@ -62,14 +77,40 @@ namespace GE.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_accountService.Registration(model) == true)
+                ApplicationUserVM newUser = new ApplicationUserVM
                 {
-                    await Authenticate(model.Email);
-                    SendMessage(model);
-                    ViewBag.Message = "На указанный электронный адрес отправлены дальнейшие инструкции по завершению регистрации";
-                    return PartialView();
+                    UserName = model.Name,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    Role = "User"
+                };
+
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<ApplicationUserVM, ApplicationUser>();
+                });
+
+                var map = config.CreateMapper();
+
+                var user =  map.Map<ApplicationUserVM, ApplicationUser>(newUser);
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    IdentityResult roleResult;
+                    //Adding Admin Role
+                    var roleCheck = await _roleManager.RoleExistsAsync("User");
+                    if (!roleCheck)
+                    {
+                        //create the roles and seed them to the database
+                        roleResult = await _roleManager.CreateAsync(new IdentityRole("User"));
+                        _userManager.AddToRoleAsync(user, "User");
+                        SendMessage(user);
+                    }
+                    return PartialView("DisplayEmail");
                 }
-                ModelState.AddModelError("", "Еmail уже существует");
+
+                ModelState.AddModelError("", "Пользователь с таким Еmail или именем уже существует");
             }
             return PartialView(model);
         }
@@ -86,14 +127,15 @@ namespace GE.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_accountService.Login(model) != false)
-                {
-                   await Authenticate(model.Email);
+                var user = _userManager.FindByEmailAsync(model.Email).Result;
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+                await _signInManager.CreateUserPrincipalAsync(user);
 
-                    return RedirectToAction("Index", "Home");
+                if (result.Succeeded)
+                {
+                    return Json(new { success = true });
                 }
-//Check for EmailConfirm I wrote in ApplicationUserRepository.
-//If you want to separate errors, you should change login method
+
                 ModelState.AddModelError("", "Неверный Email или пароль");
                 ModelState.AddModelError("", "Подтвердите Email");
             }
@@ -113,66 +155,74 @@ namespace GE.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_accountService.Registration(model) == true)
+                ApplicationUserVM newUser = new ApplicationUserVM
                 {
-                    await Authenticate(model.Email);
-                    SendMessage(model);
-                    return View("DisplayEmail");
+                    UserName = model.Name,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber
+                };
+
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<ApplicationUserVM, ApplicationUser>();
+                });
+
+                var map = config.CreateMapper();
+
+                var user = map.Map<ApplicationUserVM, ApplicationUser>(newUser);
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    IdentityResult roleResult;
+                    //Adding Admin Role
+                    var roleCheck = await _roleManager.RoleExistsAsync("User");
+                    if (!roleCheck)
+                    {
+                        //create the roles and seed them to the database
+                        roleResult = await _roleManager.CreateAsync(new IdentityRole("User"));
+                        _userManager.AddToRoleAsync(user, "User");
+                        SendMessage(user);
+                    }
+                    return PartialView("DisplayEmail");
                 }
-                ModelState.AddModelError("", "Еmail уже существует");
+
+                ModelState.AddModelError("", "Пользователь с таким Еmail или именем уже существует");
             }
             return View(model);
         }
 
-        private async Task Authenticate(string mail)
-        {
-
-            List<Claim> claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, mail),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, _accountService.GetRole(mail))
-            };
-
-            var authProperties = new AuthenticationProperties
-            {
-                AllowRefresh = true,
-                ExpiresUtc = DateTimeOffset.Now.AddDays(1),
-                IsPersistent = true,
-            };
-
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
-                ClaimsIdentity.DefaultRoleClaimType);
-
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id), authProperties);
-        }
 
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
 
-        public async void SendMessage(RegisterViewModel model)
+        public async void SendMessage(ApplicationUser user)
         {
-            var user = _userManager.CreateAsync(new ApplicationUserVM { UserName = model.Name, Email = model.Email, PhoneNumber = model.PhoneNumber });
-            //var t = _userManager.FindByEmailAsync(model.Email);
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(_accountService.GetByEmail(model.Email));
-            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { email = model.Email, code }, protocol: Request.Scheme);
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(_userManager.FindByEmailAsync(user.Email).Result);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { email = user.Email, code }, protocol: Request.Scheme);
+            try
+            {
+               _emailService.SendEmailAsync(user.Email, "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\"> завершить регистрацию</a>");
+            }
+            catch(Exception ex)
+            {               
+            }
             ViewBag.Messages = callbackUrl.ToString();
-            await _emailService.SendEmailAsync(model.Email, "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\"> завершить регистрацию</a>");
         }
 
         public IActionResult ConfirmEmail(string email, string code)
         {
             if (email != null && code != null)
             {
-                bool result = _accountService.ConfirmEmail(email);
+                var result = _userManager.ConfirmEmailAsync( _userManager.FindByEmailAsync(email).Result , code).Result;
 
-                return View(result ? "ConfirmEmail" : "Error");
+                return View(result.Succeeded ? "ConfirmEmail" : "Error");
             }
  
             return View("Error");
-
         }
 
     }

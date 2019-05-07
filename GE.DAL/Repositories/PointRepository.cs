@@ -30,7 +30,7 @@ namespace GE.DAL.Repositories
 
         public IEnumerable<Point> Find(Func<Point, bool> predicate)
         {
-            return db.Points.ToList();
+            return db.Points.Where(predicate);
         }
 
         public Point Get(int id)

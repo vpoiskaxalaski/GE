@@ -9,6 +9,8 @@ namespace GE.DAL.Interfaces
     {
         ApplicationUser GetByEmail(string email);
 
+        ApplicationUser GetByUserName(string name);
+
         bool Login(string email, string password);
 
         bool Registration(ApplicationUser entity);
@@ -17,7 +19,6 @@ namespace GE.DAL.Interfaces
 
         string GetRole(string email);
 
-        void Update(ApplicationUser entity);
-
+        List<ApplicationUser> Find(Func<ApplicationUser, Boolean> predicate);
     }
 }

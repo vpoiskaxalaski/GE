@@ -1,7 +1,12 @@
-﻿using GE.DAL.Interfaces;
+﻿using System;
+using System.Threading.Tasks;
+using AutoMapper;
+using GE.DAL.Interfaces;
 using GE.DAL.Model;
 using GE.Models;
 using GE.SL.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace GE.SL.Servives
 {
@@ -9,10 +14,14 @@ namespace GE.SL.Servives
     {
 
         private readonly IUnitOfWork _unitOfWork;
+        UserManager<ApplicationUser> _userManager;
+        SignInManager<ApplicationUser> _signInManager;
 
-        public AccountService(IUnitOfWork unitOfWork)
+        public AccountService(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public ApplicationUserVM GetByEmail(string email)
@@ -20,6 +29,21 @@ namespace GE.SL.Servives
             ApplicationUser account = _unitOfWork.ApplicationUsers.GetByEmail(email);
 
             return new ApplicationUserVM {UserName = account.UserName, Email = account.Email, PhoneNumber = account.PhoneNumber};
+        }
+
+        public ApplicationUserVM GetByUserName(string name)
+        {
+            //ApplicationUser account = _unitOfWork.ApplicationUsers.Find(i => i.UserName == name);//GetEnumerator().Current;
+            var account = _unitOfWork.ApplicationUsers.GetByUserName(name);//GetEnumerator().Current;
+            //account.GetEnumerator().
+            //dynamic user2;
+            //foreach (var item in account)
+            //{
+            //    user2 = item;
+            //}
+            // var user = account.GetEnumerator().Current;
+            return new ApplicationUserVM { UserName = account.UserName, Email = account.Email, PhoneNumber = account.PhoneNumber };
+            //return new ApplicationUserVM();
         }
 
         public string GetRole(string email)
@@ -32,22 +56,30 @@ namespace GE.SL.Servives
             return _unitOfWork.ApplicationUsers.Login(model.Email, model.Password);
         }
 
-        public bool Registration(RegisterViewModel model)
+        public async Task<ApplicationUserVM> Registration(RegisterViewModel model)
         {
-            return _unitOfWork.ApplicationUsers.Registration(new ApplicationUser { UserName = model.Name, Email = model.Email, PasswordHash = model.Password, Role = "User" });
+            ApplicationUser newUser = new ApplicationUser
+            {
+                UserName = model.Name,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Role = "User"
+            };
+            var result = await _userManager.CreateAsync(newUser, model.Password);
+
+            if (result.Succeeded)
+            {
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<ApplicationUser, ApplicationUserVM>();
+                });
+
+                var map = config.CreateMapper();
+
+                return map.Map<ApplicationUser, ApplicationUserVM>(newUser);
+            }
+
+            return null;
         }
 
-        public bool ConfirmEmail(string email)
-        {
-            
-           var user = _unitOfWork.ApplicationUsers.GetByEmail(email);
-            if (user != null)
-            {
-                user.EmailConfirmed = true;
-                _unitOfWork.Save();
-                return true;
-            }
-            return false;
-        }
-    }   
+    }
 }

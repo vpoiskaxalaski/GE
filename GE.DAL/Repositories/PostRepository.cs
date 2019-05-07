@@ -19,7 +19,11 @@ namespace GE.DAL.Repositories
 
         public IEnumerable<Post> GetAll()
         {
-            return db.Posts.Include(x => x.Subcategory);
+            return db.Posts.Include(x => x.ImagesGallery)
+                .Include(x=>x.Subcategory)
+                .Include(x=>x.City)
+                .Include(x=>x.User)
+                .Include(x=>x.Video);
         }
 
         public Post Get(int id)

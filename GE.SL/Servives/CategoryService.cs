@@ -29,7 +29,6 @@ namespace GE.SL.Servives
 
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<Subcategory, SubcategoryVM>();
-                //cfg.AddProfile<FooProfile>();
             });
 
 
@@ -45,8 +44,7 @@ namespace GE.SL.Servives
                 categoriesVM.Add(categoryVM);
             }
 
-            return categoriesVM;
-            
+            return categoriesVM;            
         }
     }
 }

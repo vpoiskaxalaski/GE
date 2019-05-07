@@ -1,0 +1,17 @@
+﻿@model IEnumerable<GE.Models.SubcategoryVM>
+<ul class="F-subis" id="subcategoryPart">
+    @foreach (var subcategory in ViewBag.Subcategories)
+    {
+        <li id="@subcategory.Name" class="F-subi valueSub" data-filter="subcategory:@subcategory.Name" onclick="getValueSub(this)">
+            <div class="F-subi_title">
+                <a class="_link" title="@subcategory.Name">
+                    <span class="_value">
+                        @subcategory.Name
+                    </span>
+                </a>
+            </div>
+        </li>
+    }
+</ul>
+
+

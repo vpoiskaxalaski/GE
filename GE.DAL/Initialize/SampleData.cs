@@ -1,4 +1,5 @@
 ﻿using GE.DAL.Model;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +8,7 @@ namespace GE.DAL.Initialize
     public static class SampleData
     {
 
-        public static void Initialize(DatabaseContext context)
+        public static void Initialize(DatabaseContext context, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             if (!context.Regions.Any())
             {
@@ -1119,12 +1120,17 @@ namespace GE.DAL.Initialize
 
             if (!context.ApplicationUsers.Any())
             {
-               context.ApplicationUsers.Add(new ApplicationUser { UserName = "admin", Email = "admin@gmail.ru", PasswordHash = Crypto.Crypto.Sha256(".System99"), Role = "Admin", EmailConfirmed = true });
-               context.ApplicationUsers.Add(new ApplicationUser { UserName = "moderator", Email = "moderator@gmail.ru", PasswordHash = Crypto.Crypto.Sha256(".System99"), Role = "Moderator", EmailConfirmed = true });
-               context.SaveChanges();
+                //var user = new ApplicationUser { UserName = "admin", Email = "admin@gmail.ru" };
+                //var result = userManager.CreateAsync(user, ".System99");
+                //var roleResult = roleManager.CreateAsync(new IdentityRole("Admin")).Result;
+                //userManager.AddToRoleAsync(user, "Admin");
+
+                //user = new ApplicationUser { UserName = "moderator", Email = "moderator@gmail.ru" };
+                //result = userManager.CreateAsync(user, ".System99");
+                //roleResult = roleManager.CreateAsync(new IdentityRole("Moderator")).Result;
+                //userManager.AddToRoleAsync(user, "Moderator");
+
             }
-
-
         }
  
     }
