@@ -89,3 +89,5 @@ E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.dll
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.pdb
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\GetCities.g.cshtml.cs
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\GetSubcategories.g.cshtml.cs
+E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\Post.g.cshtml.cs
+E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\Posts.g.cshtml.cs

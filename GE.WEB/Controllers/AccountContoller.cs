@@ -49,12 +49,13 @@ namespace GE.WEB.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userManager.FindByEmailAsync(model.Email).Result;
-                var result = _signInManager.SignInAsync(user, false);
                 await _signInManager.CreateUserPrincipalAsync(user);
+                var result = _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false).Result;
 
-                if (result!=null)
+
+                if (result.Succeeded)
                 {
-                   // Authenticate(model.Email);
+                    // Authenticate(model.Email);
                     return Json(new { success = true });
                 }
 
@@ -88,25 +89,19 @@ namespace GE.WEB.Controllers
                 var config = new MapperConfiguration(cfg => {
                     cfg.CreateMap<ApplicationUserVM, ApplicationUser>();
                 });
-
                 var map = config.CreateMapper();
-
                 var user =  map.Map<ApplicationUserVM, ApplicationUser>(newUser);
 
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
+                if (user != null)
                 {
-                    IdentityResult roleResult;
-                    //Adding Admin Role
+                    var result = await _userManager.CreateAsync(user, model.Password);
                     var roleCheck = await _roleManager.RoleExistsAsync("User");
                     if (!roleCheck)
                     {
-                        //create the roles and seed them to the database
-                        roleResult = await _roleManager.CreateAsync(new IdentityRole("User"));
-                        _userManager.AddToRoleAsync(user, "User");
-                        SendMessage(user);
+                        await _roleManager.CreateAsync(new IdentityRole("User"));
                     }
+                    await _userManager.AddToRoleAsync(user, "User");
+                    SendMessage(user);
                     return PartialView("DisplayEmail");
                 }
 
@@ -128,18 +123,19 @@ namespace GE.WEB.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userManager.FindByEmailAsync(model.Email).Result;
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
                 await _signInManager.CreateUserPrincipalAsync(user);
+                var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
 
                 if (result.Succeeded)
                 {
-                    return Json(new { success = true });
+                    return RedirectToAction("Index", "Home");
+                    //return Json(new { success = true });
                 }
 
                 ModelState.AddModelError("", "Неверный Email или пароль");
                 ModelState.AddModelError("", "Подтвердите Email");
             }
-            return View(model);
+            return View();//View(model);
 
         }
 
@@ -165,25 +161,19 @@ namespace GE.WEB.Controllers
                 var config = new MapperConfiguration(cfg => {
                     cfg.CreateMap<ApplicationUserVM, ApplicationUser>();
                 });
-
                 var map = config.CreateMapper();
-
                 var user = map.Map<ApplicationUserVM, ApplicationUser>(newUser);
-
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    IdentityResult roleResult;
-                    //Adding Admin Role
                     var roleCheck = await _roleManager.RoleExistsAsync("User");
                     if (!roleCheck)
                     {
-                        //create the roles and seed them to the database
-                        roleResult = await _roleManager.CreateAsync(new IdentityRole("User"));
-                        _userManager.AddToRoleAsync(user, "User");
-                        SendMessage(user);
+                        IdentityResult roleResult = await _roleManager.CreateAsync(new IdentityRole("User"));
                     }
+                    await _userManager.AddToRoleAsync(user, "User");
+                    SendMessage(user);
                     return PartialView("DisplayEmail");
                 }
 
@@ -201,16 +191,16 @@ namespace GE.WEB.Controllers
 
         public async void SendMessage(ApplicationUser user)
         {
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(_userManager.FindByEmailAsync(user.Email).Result);
+            var u = _userManager.FindByEmailAsync(user.Email).Result;
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(u);
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { email = user.Email, code }, protocol: Request.Scheme);
+            ViewBag.Messages = callbackUrl.ToString();
             try
             {
-               _emailService.SendEmailAsync(user.Email, "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\"> завершить регистрацию</a>");
+               await _emailService.SendEmailAsync(user.Email, "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\"> завершить регистрацию</a>");
             }
-            catch(Exception ex)
-            {               
-            }
-            ViewBag.Messages = callbackUrl.ToString();
+            catch(Exception ex) {  }
+
         }
 
         public IActionResult ConfirmEmail(string email, string code)

@@ -14,9 +14,7 @@
 
   <ItemGroup>
     <Content Remove="Views\Manage\ChangePost.cshtml" />
-    <Content Remove="Views\Manage\Post.cshtml" />
     <Content Remove="Views\Manage\PostInformation.cshtml" />
-    <Content Remove="Views\Manage\Posts.cshtml" />
     <Content Remove="Views\Manage\RequestPost.cshtml" />
     <Content Remove="Views\Manage\ResponsePost.cshtml" />
   </ItemGroup>

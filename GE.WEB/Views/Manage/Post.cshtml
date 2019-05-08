@@ -1,4 +1,4 @@
-﻿@model diplom.Models.Post
+﻿@model GE.Models.PostVM
 <div class="view">
     <div class="view-header">
         <div class="container">
@@ -20,7 +20,7 @@
                 <div class="thumbnail">
                     <div class="thumb">
                         @*@Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.ImagesGallery.ToList()[0].ImageData) + "\" width='300' style='min-height:250px;' />")*@
-                        <img class='voi__poster' src="@string.Concat("/Images/" + Model.UserId + "/", Model.ImagesGallery.ToList().First().Title, ".jpg")" width='162' height='228' style="    max-height: 390px;" />
+                        <img class='voi__poster' src="@string.Concat("/images/" + Model.User.Id + "/", Model.ImagesGallery.ToList().First().Name)")" width='162' height='228' style="    max-height: 390px;" />
                     </div>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                         {
                             <span>
                                 @*@Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.ImageData) + "\"onclick=" + "openImg(this);" + " />")*@
-                                <img class='voi__poster' src="@string.Concat("/Images/" + Model.UserId + "/", item.Title, ".jpg")" width='162' height='228' onclick="openImg(this);" />
+                                <img class='voi__poster' src="@string.Concat("/images/" + Model.User.Id + "/", Model.ImagesGallery.ToList().First().Name)" width='162' height='228' onclick="openImg(this);" />
                             </span>
                         }
                     </div>
@@ -190,7 +190,7 @@
                     {
                         <span>
                             @*@Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.ImageData) + "\"onclick=" + "openImg(this);" + " />")*@
-                            <img class='voi__poster' src="@string.Concat("/Images/" + Model.UserId + "/", item.Title, ".jpg")" width='162' height='228' onclick="openImg(this);" />
+                            <img class='voi__poster' src="@string.Concat("/images/" + Model.User.Id + "/", Model.ImagesGallery.ToList().First().Name)" width='162' height='228' onclick="openImg(this);" />
                         </span>
                     }
                 </div>

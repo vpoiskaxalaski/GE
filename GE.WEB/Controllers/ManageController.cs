@@ -54,7 +54,7 @@ namespace GE.WEB.Controllers
         [HttpPost]
         public IActionResult CreatePost(RegisterPostViewModel model, IEnumerable<IFormFile> images, IFormFile video)
         {
-            if (ModelState.IsValid && !(images.All(i => Equals(i, null))))
+            if (ModelState.IsValid) //&& !(images.All(i => Equals(i, null))))
             {
                 var user = _accountService.GetByUserName(User.Identity.Name);
                 _postService.CreatePost(model, images, video, user);
@@ -62,7 +62,7 @@ namespace GE.WEB.Controllers
             }
             else
             {
-                GetCacheData();
+                //    GetCacheData();
                 return View();
             }
         }
@@ -120,25 +120,24 @@ namespace GE.WEB.Controllers
         //}
 
 
-        //[HttpGet]
-        //public ActionResult Posts()
-        //{
-        //    ViewBag.Message = TempData["Message"];
-        //    db = new ApplicationDbContext();
-        //    string userId = User.Identity.GetUserId();
-        //    ViewBag.Posts = db.Posts.Where(i => i.UserId == userId).ToList();
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult Posts()
+        {
+            ViewBag.Message = TempData["Message"];
+            string userName = User.Identity.Name;
+            //var us_accountService.GetByUserName(userName);
+            ViewBag.Posts = _postService.GetAll().Where(x => x.Name == userName); // db.Posts.Where(i => i.UserId == userId).ToList();
+            return View();
+        }
 
-        //[HttpGet]
-        //public ActionResult Post(string Id)
-        //{
-        //    db = new ApplicationDbContext();
-        //    var post = db.Posts.Find(Id);
-        //    if (post != null)
-        //        return View(post);
-        //    else return RedirectToAction("Index");
-        //}
+        [HttpGet]
+        public ActionResult Post(int Id)
+        {
+            var post = _postService.GetAll().Find(x=>x.Id == Id); //db.Posts.Find(Id);
+            if (post != null)
+                return View(post);
+            else return RedirectToAction("Account","Index");
+        }
 
         //[HttpGet]
         //public ActionResult ChangePost(string postId)

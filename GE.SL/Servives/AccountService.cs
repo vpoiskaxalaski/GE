@@ -34,7 +34,7 @@ namespace GE.SL.Servives
         public ApplicationUserVM GetByUserName(string name)
         {
             //ApplicationUser account = _unitOfWork.ApplicationUsers.Find(i => i.UserName == name);//GetEnumerator().Current;
-            var account = _unitOfWork.ApplicationUsers.GetByUserName(name);//GetEnumerator().Current;
+            var account = _userManager.FindByNameAsync(name).Result;//_unitOfWork.ApplicationUsers.GetByUserName(name);//GetEnumerator().Current;
             //account.GetEnumerator().
             //dynamic user2;
             //foreach (var item in account)
@@ -42,7 +42,7 @@ namespace GE.SL.Servives
             //    user2 = item;
             //}
             // var user = account.GetEnumerator().Current;
-            return new ApplicationUserVM { UserName = account.UserName, Email = account.Email, PhoneNumber = account.PhoneNumber };
+            return new ApplicationUserVM {Id = account.Id, UserName = account.UserName, Email = account.Email, PhoneNumber = account.PhoneNumber };
             //return new ApplicationUserVM();
         }
 

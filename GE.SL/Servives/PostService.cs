@@ -60,10 +60,11 @@ namespace GE.SL.Servives
                 Description = model.Description,
                 City = _unitOfWork.Cities.Find(i => i.Name == model.City).First(), //db.Cities.First(i => i.Name == model.City),
                 DateCreatePost = GetTime(),
+                UserId = dbUser.Id,
                 ImagesGallery = AddImagesInDb(images, user.Id),
                 Video = AddVideoInDb(video),
                 Subcategory = _unitOfWork.Subcategories.Find(i => i.Name == model.Subcategory).FirstOrDefault(),
-                User = dbUser,
+                //User = dbUser,
                 Status = "0"
             };
             _unitOfWork.Posts.Create(post);

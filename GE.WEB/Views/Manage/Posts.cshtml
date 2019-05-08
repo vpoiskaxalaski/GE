@@ -18,13 +18,13 @@
         <div class="videos-mask">
             <div id="content">
                 <ul class="videos-list vois">
-                    @foreach (diplom.Models.Post post in ViewBag.Posts)
+                    @foreach (GE.Models.PostVM post in ViewBag.Posts)
                     {
                         if (post.Status != "0")
                         {
                             <li class="voi">
                                 <a href="/Manage/Post/@post.Id" title="@post.Name">
-                                    <img class='voi__poster' src="@string.Concat("/Images/" + post.UserId + "/", post.ImagesGallery.ToList().First().Title, ".jpg")" />
+                                    <img class='voi__poster' src="@string.Concat("/images/" + post.UserId + "/", post.ImagesGallery.ToList().First().Name)" />
                                 </a>
                                 <div class="voi__content">
                                     <p class="voi__title">
@@ -46,7 +46,7 @@
                         {
                             <li class="voi">
                                 <a href="/Manage/Post/@post.Id" title="@post.Name">
-                                    <img class='voi__poster' src="@string.Concat("/Images/" + post.UserId + "/", post.ImagesGallery.ToList().First().Title, ".jpg")" />
+                                    <img class='voi__poster' src="@string.Concat("/images/" + post.UserId + "/", post.ImagesGallery.ToList().First().Name)" />
                                 </a>
                                 <div class="voi__content">
                                     <p class="voi__title">
