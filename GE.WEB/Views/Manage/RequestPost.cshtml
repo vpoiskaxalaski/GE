@@ -13,16 +13,16 @@
     </div>
     <div class="F__category">
     </div>
-    @if (((IEnumerable<dynamic>)ViewBag.Posts).Count() > 0)
+    @if (((IEnumerable<dynamic>)ViewBag.Orders).Count() > 0)
     {
         <div class="videos-mask">
             <div id="content">
                 <ul class="videos-list vois">
-                    @foreach (diplom.Models.Order order in ViewBag.Posts)
+                    @foreach (GE.Models.OrderVM order in ViewBag.Orders)
                     {
                         <li class="voi">
                             <a href="/Home/Post/@order.PostId" title="@order.Post.Name">
-                                <img class='voi__poster' src="@string.Concat("/Images/" + order.Post.UserId + "/", order.Post.ImagesGallery.ToList().First().Title, ".jpg")" />
+                                <img class='voi__poster' src="@string.Concat("/images/" + order.UserId + "/", order.Post.ImagesGallery.ToList().First().Name)" />
                             </a>
                             <div class="voi__content">
                                 <p class="voi__title">

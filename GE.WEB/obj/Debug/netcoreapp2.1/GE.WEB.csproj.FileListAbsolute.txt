@@ -91,3 +91,4 @@ E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\Get
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\GetSubcategories.g.cshtml.cs
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\Post.g.cshtml.cs
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\Posts.g.cshtml.cs
+E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\RequestPost.g.cshtml.cs

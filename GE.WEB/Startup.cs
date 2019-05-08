@@ -57,6 +57,7 @@ namespace GE.WEB
             services.AddScoped<ICacheService, CacheService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             //services.AddSingleton<IHostingEnvironment>(new HostingEnvironment());
 

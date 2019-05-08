@@ -14,11 +14,13 @@ namespace GE.WEB.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly IPostService _postService;
+        private readonly IOrderService _orderService;
 
-        public ManageController(IAccountService accountService, IPostService postService)
+        public ManageController(IAccountService accountService, IPostService postService, IOrderService orderService)
         {
             _accountService = accountService;
             _postService = postService;
+            _orderService = orderService;
         }
 
         //public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -214,47 +216,42 @@ namespace GE.WEB.Controllers
         //    return RedirectToAction("Posts");
         //}
 
-        //[HttpGet]
-        //public ActionResult RequestPost()
-        //{
-        //    ViewBag.Message = TempData["Message"];
-        //    db = new ApplicationDbContext();
-        //    string userId = User.Identity.GetUserId();
-        //    ViewBag.Posts = db.Orders.Where(i => i.UserId == userId).ToList();
-        //    return View();
-        //}
+        [HttpGet]
+        public ActionResult RequestPost()
+        {
+            ViewBag.Message = TempData["Message"];
+            string userId = _accountService.GetByUserName(User.Identity.Name).Id;
+            ViewBag.Orders = _orderService.GetAll().Where(x => x.UserId == userId); //db.Orders.Where(i => i.UserId == userId).ToList();
+            return View();
+        }
 
-        //[HttpPost]
-        //public ActionResult RequestPost(string postId)
-        //{
-        //    db = new ApplicationDbContext();
-        //    var userId = User.Identity.GetUserId();
-        //    var post = db.Posts.Find(postId);
+        [HttpPost]
+        public ActionResult RequestPost(int postId)
+        {
+            string userId = _accountService.GetByUserName(User.Identity.Name).Id;
+            var post = _postService.GetAll().Find(x => x.UserId == userId);
 
-        //    if (post != null)
-        //    {
-        //        if (post.UserId != userId)
-        //        {
-        //            var orders = db.Orders.Where(i => i.PostId == postId).ToList().Where(i => i.UserId == userId).ToList(); //all orders from this postid and userid
-        //            if (orders.Count == 0)
-        //            {
-        //                var order = new Order
-        //                {
-        //                    Id = Guid.NewGuid().ToString(),
-        //                    PostId = postId,
-        //                    UserId = userId
-        //                };
-        //                db.Orders.Add(order);
-        //                db.SaveChanges();
-        //                TempData["Message"] = "Пост был успешно добавлен в запросы";
-        //            }
-        //            else TempData["Message"] = "Вы не можете запросить повторно один и тот же пост";
-        //        }
-        //        else TempData["Message"] = "Вы не можете запросить свой же пост";
-        //    }
-        //    else TempData["Message"] = "Что-то пошло не так";
-        //    return RedirectToAction("RequestPost");
-        //}
+            if (post != null)
+            {
+                //if (post.UserId != userId)
+                //{
+                var orders = _orderService.GetAll().Where(x => x.PostId == postId && x.UserId == userId);//db.Orders.Where(i => i.PostId == postId).ToList().Where(i => i.UserId == userId).ToList(); //all orders from this postid and userid
+                    if (orders.Count() == 0)
+                    {
+                    _orderService.Create(new OrderVM
+                    {
+                        PostId = postId,
+                        UserId = userId
+                    });
+                        TempData["Message"] = "Пост был успешно добавлен в запросы";
+                }
+                else TempData["Message"] = "Вы не можете запросить повторно один и тот же пост";
+            //}
+            //    else TempData["Message"] = "Вы не можете запросить свой же пост";
+            }
+            else TempData["Message"] = "Что-то пошло не так";
+            return RedirectToAction("RequestPost");
+        }
 
         //[HttpGet]
         //public ActionResult ResponsePost()

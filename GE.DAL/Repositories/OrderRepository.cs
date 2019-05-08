@@ -20,7 +20,7 @@ namespace GE.DAL.Repositories
 
         public IEnumerable<Order> GetAll()
         {
-            return db.Orders;
+            return db.Orders.Include(x=>x.Post);
         }
 
         public Order Get(int id)
@@ -39,7 +39,7 @@ namespace GE.DAL.Repositories
         }
         public IEnumerable<Order> Find(Func<Order, Boolean> predicate)
         {
-            return db.Orders;
+            return db.Orders.Where(predicate);
         }
         public void Delete(int id)
         {

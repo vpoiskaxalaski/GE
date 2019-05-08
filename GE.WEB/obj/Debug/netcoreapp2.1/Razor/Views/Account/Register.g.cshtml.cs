@@ -75,7 +75,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("<div class=\"autH\">\r\n    <div class=\"modal-header\">\r\n        <h3 class=\"title\">\r\n            Регистрация\r\n        </h3>\r\n    </div>\r\n    ");
             EndContext();
             BeginContext(172, 2110, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1731805a24e148a1ac1d1958a5e8f432", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "783ec42a228846dea2e3cb531b335a7e", async() => {
                 BeginContext(253, 105, true);
                 WriteLiteral("\r\n        <div align=\"center\">\r\n            <h3 style=\"color:#cb95aa;font-size:small;\">\r\n                ");
                 EndContext();
@@ -242,7 +242,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\r\n        в существующий аккаунт\r\n    </div>\r\n</div>\r\n");
             EndContext();
             BeginContext(2456, 78, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3534f060e4e841ccab737eb2c3f35b53", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2723dcc596d6438ca57069afb2ddba1f", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

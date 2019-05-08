@@ -34,7 +34,7 @@ namespace GE.SL.Servives
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Post, PostVM>();
+                cfg.CreateMap<Post, PostVM>();   
             });
 
 

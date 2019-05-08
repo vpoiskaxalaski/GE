@@ -9,12 +9,14 @@
     <Compile Include="Interfaces\ICacheService.cs" />
     <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\IEmailService.cs" />
+    <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="Interfaces\IPostService.cs" />
     <Compile Include="Interfaces\IRegionService.cs" />
     <Compile Include="Servives\AccountService.cs" />
     <Compile Include="Servives\CacheService.cs" />
     <Compile Include="Servives\CategoryService.cs" />
     <Compile Include="Servives\EmailService.cs" />
+    <Compile Include="Servives\OrderService.cs" />
     <Compile Include="Servives\PostService.cs" />
     <Compile Include="Servives\RegionService.cs" />
   </ItemGroup>

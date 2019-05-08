@@ -20,7 +20,7 @@
                 <tr><th>Наиеменование поста</th><th>Имя пользователя</th><th>Номер телефона</th></tr>
             </thead>
             <tbody>
-                @foreach (diplom.Models.Order order in ViewBag.Posts)
+                @foreach (GE.Models.OrderVM order in ViewBag.Posts)
                 {
                     <tr>
                         <td>@Ajax.ActionLink((string)order.Post.Name, "PostInformation", "Manage", new { id = order.Post.Id }, new AjaxOptions { UpdateTargetId = "postInformation" })</td>
