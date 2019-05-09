@@ -3,19 +3,19 @@ using GE.DAL.Interfaces;
 using GE.DAL.Model;
 using GE.Models;
 using GE.SL.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GE.SL.Servives
 {
     public class OrderService : IOrderService
     {
         private IUnitOfWork _unitOfWork;
+        private IImageGalleryService _imageGalleryService;
 
-        public OrderService(IUnitOfWork unitOfWork)
+        public OrderService(IUnitOfWork unitOfWork, IImageGalleryService imageGalleryService)
         {
             _unitOfWork = unitOfWork;
+            _imageGalleryService = imageGalleryService;
         }
 
         public void Create(OrderVM order)
@@ -24,29 +24,61 @@ namespace GE.SL.Servives
             _unitOfWork.Save();
         }
 
+        public void Delete(int id)
+        {
+            _unitOfWork.Orders.Delete(id);
+            _unitOfWork.Save();
+        }
+
+        public OrderVM FindById(int postId)
+        {
+            var order = _unitOfWork.Orders.Get(postId);
+
+            return new OrderVM { Id = order.Id, PostId = order.PostId, UserId = order.UserId };
+        }
+
         public List<OrderVM> GetAll()
         {
             List<OrderVM> ordersVM = new List<OrderVM>();
-            //PostVM postVM = new PostVM();
-            //OrderVM orderVM = new OrderVM();
-
             IEnumerable<Order> orders = _unitOfWork.Orders.GetAll();
 
-
-            //var config = new MapperConfiguration(cfg =>
-            //{
-            //    cfg.CreateMap<Post, PostVM>();
-            //});
-            //var map = config.CreateMapper();
+            var postConfig = new MapperConfiguration(cfg => {
+                cfg.CreateMap<Post, PostVM>();
+            });
+            var postMap = postConfig.CreateMapper();
+            var userConfig = new MapperConfiguration(cfg => {
+                cfg.CreateMap<ApplicationUser, ApplicationUserVM>();
+            });
+            var userMap = userConfig.CreateMapper();
+            var imageConfig = new MapperConfiguration(cfg => {
+                cfg.CreateMap<ImagesGallery, ImagesGalleryVM>();
+            });
+            var imageMap = imageConfig.CreateMapper();
 
             foreach (Order order in orders)
             {
-                // postVM = map.Map<Post, PostVM>(order.Post);
-                // orderVM = new OrderVM {  Id=order.Id, PostId};
-                ordersVM.Add(new OrderVM { Id = order.Id, PostId = order.PostId, UserId = order.Post.UserId });
+                var userVM = userMap.Map<ApplicationUser, ApplicationUserVM>(order.User);
+                var imageGallery = _imageGalleryService.Find(order.PostId);
+                var subcategory = _unitOfWork.Subcategories.Get(order.Post.SubcategoryId);
+                var postVM = postMap.Map<Post, PostVM>(order.Post);
+                postVM.Subcategory = new SubcategoryVM { Id = subcategory.Id, Name = subcategory.Name, Points = subcategory.Points };
+                postVM.ImagesGallery = imageGallery;
+
+                ordersVM.Add(new OrderVM { Id=order.Id, PostId = order.PostId, UserId = order.UserId, Post = postVM, User = userVM});
             }
 
             return ordersVM;
+        }
+
+        public void RemoveRange(ICollection<OrderVM> items)
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<OrderVM, Order>();
+            });
+            var map = config.CreateMapper();
+            var orders = map.Map<IEnumerable<OrderVM>, ICollection<Order>>(items);
+
+            _unitOfWork.Orders.RemoveRange(orders);
         }
     }
 }

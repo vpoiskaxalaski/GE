@@ -2,10 +2,10 @@
 using GE.SL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace GE.WEB.Controllers
 {
@@ -15,35 +15,20 @@ namespace GE.WEB.Controllers
         private readonly IAccountService _accountService;
         private readonly IPostService _postService;
         private readonly IOrderService _orderService;
+        private readonly IOperationService _operationService;
+        private readonly IImageGalleryService _imageGalleryService;
 
-        public ManageController(IAccountService accountService, IPostService postService, IOrderService orderService)
+        public ManageController(IAccountService accountService, 
+            IPostService postService, 
+            IOrderService orderService, 
+            IOperationService operationService,
+            IImageGalleryService imageGalleryService)
         {
             _accountService = accountService;
             _postService = postService;
             _orderService = orderService;
-        }
-
-        //public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        //{
-        //    UserManager = userManager;
-        //    SignInManager = signInManager;
-        //}
-
-        [HttpGet]
-        public async Task<ActionResult> Index()
-        {
-            //ViewBag.StatusMessage = message == ManageMessageId.Error ? "Произошла ошибка." : "";
-
-            //var userId = User.Identity.GetUserId();
-            //var model = new IndexViewModel
-            //{
-            //    HasPassword = HasPassword(),
-            //    PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-            //    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-            //    Logins = await UserManager.GetLoginsAsync(userId),
-            //    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            //};
-            return View();
+            _operationService = operationService;
+            _imageGalleryService = imageGalleryService;
         }
 
         [HttpGet]
@@ -54,12 +39,12 @@ namespace GE.WEB.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreatePost(RegisterPostViewModel model, IEnumerable<IFormFile> images, IFormFile video)
+        public IActionResult CreatePost(RegisterPostViewModel model, IEnumerable<IFormFile> images)
         {
             if (ModelState.IsValid) //&& !(images.All(i => Equals(i, null))))
             {
                 var user = _accountService.GetByUserName(User.Identity.Name);
-                _postService.CreatePost(model, images, video, user);
+                _postService.CreatePost(model, images, user);
                 return RedirectToAction("Posts");
             }
             else
@@ -96,30 +81,21 @@ namespace GE.WEB.Controllers
         }
 
 
-        //[HttpGet]
-        //public ActionResult Profile()
-        //{
-        //    db = new ApplicationDbContext();
-        //    var user = db.Users.Find(User.Identity.GetUserId());
-        //    ViewBag.User = user;
-        //    ViewBag.HistoryOperations = db.Operations.Where(i => i.PointId == user.Points.Id).ToList();
-        //    return View();
-        //}
+        [HttpGet]
+        public ActionResult Profile()
+        {
+            var user = _accountService.GetByUserName(User.Identity.Name);
+            ViewBag.User = user;
+            ViewBag.HistoryOperations = _operationService.GetAll().Where(x=>x.UserId == user.Id).ToList();
+            return View();
+        }
 
-        //[HttpGet]
-        //public string GetBonus()
-        //{
-        //    var userId = User.Identity.GetUserId();
-        //    db = new ApplicationDbContext();
-        //    string points = db.Points.Find(userId).Points.ToString();
-        //    return points;
-        //}
-
-        //[HttpGet]
-        //public ActionResult ChangeProfile()
-        //{
-        //    return PartialView();
-        //}
+        [HttpGet]
+        public string GetBonus()
+        {
+            var user = _accountService.GetByUserName(User.Identity.Name);
+            return user.Points.ToString();
+        }
 
 
         [HttpGet]
@@ -127,306 +103,225 @@ namespace GE.WEB.Controllers
         {
             ViewBag.Message = TempData["Message"];
             string userName = User.Identity.Name;
-            //var us_accountService.GetByUserName(userName);
-            ViewBag.Posts = _postService.GetAll().Where(x => x.Name == userName); // db.Posts.Where(i => i.UserId == userId).ToList();
+            ViewBag.Posts = _postService.GetAll().Where(x => x.User.UserName == userName); 
             return View();
         }
 
         [HttpGet]
         public ActionResult Post(int Id)
         {
-            var post = _postService.GetAll().Find(x=>x.Id == Id); //db.Posts.Find(Id);
-            if (post != null)
-                return View(post);
-            else return RedirectToAction("Account","Index");
+            ViewBag.User = _accountService.GetByUserName(User.Identity.Name);
+            ViewBag.Post = _postService.GetAll().FirstOrDefault(i => i.Id == Id);
+
+            return View();
         }
 
-        //[HttpGet]
-        //public ActionResult ChangePost(string postId)
-        //{
-        //    //Tuple<IList<Category>, IList<Region>> tuple = HomeController.GetDataFromCatReg();
-        //    //ViewBag.Categories = tuple.Item1;
-        //    //ViewBag.Regions = tuple.Item2;
-        //    db = new ApplicationDbContext();
-        //    var post = db.Posts.Find(postId);
-        //    if (post != null)
-        //        return View(post);
-        //    else return RedirectToAction("Index");
-        //}
-
-        //[HttpPost]
-        //public ActionResult ChangePost(Post model, HttpPostedFileBase video)//IEnumerable<HttpPostedFileBase> images)
-        //{
-        //    db = new ApplicationDbContext();
-        //    var user = db.Users.Find(User.Identity.GetUserId());
-        //    var post = db.Posts.FirstOrDefault(i => i.Id == model.Id);
-        //    //if (!(images.All(i => Equals(i, null))))
-        //    //{
-        //    //db = new ApplicationDbContext();
-        //    //var user = db.Users.Find(User.Identity.GetUserId());
-        //    //var post = db.Posts.FirstOrDefault(i => i.Id == model.Id);
-        //    //if (post != null)
-        //    //{
-        //    if (model.Description.Count() >= 5)
-        //    {
-        //        post.Name = model.Name;
-        //        post.Description = model.Description;
-        //        //post.City = db.Cities.First(i => i.Name == model.City.Name);
-        //        //post.DateCreatePost = DateTime.Now.ToString();
-        //        //post.ImagesGallery = AddImagesInDb(images, user.Id);
-        //        if (video != null)
-        //        {
-        //            post.Video = AddVideoInDb(video);
-        //        }
-        //        post.Status = "0";
-        //        db.Orders.RemoveRange(db.Orders.Where(i => i.PostId == post.Id).ToList());
-        //        //post.Subcategory = db.Subcategories.First(i => i.Name == model.Subcategory),
-        //        db.SaveChanges();
-        //        ViewBag.Message = "Пост успешно изменен";
-        //        return View(post);
-        //    }
-        //    ViewBag.Error = "Описание должно иметь не менее 5 символов";
-        //    return View(post);
-        //    //}
-        //    //ViewBag.Error = "Что-то пошло не так";
-        //    //return View(post);
-        //    //}
-        //    //else
-        //    //{
-        //    //    ViewBag.Error = "Добавьте хотя бы одну фотографию";
-        //    //    return View(post);
-        //    //}
-        //}
-
-        //[HttpPost]
-        //public ActionResult DeletePost(string postId)
-        //{
-        //    db = new ApplicationDbContext();
-        //    var post = db.Posts.Find(postId);
-        //    if (post != null)
-        //    {
-        //        db.ImagesGallery.RemoveRange(db.ImagesGallery.Where(i => i.PostId == post.Id).ToList());
-        //        db.Orders.RemoveRange(db.Orders.Where(i => i.PostId == post.Id).ToList());
-        //        db.Posts.Remove(post);
-        //        db.SaveChanges();
-        //        TempData["Message"] = "Пост был успешно удален";
-        //    }
-        //    else TempData["Message"] = "Что-то пошло не так";
-
-        //    return RedirectToAction("Posts");
-        //}
-
         [HttpGet]
-        public ActionResult RequestPost()
+        public IActionResult RequestPost()
         {
             ViewBag.Message = TempData["Message"];
             string userId = _accountService.GetByUserName(User.Identity.Name).Id;
-            ViewBag.Orders = _orderService.GetAll().Where(x => x.UserId == userId); //db.Orders.Where(i => i.UserId == userId).ToList();
+            ViewBag.Orders = _orderService.GetAll().Where(x => x.UserId == userId).ToList();
             return View();
         }
 
         [HttpPost]
-        public ActionResult RequestPost(int postId)
+        public IActionResult RequestPost(int postId)
         {
             string userId = _accountService.GetByUserName(User.Identity.Name).Id;
             var post = _postService.GetAll().Find(x => x.UserId == userId);
 
             if (post != null)
             {
-                //if (post.UserId != userId)
-                //{
                 var orders = _orderService.GetAll().Where(x => x.PostId == postId && x.UserId == userId);//db.Orders.Where(i => i.PostId == postId).ToList().Where(i => i.UserId == userId).ToList(); //all orders from this postid and userid
-                    if (orders.Count() == 0)
-                    {
+                if (orders.Count() == 0)
+                {
                     _orderService.Create(new OrderVM
                     {
                         PostId = postId,
-                        UserId = userId
+                        UserId = userId,
+                        Post = _postService.GetAll().FirstOrDefault(x => x.Id == postId),
+                        User = _accountService.GetById(userId)
                     });
-                        TempData["Message"] = "Пост был успешно добавлен в запросы";
+                    TempData["Message"] = "Пост был успешно добавлен в запросы";
                 }
                 else TempData["Message"] = "Вы не можете запросить повторно один и тот же пост";
-            //}
-            //    else TempData["Message"] = "Вы не можете запросить свой же пост";
             }
             else TempData["Message"] = "Что-то пошло не так";
             return RedirectToAction("RequestPost");
         }
 
-        //[HttpGet]
-        //public ActionResult ResponsePost()
-        //{
-        //    ViewBag.Message = TempData["Message"];
-        //    db = new ApplicationDbContext();
-        //    string userId = User.Identity.GetUserId();
-        //    ViewBag.Posts = db.Orders.Where(i => i.Post.UserId == userId).ToList();
-        //    return View();
-        //}
+        [HttpGet]
+        public ActionResult ResponsePost()
+        {
+            ViewBag.Message = TempData["Message"];
+            string userId = _accountService.GetByUserName(User.Identity.Name).Id;
+            ViewBag.Orders = _orderService.GetAll().Where(x => x.Post.UserId == userId);
+            return View();
+        }
 
-        //[HttpGet]
-        //public ActionResult PostInformation(string id)
-        //{
-        //    //ViewBag.Message = TempData["Message"];
-        //    db = new ApplicationDbContext();
-        //    //string userId = User.Identity.GetUserId();
-        //    //ViewBag.Posts = db.Posts.Find(id);
-        //    return View(db.Posts.Find(id));
-        //}
+        [HttpGet]
+        public ActionResult PostInformation(int id)
+        {
+            return View(_postService.GetAll().Find(x => x.Id == id));
+        }
 
-        //[HttpPost]
-        //public ActionResult ResolveRequest(string id)
-        //{
-        //    //ViewBag.Message = TempData["Message"];
+        [HttpPost]
+        public ActionResult ResolveRequest(int id)//orderId
+        {
+            var user = _accountService.GetByUserName(User.Identity.Name);
+            var order = _orderService.GetAll().Where(x => x.Id == id).FirstOrDefault();
+            if (order != null)
+            {
+                var currentUser = user;
+                var requestUser = _accountService.GetById(order.UserId);
+                int points = order.Post.Subcategory.Points;
+                if (requestUser != null)
+                {
+                    if (requestUser.Points >= points)
+                    {
+                        requestUser.Points -= points;
+                        _operationService.Create(CreateOperation(true, points, requestUser.Id));
+                        currentUser.Points += points;
+                        _operationService.Create(CreateOperation(false, points, requestUser.Id));
+                        _orderService.Delete(order.Id);
+                        TempData["Message"] = "Операция произведена успешно";
+                    }
+                    else TempData["Message"] = "Вы не можете совершить обмен с данным пользователем";
+                }
+                else TempData["Message"] = "Такого пользователя не существует";
+            }
+            else TempData["Message"] = "Такого запроса не существует";
 
-        //    db = new ApplicationDbContext();
-        //    string userId = User.Identity.GetUserId();
-        //    var order = db.Orders.Find(id);
-        //    if (order != null)
-        //    {
-        //        var currentUser = db.Users.Find(userId);
-        //        var requestUser = db.Users.Find(order.UserId);
-        //        int points = order.Post.Subcategory.Points;
-        //        if (requestUser != null)
-        //        {
-        //            if (requestUser.Points.Points >= points)
-        //            {
-        //                requestUser.Points.Points -= points;
-        //                requestUser.Points.Operations.Add(CreateOperation(true, points, requestUser.Points.Id));
-        //                currentUser.Points.Points += points;
-        //                currentUser.Points.Operations.Add(CreateOperation(false, points, requestUser.Points.Id));
-        //                db.Orders.RemoveRange(db.Orders.ToList().Where(i => i.PostId == order.PostId).ToList());
-        //                db.SaveChanges();
-        //                TempData["Message"] = "Операция произведена успешно";
-        //            }
-        //            else TempData["Message"] = "Вы не можете совершить обмен с данным пользователем";
-        //        }
-        //        else TempData["Message"] = "Такого пользователя не существует";
-        //    }
-        //    else TempData["Message"] = "Такого запроса не существует";
-        //    return RedirectToAction("ResponsePost");
+            return RedirectToAction("ResponsePost");
+        }
 
+        [HttpPost]
+        public ActionResult RejectRequest(int id)//orderId
+        {
+            var user = _accountService.GetByUserName(User.Identity.Name);
+            var order = _orderService.GetAll().Where(x => x.Id == id).FirstOrDefault();
+            if (order != null)
+            {
+                _orderService.Delete(order.Id);
+                TempData["Message"] = "Операция произведена успешно";
+            }
+            else TempData["Message"] = "Такого запроса не существует";
 
-        //    //ViewBag.Posts = db.Posts.Find(id);
-        //    //return View(db.Posts.Find(id));
-        //}
+            return RedirectToAction("ResponsePost");
+        }
 
-        //[HttpPost]
-        //public ActionResult RejectRequest(string id)
-        //{
-        //    //ViewBag.Message = TempData["Message"];
+        [HttpGet]
+        public ActionResult ChangePost(int postId)
+        {
+            //Tuple<IList<Category>, IList<Region>> tuple = HomeController.GetDataFromCatReg();
+            //ViewBag.Categories = tuple.Item1;
+            //ViewBag.Regions = tuple.Item2;
+            ViewBag.Post = _postService.FindById(postId);
 
-        //    db = new ApplicationDbContext();
-        //    string userId = User.Identity.GetUserId();
-        //    var order = db.Orders.Find(id);
-        //    if (order != null)
-        //    {
-        //        db.Orders.Remove(order);
-        //        db.SaveChanges();
-        //        TempData["Message"] = "Операция произведена успешно";
-        //    }
+            return View();
+        }
 
-        //    else TempData["Message"] = "Такого запроса не существует";
-        //    return RedirectToAction("ResponsePost");
+        [HttpPost]
+        public ActionResult ChangePost(PostVM model)
+        {
+            var user = _accountService.GetByUserName(User.Identity.Name);
+            var post = _postService.FindById(model.Id);// db.Posts.FirstOrDefault(i => i.Id == model.Id);
+            //if (!(images.All(i => Equals(i, null))))
+            //{
+            //db = new ApplicationDbContext();
+            //var user = db.Users.Find(User.Identity.GetUserId());
+            //var post = db.Posts.FirstOrDefault(i => i.Id == model.Id);
+            //if (post != null)
+            //{
+            if (model.Description.Count() >= 5)
+            {
+                post.Name = model.Name;
+                post.Description = model.Description;
+                //post.City = db.Cities.First(i => i.Name == model.City.Name);
+                //post.DateCreatePost = DateTime.Now.ToString();
+                //post.ImagesGallery = AddImagesInDb(images, user.Id);                
+                post.Status = "0";
+                _postService.Update(post);
+                _orderService.RemoveRange(_orderService.GetAll().Where(x=>x.PostId==model.Id).ToList());
+                //_orderService.Delete(post.Id);
+                //post.Subcategory = db.Subcategories.First(i => i.Name == model.Subcategory),
+                ViewBag.Message = "Пост успешно изменен";
+                ViewBag.Post = _postService.FindById(model.Id);
+                return View();
+            }
+            ViewBag.Error = "Описание должно иметь не менее 5 символов";
+            return View();
+            //}
+            //ViewBag.Error = "Что-то пошло не так";
+            //return View(post);
+            //}
+            //else
+            //{
+            //    ViewBag.Error = "Добавьте хотя бы одну фотографию";
+            //    return View(post);
+            //}
+        }
 
+        [HttpPost]
+        public ActionResult DeletePost(int Id)
+        {
+            var post = _postService.GetAll().FirstOrDefault( x => x.Id == Id );// db.Posts.Find(postId);
+            if (post != null)
+            {
+                //db.ImagesGallery.RemoveRange(db.ImagesGallery.Where(i => i.PostId == post.Id).ToList());
 
-        //    //ViewBag.Posts = db.Posts.Find(id);
-        //    //return View(db.Posts.Find(id));
-        //}
+                //db.Orders.RemoveRange(db.Orders.Where(i => i.PostId == post.Id).ToList());
+                _postService.Remove(Id);
 
-        //private Operation CreateOperation(bool SpentOrEarned, int valueOfBonus, string pointId)
-        //{
-        //    if (SpentOrEarned)
-        //    {
-        //        return new Operation
-        //        {
-        //            Id = Guid.NewGuid().ToString(),
-        //            Date = HomeController.GetTime(),
-        //            Spent = valueOfBonus,
-        //            PointId = pointId
-        //        };
-        //    }
-        //    else
-        //    {
-        //        return new Operation
-        //        {
-        //            Id = Guid.NewGuid().ToString(),
-        //            Date = HomeController.GetTime(),
-        //            Earned = valueOfBonus,
-        //            PointId = pointId
-        //        };
+                var images = _imageGalleryService.Find(Id).ToList();
+                if (images.Count == 1)
+                    _imageGalleryService.RemoveItem(images[0]);
+                else
+                    _imageGalleryService.RemoveRange(images);
 
-        //    }
+                var orders = _orderService.GetAll().Where(x => x.PostId == Id).ToList();
+                if (orders.Count > 0)
+                    _orderService.RemoveRange(orders);
+                //db.Posts.Remove(post);
+                //db.SaveChanges();
+                TempData["Message"] = "Пост был успешно удален";
+            }
+            else TempData["Message"] = "Что-то пошло не так";
 
-        //}
+            return RedirectToAction("Posts");
+        }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing && _userManager != null)
-        //    {
-        //        _userManager.Dispose();
-        //        _userManager = null;
-        //    }
-        //    if (db != null)
-        //    {
-        //        db.Dispose();
-        //        db = null;
-        //    }
+        private OperationVM CreateOperation(bool SpentOrEarned, int valueOfBonus, string userId)
+        {
+            if (SpentOrEarned)
+            {
+                return new OperationVM
+                {
+                    Date = HomeController.GetTime(),
+                    Spent = valueOfBonus,
+                    UserId = userId
+                };
+            }
+            else
+            {
+                return new OperationVM
+                {
+                    Date = HomeController.GetTime(),
+                    Earned = valueOfBonus,
+                    UserId = userId
+                };
 
-        //    base.Dispose(disposing);
-        //}
+            }
 
-        //#region Вспомогательные приложения
-        //// Используется для защиты от XSRF-атак при добавлении внешних имен входа
-        //private const string XsrfKey = "XsrfId";
-        //private readonly ICategoryService _categoryService;
+        }
 
-        //private IAuthenticationManager AuthenticationManager
-        //{
-        //    get
-        //    {
-        //        return HttpContext.GetOwinContext().Authentication;
-        //    }
-        //}
-
-        //private void AddErrors(IdentityResult result)
-        //{
-        //    foreach (var error in result.Errors)
-        //    {
-        //        ModelState.AddModelError("", error);
-        //    }
-        //}
-
-        //private bool HasPassword()
-        //{
-        //    var user = UserManager.FindById(User.Identity.GetUserId());
-        //    if (user != null)
-        //    {
-        //        return user.PasswordHash != null;
-        //    }
-        //    return false;
-        //}
-
-        //private bool HasPhoneNumber()
-        //{
-        //    var user = UserManager.FindById(User.Identity.GetUserId());
-        //    if (user != null)
-        //    {
-        //        return user.PhoneNumber != null;
-        //    }
-        //    return false;
-        //}
-
-        //public enum ManageMessageId
-        //{
-        //    AddPhoneSuccess,
-        //    ChangePasswordSuccess,
-        //    SetTwoFactorSuccess,
-        //    SetPasswordSuccess,
-        //    RemoveLoginSuccess,
-        //    RemovePhoneSuccess,
-        //    Error
-        //}
-
-        //#endregion
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.ToString());
+            }
+        }
     }
 }

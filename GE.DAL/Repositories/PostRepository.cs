@@ -20,15 +20,18 @@ namespace GE.DAL.Repositories
         public IEnumerable<Post> GetAll()
         {
             return db.Posts.Include(x => x.ImagesGallery)
-                .Include(x=>x.Subcategory)
-                .Include(x=>x.City)
-                .Include(x=>x.User)
-                .Include(x=>x.Video);
+                .Include(x => x.ImagesGallery)
+                .Include(x => x.Subcategory)
+                .Include(x => x.City)
+                .Include(x => x.User);
         }
 
         public Post Get(int id)
         {
-            return db.Posts.Find(id);
+            var imageGallery = db.ImagesGalleries.Where(x => x.PostId == id);
+            var post = db.Posts.Find(id);
+            post.ImagesGallery = imageGallery.ToList();
+            return post;
         }
 
         public void Create(Post lot)
@@ -36,9 +39,14 @@ namespace GE.DAL.Repositories
             db.Posts.Add(lot);
         }
 
-        public void Update(Post lot)
+        public void Update(Post item)
         {
-            db.Entry(lot).State = EntityState.Modified;
+            var result = Get(item.Id);
+            if (result != null)
+            {
+                result.Name = item.Name;
+                result.Description = item.Description;
+            }
         }
 
         public IEnumerable<Post> Find(Func<Post, Boolean> predicate)
@@ -56,6 +64,11 @@ namespace GE.DAL.Repositories
         public int GetCount()
         {
             return db.Posts.Count();
+        }
+
+        public void RemoveRange(IEnumerable<Post> items)
+        {
+            throw new NotImplementedException();
         }
     }
 }

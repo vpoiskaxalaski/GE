@@ -12,9 +12,9 @@ namespace GE.DAL.Interfaces
         IRepository<Region> Regions { get; }
         IRepository<City> Cities{ get; }
         IRepository<Post> Posts { get; }
-        IRepository<Point> Points { get; }
         IRepository<ImagesGallery> ImagesGallery { get; }
         IRepository<Order> Orders { get; }
+        IRepository<Operation> Operations { get; }
         IApplicationUserRepository ApplicationUsers { get; }
         
         void Save();

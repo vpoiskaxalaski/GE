@@ -4674,21 +4674,10 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "Crypto/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "compile": {
-          "bin/placeholder/Crypto.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Crypto.dll": {}
-        }
-      },
       "GE.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
-          "Crypto": "1.0.0",
           "Microsoft.AspNetCore.App": "2.1.0",
           "System.Runtime.InteropServices": "4.3.0"
         },
@@ -12737,11 +12726,6 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
-    },
-    "Crypto/1.0.0": {
-      "type": "project",
-      "path": "../Crypto/Crypto.csproj",
-      "msbuildProject": "../Crypto/Crypto.csproj"
     },
     "GE.DAL/1.0.0": {
       "type": "project",

@@ -15,27 +15,21 @@
     <Compile Include="Interfaces\IApplicationUserRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Migrations\20190506204617_AllTables.cs" />
-    <Compile Include="Migrations\20190506204617_AllTables.Designer.cs" />
-    <Compile Include="Migrations\DatabaseContextModelSnapshot.cs" />
     <Compile Include="Model\ApplicationUser.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\ImagesGallery.cs" />
     <Compile Include="Model\Operation.cs" />
     <Compile Include="Model\Order.cs" />
-    <Compile Include="Model\Point.cs" />
     <Compile Include="Model\Post.cs" />
     <Compile Include="Model\Region.cs" />
     <Compile Include="Model\Subcategory.cs" />
-    <Compile Include="Model\Video.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\ImagesGalleryRepository.cs" />
     <Compile Include="Repositories\OperationRepository.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
-    <Compile Include="Repositories\PointRepository.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Repositories\RegionRepository.cs" />
     <Compile Include="Repositories\SubcategoryRepository.cs" />
@@ -48,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Crypto\Crypto.csproj" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

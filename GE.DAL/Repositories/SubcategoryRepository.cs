@@ -52,5 +52,10 @@ namespace GE.DAL.Repositories
         {
             return db.Subcategories.Count();
         }
+
+        public void RemoveRange(IEnumerable<Subcategory> items)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

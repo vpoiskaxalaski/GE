@@ -1,47 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
 using System.Net.Sockets;
 using System.IO;
 using System.Globalization;
-using Microsoft.AspNetCore.Authorization;
 using GE.SL.Interfaces;
 using GE.Models;
-using AutoMapper;
 
 namespace GE.WEB.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IPostService _postsService;
+        private readonly IAccountService _accountService;
 
-
-        public HomeController(IPostService postService)
+        public HomeController(IPostService postService, IAccountService accountService)
         {
             _postsService = postService;
+            _accountService = accountService;
             
         }
 
         public IActionResult Index()
         {         
-            ViewBag.posts = _postsService.GetAll();
+            ViewBag.posts = _postsService.GetAll().Where( x => x.Status == "1" );
 
             return View();
         }
 
         [HttpGet]
-        public IActionResult Post(string Id)
+        public IActionResult Post(int Id)
         {
-          
-            var post = _postsService.GetAll().FirstOrDefault(i => i.Id == int.Parse(Id));
-            if (post != null)
-                return View(post);
-            else return RedirectToAction("Index");
+            ViewBag.User = _accountService.GetByUserName(User.Identity.Name);
+            ViewBag.Post = _postsService.GetAll().FirstOrDefault(i => i.Id == Id);
+ 
+            return View();
         }
 
         public IActionResult About()
@@ -69,6 +63,17 @@ namespace GE.WEB.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
+        public static string GetTime()
+        {
+            var client = new TcpClient("time.nist.gov", 13);
+            string localDateTime = "";
+            using (var streamReader = new StreamReader(client.GetStream()))
+            {
+                var response = streamReader.ReadToEnd();
+                var utcDateTimeString = response.Substring(7, 17);
+                localDateTime = DateTime.ParseExact(utcDateTimeString, "yy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToString();
+            }
+            return localDateTime;
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace GE.DAL.Repositories
 
         public IEnumerable<Operation> Find(Func<Operation, bool> predicate)
         {
-            return db.Operations;
+            return db.Operations.Where(predicate);
         }
 
         public Operation Get(int id)
@@ -48,6 +48,11 @@ namespace GE.DAL.Repositories
         public int GetCount()
         {
             return db.Operations.Count();
+        }
+
+        public void RemoveRange(IEnumerable<Operation> items)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Operation item)

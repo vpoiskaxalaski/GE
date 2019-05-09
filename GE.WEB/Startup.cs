@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using GE.DAL.Model;
 using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace GE.WEB
 {
@@ -32,6 +33,8 @@ namespace GE.WEB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -50,7 +53,6 @@ namespace GE.WEB
                 .AddEntityFrameworkStores<DatabaseContext>()
                 .AddDefaultTokenProviders();
 
-
             services.AddAutoMapper();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IRegionService, RegionService>();
@@ -58,10 +60,18 @@ namespace GE.WEB
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOperationService, OperationService>();
+            services.AddScoped<IImageGalleryService, ImageGalleryService>();
 
             //services.AddSingleton<IHostingEnvironment>(new HostingEnvironment());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+            services.AddSession();
+
+            // Adds a default in-memory implementation of IDistributedCache.
+            services.AddDistributedMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,9 +91,11 @@ namespace GE.WEB
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
 
-            app.UseAuthentication();
+
+            app.UseSession();
+
+
 
             app.UseMvc(routes =>
             {
@@ -91,7 +103,7 @@ namespace GE.WEB
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
+            app.UseCookiePolicy();
         }
     }
 }

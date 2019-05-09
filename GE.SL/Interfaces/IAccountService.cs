@@ -1,8 +1,4 @@
 ﻿using GE.Models;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GE.SL.Interfaces
@@ -14,10 +10,10 @@ namespace GE.SL.Interfaces
 
         ApplicationUserVM GetByUserName(string name);
 
-        bool Login(LoginViewModel model);
+        ApplicationUserVM GetById(string id);
 
-        Task<ApplicationUserVM> Registration(RegisterViewModel model);
+        //bool Login(LoginViewModel model);
 
-        string GetRole(string email);
+        //Task<ApplicationUserVM> Registration(RegisterViewModel model);
     }
 }

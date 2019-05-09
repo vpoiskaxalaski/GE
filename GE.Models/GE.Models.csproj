@@ -14,12 +14,10 @@
     <Compile Include="RegisterPostViewModel.cs" />
     <Compile Include="OperationVM.cs" />
     <Compile Include="OrderVM.cs" />
-    <Compile Include="PointVM.cs" />
     <Compile Include="PostVM.cs" />
     <Compile Include="RegionVM.cs" />
     <Compile Include="RegisterViewModel.cs" />
     <Compile Include="SubcategoryVM.cs" />
-    <Compile Include="VideoVM.cs" />
   </ItemGroup>
 
   <ItemGroup>

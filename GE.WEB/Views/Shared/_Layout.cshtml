@@ -136,7 +136,7 @@
                                             </a>
                                             <div class="dropdown-menu">
                                                 <ul class="langs-list">
-                                                    @if (User.IsInRole("Administrator"))
+                                                    @if (User.IsInRole("Admin"))
                                                     {
                                                         <li class="langs-item"><a class="langs-item-title" href="/Admin/Index">Админ панель</a></li>
                                                     }
@@ -144,8 +144,8 @@
                                                     {
                                                         <li class="langs-item"><a class="langs-item-title" href="/Manage/CreatePost">Создать объявление</a></li>
                                                         <li class="langs-item"><a class="langs-item-title" href="/Manage/Posts">Мои объявления</a></li>
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/RequestPost">Запрошенные объявления</a></li>
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/ResponsePost">Запросы для одобрения</a></li>
+                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/RequestPost">Корзина</a></li>
+                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/ResponsePost">Объявления на рассмотрении</a></li>
                                                     }
                                                     else if (User.IsInRole("Moderator"))
                                                     {
@@ -191,18 +191,21 @@
                         <ul class="main-menu">
                             @{
                                 IList<CategoryVM> categories = System.Runtime.Caching.MemoryCache.Default["Categories"] as IList<CategoryVM>;
-                            }
-                            @foreach (var item in categories)
-                            {
-                                <li>
-                                    <a href="#">@item.Name</a>
-                                    <ul class="sub-menu">
-                                        @foreach (var subitem in @item.Subcategories)
-                                        {
-                                            <li><a href="#">@subitem.Name</a></li>
-                                        }
-                                    </ul>
-                                </li>
+                                if (categories != null)
+                                {
+                                    foreach (var item in categories)
+                                    {
+                                        <li>
+                                            <a href="#">@item.Name</a>
+                                            <ul class="sub-menu">
+                                                @foreach (var subitem in @item.Subcategories)
+                                                {
+                                                    <li><a href="#">@subitem.Name</a></li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                }
                             }
                         </ul>
                     </div>

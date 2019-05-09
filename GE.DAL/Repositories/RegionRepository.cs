@@ -50,6 +50,11 @@ namespace GE.DAL.Repositories
             return db.Regions.Count();
         }
 
+        public void RemoveRange(IEnumerable<Region> items)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Region item)
         {
             db.Entry(item).State = EntityState.Modified;

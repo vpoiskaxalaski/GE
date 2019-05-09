@@ -52,6 +52,11 @@ namespace GE.DAL.Repositories
             return db.Categories.Count();
         }
 
+        public void RemoveRange(IEnumerable<Category> items)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Category item)
         {
             db.Entry(item).State = EntityState.Modified;

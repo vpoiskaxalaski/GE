@@ -1,7 +1,5 @@
 ﻿using GE.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GE.SL.Interfaces
 {
@@ -9,6 +7,12 @@ namespace GE.SL.Interfaces
     {
         List<OrderVM> GetAll();
 
+        OrderVM FindById(int Id);
+
         void Create(OrderVM order);
+
+        void Delete(int id);
+
+        void RemoveRange(ICollection<OrderVM> items);
     }
 }

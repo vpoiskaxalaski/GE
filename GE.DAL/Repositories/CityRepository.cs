@@ -49,6 +49,11 @@ namespace GE.DAL.Repositories
             return db.Cities.Count();
         }
 
+        public void RemoveRange(IEnumerable<City> items)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(City item)
         {
             db.Entry(item).State = EntityState.Modified;

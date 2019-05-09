@@ -1,9 +1,8 @@
-﻿@model GE.Models.PostVM
-<div class="view">
+﻿<div class="view">
     <div class="view-header">
         <div class="container">
             <h1 class="view__title">
-                @Model.Name
+                @ViewBag.Post.Name
             </h1>
         </div>
     </div>
@@ -19,76 +18,15 @@
             <div class="view-side">
                 <div class="thumbnail">
                     <div class="thumb">
-                        @*@Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.ImagesGallery.ToList()[0].ImageData) + "\" width='300' style='min-height:250px;' />")*@
-                        <img class='voi__poster' src="@string.Concat("/images/" + Model.User.Id + "/", Model.ImagesGallery.ToList().First().Name)")" width='162' height='228' style="    max-height: 390px;" />
+  
+                        <img class='voi__poster' src="@string.Concat("/images/" + ViewBag.Post.UserId + "/", ViewBag.Post.ImagesGallery[0].Name)" width='162' height='228' style="    max-height: 390px;" />
                     </div>
                 </div>
             </div>
-            <div class="view-wide">
-                @if (Model.Video != null)
-                {
-                    <div class="player-container player-width player-height">
-                        <video width="320" height="240" controls>
-
-                            <source src="@string.Concat("/Videos/", Model.Video.Title, ".mp4")" type="video/mp4">
-
-                        </video>
-                    </div>
-                }
-            </div>
+            
         </div>
     </div>
-    <div class="container">
-        @if (Model.Video != null)
-        {
-            <div class="view-side">
-
-                <div class="info info_summary">
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Дата:
-                        </h4>
-                        <div class="infoi__content">
-                            @Model.DateCreatePost
-                        </div>
-                    </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Категория:
-                        </h4>
-                        <div class="infoi__content">
-                            @Model.Subcategory.Name ,  @Model.Subcategory.CategoryName
-                        </div>
-                    </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Город:
-                        </h4>
-                        <div class="infoi__content">
-                            @Model.City.Name ,  @Model.City.RegionName область
-                        </div>
-                    </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Цена:
-                        </h4>
-                        <div class="infoi__content">
-                            @Model.Subcategory.Points
-                        </div>
-                    </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Номер телефона:
-                        </h4>
-                        <div class="infoi__content">
-                            @Model.User.PhoneNumber
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-        else
-        {
+    <div class="container">       
             <div class="view-side" style="margin-left:300px">
                 <div class="info info_summary" style="all:unset">
                     <div class="infoi">
@@ -96,7 +34,7 @@
                             Дата:
                         </h4>
                         <div class="infoi__content">
-                            @Model.DateCreatePost
+                            @ViewBag.Post.DateCreatePost
                         </div>
                     </div>
                     <div class="infoi">
@@ -104,7 +42,7 @@
                             Категория:
                         </h4>
                         <div class="infoi__content">
-                            @Model.Subcategory.Name ,  @Model.Subcategory.CategoryName
+                            @ViewBag.Post.Subcategory.Name ,  @ViewBag.Post.Subcategory.CategoryName
                         </div>
                     </div>
                     <div class="infoi">
@@ -112,7 +50,7 @@
                             Город:
                         </h4>
                         <div class="infoi__content">
-                            @Model.City.Name ,  @Model.City.RegionName область
+                            @ViewBag.Post.City.Name ,  @ViewBag.Post.City.RegionName область
                         </div>
                     </div>
                     <div class="infoi">
@@ -120,7 +58,7 @@
                             Цена:
                         </h4>
                         <div class="infoi__content">
-                            @Model.Subcategory.Points
+                            @ViewBag.Post.Subcategory.Points
                         </div>
                     </div>
                     <div class="infoi">
@@ -128,100 +66,57 @@
                             Номер телефона:
                         </h4>
                         <div class="infoi__content">
-                            @Model.User.PhoneNumber
+                            @ViewBag.Post.User.PhoneNumber
                         </div>
                     </div>
                 </div>
             </div>
-        }
-
-        @if (Model.Video != null)
-        {
-            <div class="view-wide">
+            <div class="view-side">
                 <div class="view-story">
-                    <h3 class="infoi__title">
-                        Описание
-                    </h3>
-                    <div class="expand">
-                        <div class="expandContent">
-                            @Model.Description
-                        </div>
-                    </div>
-                </div>
-                <div class="view-images">
-                    <h3 class="title">
-                        Галерея
-                    </h3>
-                    <div class="gallery-thumbnails clearfix">
-                        @foreach (var item in Model.ImagesGallery)
-                        {
-                            <span>
-                                @*@Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.ImageData) + "\"onclick=" + "openImg(this);" + " />")*@
-                                <img class='voi__poster' src="@string.Concat("/images/" + Model.User.Id + "/", Model.ImagesGallery.ToList().First().Name)" width='162' height='228' onclick="openImg(this);" />
-                            </span>
-                        }
-                    </div>
-                </div>
-            </div>
-        }
-        else
-        {
-            <div class="view-side" style="    width: 400px">
-                <div class="view-story" style="margin:unset">
                     <h3 class="infoi__title" style="float:unset">
                         Описание
                     </h3>
                     <div class="expand">
                         <div class="expandContent">
-                            @Model.Description
+                            @ViewBag.Post.Description
                         </div>
                     </div>
                 </div>
             </div>
-        }
-        @if (Model.Video == null)
-        {
             <div class="view-images" style="margin-left:300px">
                 <h3 class="title">
                     Галерея
                 </h3>
                 <div class="gallery-thumbnails clearfix">
-                    @foreach (var item in Model.ImagesGallery)
+                    @foreach (var item in ViewBag.Post.ImagesGallery)
                     {
-                        <span>
-                            @*@Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.ImageData) + "\"onclick=" + "openImg(this);" + " />")*@
-                            <img class='voi__poster' src="@string.Concat("/images/" + Model.User.Id + "/", Model.ImagesGallery.ToList().First().Name)" width='162' height='228' onclick="openImg(this);" />
+                        <span>                     
+                            <img class='voi__poster' src="@string.Concat("/images/" + ViewBag.Post.UserId + "/", ViewBag.Post.ImagesGallery[0].Name)" width='162' height='228' onclick="openImg(this);" />
                         </span>
                     }
                 </div>
             </div>
-        }
     </div>
     <div class="container">
         <div class="containerImage" style="padding: 0px 0px 10px 0px;">
-            <b class="closebtn" onclick="this.parentElement.style.display='none'"></b>
-            @*<span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>*@
+            <b class="closebtn" onclick="this.parentElement.style.display='none'"></b>          
             <img id="expandedImg" style="width:50%; display:block; margin-left:auto; margin-right:auto">
             <div id="imgtext"></div>
         </div>
     </div>
     <div class="container">
         <div class="container">
-
-            @using (Html.BeginForm("ChangePost", "Manage", FormMethod.Get, new { @style = "display:inline" }))
-            {
-                <input type="hidden" name="postId" value="@Model.Id" />
+            <form action="/Manage/ChangePost" method="get" style="display:inline">
+                <input type="hidden" name="postId" value="@ViewBag.Post.Id">
                 <button style="margin-bottom: 30px;border-color: #ff6600 !important; background-color: #ff6600 !important; color:white; padding: 6px 0px; width: 49.5%; border: 1px solid #cccccc;" type="submit">Изменить</button>
-            }
-            @using (Html.BeginForm("DeletePost", "Manage", FormMethod.Post, new { @style = "display: inline" }))
-            {
-                <input type="hidden" name="postId" value="@Model.Id" />
+            </form>            
+            <form action="/Manage/DeletePost" method="post" style="display: inline">
+                <input type="hidden" name="Id" value="@ViewBag.Post.Id">
                 <button style="margin-bottom: 30px; border-color: crimson !important; background-color: crimson !important; color:white; padding: 6px 0px; width: 49.5%; border: 1px solid #cccccc;" type="submit">Удалить</button>
-            }
-
-
+            </form>
         </div>
     </div>
+</div>
 
     @section scripts{
         <script type="text/javascript">

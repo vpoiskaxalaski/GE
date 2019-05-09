@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GE.SL.Interfaces
+﻿namespace GE.SL.Interfaces
 {
     public interface ICacheService
     {

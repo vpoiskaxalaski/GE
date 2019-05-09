@@ -1,9 +1,8 @@
 ﻿using GE.DAL.Interfaces;
 using System;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Text;
 using GE.DAL.Model;
+
 
 namespace GE.DAL.Repositories
 {
@@ -17,9 +16,9 @@ namespace GE.DAL.Repositories
         private RegionRepository regionRepository;
         private CityRepository cityRepository;
         private ImagesGalleryRepository imagesGlleryRepository;
-        private PointRepository pointRepository;
         private PostRepository postRepository;
         private ApplicationUserRepository userRepository;
+        private OperationRepository operationRepository;
         
 
         public UnitOfWork(DbContextOptions<DatabaseContext> options)
@@ -52,7 +51,6 @@ namespace GE.DAL.Repositories
                 return categoryRepository;
             }
         }
-
         
         public IRepository<Order> Orders
         {
@@ -63,7 +61,6 @@ namespace GE.DAL.Repositories
                 return orderRepository;
             }
         }
-
 
         public IRepository<Region> Regions
         {
@@ -95,16 +92,6 @@ namespace GE.DAL.Repositories
             }
         }
 
-        public IRepository<Point> Points
-        {
-            get
-            {
-                if (pointRepository == null)
-                    pointRepository = new PointRepository(db);
-                return pointRepository;
-            }
-        }
-
         public IRepository<ImagesGallery> ImagesGallery
         {
             get
@@ -122,6 +109,16 @@ namespace GE.DAL.Repositories
                 if (userRepository == null)
                     userRepository = new ApplicationUserRepository(db);
                 return userRepository;
+            }
+        }
+
+        public IRepository<Operation> Operations
+        {
+            get
+            {
+                if (operationRepository == null)
+                    operationRepository = new OperationRepository(db);
+                return operationRepository;
             }
         }
 

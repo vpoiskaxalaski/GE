@@ -2,13 +2,9 @@
 using GE.DAL.Model;
 using GE.Models;
 using GE.SL.Interfaces;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GE.WEB.Controllers
@@ -55,7 +51,6 @@ namespace GE.WEB.Controllers
 
                 if (result.Succeeded)
                 {
-                    // Authenticate(model.Email);
                     return Json(new { success = true });
                 }
 
@@ -82,8 +77,7 @@ namespace GE.WEB.Controllers
                 {
                     UserName = model.Name,
                     Email = model.Email,
-                    PhoneNumber = model.PhoneNumber,
-                    Role = "User"
+                    PhoneNumber = model.PhoneNumber
                 };
 
                 var config = new MapperConfiguration(cfg => {
@@ -123,14 +117,17 @@ namespace GE.WEB.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userManager.FindByEmailAsync(model.Email).Result;
-                await _signInManager.CreateUserPrincipalAsync(user);
-                var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
-
-                if (result.Succeeded)
+                if(user != null)
                 {
-                    return RedirectToAction("Index", "Home");
-                    //return Json(new { success = true });
-                }
+                    await _signInManager.CreateUserPrincipalAsync(user);
+                    var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home");
+                        //return Json(new { success = true });
+                    }
+                }              
 
                 ModelState.AddModelError("", "Неверный Email или пароль");
                 ModelState.AddModelError("", "Подтвердите Email");

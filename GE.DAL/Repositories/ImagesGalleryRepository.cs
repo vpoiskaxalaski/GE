@@ -30,7 +30,7 @@ namespace GE.DAL.Repositories
 
         public IEnumerable<ImagesGallery> Find(Func<ImagesGallery, bool> predicate)
         {
-            return db.ImagesGalleries;
+            return db.ImagesGalleries.Where(predicate);
         }
 
         public ImagesGallery Get(int id)
@@ -41,12 +41,17 @@ namespace GE.DAL.Repositories
 
         public IEnumerable<ImagesGallery> GetAll()
         {
-            return db.ImagesGalleries;
+            return db.ImagesGalleries.ToList();
         }
 
         public int GetCount()
         {
             return db.ImagesGalleries.Count();
+        }
+
+        public void RemoveRange(IEnumerable<ImagesGallery> items)
+        {
+            db.ImagesGalleries.RemoveRange(items);
         }
 
         public void Update(ImagesGallery item)

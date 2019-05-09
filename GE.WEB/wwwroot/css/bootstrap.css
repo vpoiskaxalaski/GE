@@ -11332,9 +11332,8 @@ ul.pagination li a:hover:not(.active) {
         }
 
 .view-side {
-    float: left;
-    position: relative;
-    width: 276px
+    max-width: 250px;
+    margin: 10px;
 }
 
     .view-side .infoi {
@@ -12069,8 +12068,9 @@ ul.pagination li a:hover:not(.active) {
 }
 
 .view-story {
-    position: relative;
-    margin: 20px 0 30px
+    position: absolute;
+    margin: 20px 10px 0 5px;
+    max-width: 100px;
 }
 
     .view-story p {

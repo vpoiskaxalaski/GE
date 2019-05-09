@@ -11,7 +11,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 
 namespace GE.SL.Servives
 {
@@ -34,21 +33,26 @@ namespace GE.SL.Servives
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Post, PostVM>();   
+                cfg.CreateMap<Post, PostVM>();
             });
-
-
             var map = config.CreateMapper();
-            var postsVM = map.Map<IEnumerable<Post>, IEnumerable<PostVM>>(posts);
+            var postsVM = map.Map<IEnumerable<Post>, ICollection<PostVM>>(posts);
 
-            List<PostVM> result = postsVM.Cast<PostVM>().ToList();
+            foreach(PostVM item in postsVM)
+            {
+                var subcategory = _unitOfWork.Subcategories.Find(x => x.Id == item.SubcategoryId).FirstOrDefault();
+                item.Subcategory = new SubcategoryVM { Id = subcategory.Id, Name = subcategory.Name, Points = subcategory.Points };
+            }
+
+            List<PostVM> result = postsVM.ToList();
 
             return result;
         }
 
-        public void CreatePost(RegisterPostViewModel model, IEnumerable<IFormFile> images, IFormFile video, ApplicationUserVM user)
+        public void CreatePost(RegisterPostViewModel model, IEnumerable<IFormFile> images, ApplicationUserVM user)
         {
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<ApplicationUserVM, ApplicationUser>();
             });
             var map = config.CreateMapper();
@@ -58,13 +62,11 @@ namespace GE.SL.Servives
             {
                 Name = model.Name,
                 Description = model.Description,
-                City = _unitOfWork.Cities.Find(i => i.Name == model.City).First(), //db.Cities.First(i => i.Name == model.City),
+                City = _unitOfWork.Cities.Find(i => i.Name == model.City).First(),
                 DateCreatePost = GetTime(),
                 UserId = dbUser.Id,
                 ImagesGallery = AddImagesInDb(images, user.Id),
-                Video = AddVideoInDb(video),
                 Subcategory = _unitOfWork.Subcategories.Find(i => i.Name == model.Subcategory).FirstOrDefault(),
-                //User = dbUser,
                 Status = "0"
             };
             _unitOfWork.Posts.Create(post);
@@ -93,42 +95,75 @@ namespace GE.SL.Servives
                     var extension = Path.GetExtension(image.FileName);
                     var fileSavePath = Path.Combine(uploadFilesDir, userId + extension);
                     var name = Path.GetFileName(image.FileName);
-                    imagesGallery.Add(new ImagesGallery() { Title = fileId, Name = name });     
+                    imagesGallery.Add(new ImagesGallery() { Name = name });
                 }
             }
             return imagesGallery;
         }
 
-        private Video AddVideoInDb(IFormFile videoData)
-        {
-            Video video = null;
-            if (videoData != null)
-            {
-                var videoId = Guid.NewGuid().ToString();
-                var uploadFilesDir = _hostingEnvironment.WebRootPath + "/Videos";
-                if (!Directory.Exists(uploadFilesDir))
-                {
-                    Directory.CreateDirectory(uploadFilesDir);
-                }
-                var extension = Path.GetExtension(videoData.FileName);
-                var fileSavePath = Path.Combine(uploadFilesDir, videoId + extension);
-                var name = Path.GetFileName(videoData.FileName);
-                video = new Video() { Title = videoId, Name = name };
-            }
-            return video;
-        }
-
         private static string GetTime()
         {
-            var client = new TcpClient("time.nist.gov", 13);
             string localDateTime = "";
-            using (var streamReader = new StreamReader(client.GetStream()))
+            try
             {
-                var response = streamReader.ReadToEnd();
-                var utcDateTimeString = response.Substring(7, 17);
-                localDateTime = DateTime.ParseExact(utcDateTimeString, "yy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToString();
+                var client = new TcpClient("time.nist.gov", 13);
+
+                using (var streamReader = new StreamReader(client.GetStream()))
+                {
+                    var response = streamReader.ReadToEnd();
+                    var utcDateTimeString = response.Substring(7, 17);
+                    localDateTime = DateTime.ParseExact(utcDateTimeString, "yy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToString();
+                }
             }
+            catch
+            {
+
+            }
+            
             return localDateTime;
+        }
+
+        public void Remove(int id)
+        {
+            _unitOfWork.Posts.Delete(id);
+            _unitOfWork.Save();
+        }
+
+        public PostVM FindById(int id)
+        {
+            var post = _unitOfWork.Posts.Get(id);
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ImagesGallery, ImagesGalleryVM>();
+            });
+            var map = config.CreateMapper();            
+
+            return new PostVM
+            {
+                Id = post.Id,
+                CityId = post.CityId,
+                DateCreatePost = post.DateCreatePost,
+                Description = post.Description,
+                Name = post.Name,
+                Status = post.Status,
+                SubcategoryId = post.SubcategoryId,
+                UserId = post.UserId,
+                ImagesGallery = map.Map<IEnumerable<ImagesGallery>, ICollection<ImagesGalleryVM>>(post.ImagesGallery)
+            };
+        }
+
+        public void Update(PostVM post)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<PostVM, Post>();
+            });
+            var map = config.CreateMapper();
+            var dbPost = map.Map<PostVM, Post>(post);
+
+            _unitOfWork.Posts.Update(dbPost);
+            _unitOfWork.Save();
         }
     }
 }

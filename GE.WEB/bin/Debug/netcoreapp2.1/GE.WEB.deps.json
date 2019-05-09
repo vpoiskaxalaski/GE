@@ -1061,17 +1061,8 @@
           "lib/netstandard2.0/X.PagedList.Mvc.Core.dll": {}
         }
       },
-      "Crypto/1.0.0": {
-        "runtime": {
-          "Crypto.dll": {}
-        },
-        "compile": {
-          "Crypto.dll": {}
-        }
-      },
       "GE.DAL/1.0.0": {
         "dependencies": {
-          "Crypto": "1.0.0",
           "Microsoft.AspNetCore.App": "2.1.1",
           "System.Runtime.InteropServices": "4.3.0"
         },
@@ -4356,11 +4347,6 @@
       "sha512": "sha512-5fmLfdbnoIlitMdrXQ+a99xQinKNTq6HYo2GrML9MnM8dd99QqDWLzPWG7nBlki1dZIp4vO0f5JjVS1/JB2bJw==",
       "path": "x.pagedlist.mvc.core/7.6.0",
       "hashPath": "x.pagedlist.mvc.core.7.6.0.nupkg.sha512"
-    },
-    "Crypto/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "GE.DAL/1.0.0": {
       "type": "project",

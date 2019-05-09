@@ -4333,16 +4333,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
-      },
-      "Crypto/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "compile": {
-          "bin/placeholder/Crypto.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Crypto.dll": {}
-        }
       }
     }
   },
@@ -11802,16 +11792,10 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
-    },
-    "Crypto/1.0.0": {
-      "type": "project",
-      "path": "../Crypto/Crypto.csproj",
-      "msbuildProject": "../Crypto/Crypto.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "Crypto >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.1.0",
       "Microsoft.NETCore.App >= 2.1.0",
       "System.Runtime.InteropServices >= 4.3.0"
@@ -11846,11 +11830,7 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "projectReferences": {
-            "E:\\UNIVER\\CourseProject\\GE\\Crypto\\Crypto.csproj": {
-              "projectPath": "E:\\UNIVER\\CourseProject\\GE\\Crypto\\Crypto.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

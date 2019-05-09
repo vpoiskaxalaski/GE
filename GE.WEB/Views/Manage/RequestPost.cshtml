@@ -2,7 +2,7 @@
     <div class="view-header">
         <div class="container">
             <h1 class="view__title">
-                Мои запросы
+                Мои запросы(Я прошу у других)
             </h1>
         </div>
     </div>
@@ -13,7 +13,7 @@
     </div>
     <div class="F__category">
     </div>
-    @if (((IEnumerable<dynamic>)ViewBag.Orders).Count() > 0)
+    @if (((IEnumerable<OrderVM>)ViewBag.Orders).Count() > 0)
     {
         <div class="videos-mask">
             <div id="content">
@@ -22,7 +22,7 @@
                     {
                         <li class="voi">
                             <a href="/Home/Post/@order.PostId" title="@order.Post.Name">
-                                <img class='voi__poster' src="@string.Concat("/images/" + order.UserId + "/", order.Post.ImagesGallery.ToList().First().Name)" />
+                                <img class='voi__poster' src="@string.Concat("/images/" + order.Post.UserId + "/", order.Post.ImagesGallery.FirstOrDefault().Name)" />
                             </a>
                             <div class="voi__content">
                                 <p class="voi__title">
@@ -34,9 +34,9 @@
                                     @order.Post.Subcategory.Points, @order.Post.Subcategory.Name
                                 </p>
                             </div>
-                            @*<div class="overlay" original-title="">
-                                    <a class="overlay-link" href="/Manage/Post/@Post.Id"></a>
-                                </div>*@
+                            <div class="overlay" original-title="">
+                                    <a class="overlay-link" href="/Manage/Post/@order.PostId"></a>
+                                </div>
 
                         </li>
                     }

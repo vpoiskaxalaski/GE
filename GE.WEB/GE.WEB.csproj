@@ -13,9 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Manage\ChangePost.cshtml" />
-    <Content Remove="Views\Manage\PostInformation.cshtml" />
-    <Content Remove="Views\Manage\ResponsePost.cshtml" />
+    <Content Remove="wwwroot\images\02fcd578-5d62-40b7-a434-4a564948455a\mkGeNouGnsU.jpg" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,13 +11,13 @@ namespace GE.DAL.Interfaces
 
         ApplicationUser GetByUserName(string name);
 
-        bool Login(string email, string password);
+        //bool Login(string email, string password);
 
-        bool Registration(ApplicationUser entity);
+        //bool Registration(ApplicationUser entity);
 
         bool IsExists(string email);
 
-        string GetRole(string email);
+        //string GetRole(string email);
 
         List<ApplicationUser> Find(Func<ApplicationUser, Boolean> predicate);
     }

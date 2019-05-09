@@ -1,8 +1,6 @@
 ﻿using GE.Models;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GE.SL.Interfaces
 {
@@ -10,6 +8,12 @@ namespace GE.SL.Interfaces
     {
         List<PostVM> GetAll();
 
-        void CreatePost(RegisterPostViewModel model, IEnumerable<IFormFile> images, IFormFile video, ApplicationUserVM user);
+        void Remove(int id);
+
+        PostVM FindById(int id);
+
+        void Update(PostVM post);
+
+        void CreatePost(RegisterPostViewModel model, IEnumerable<IFormFile> images, ApplicationUserVM user);
     }
 }

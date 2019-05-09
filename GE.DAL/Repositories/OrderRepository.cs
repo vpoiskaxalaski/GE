@@ -20,12 +20,12 @@ namespace GE.DAL.Repositories
 
         public IEnumerable<Order> GetAll()
         {
-            return db.Orders.Include(x=>x.Post);
+            return db.Orders.Include(x=>x.Post).Include(x=>x.User);
         }
 
         public Order Get(int id)
         {
-            return db.Orders.Find(id);
+            return db.Orders.FirstOrDefault(x=>x.PostId==id);
         }
 
         public void Create(Order order)
@@ -43,14 +43,19 @@ namespace GE.DAL.Repositories
         }
         public void Delete(int id)
         {
-            Order order = db.Orders.Find(id);
-            if (order != null)
-                db.Orders.Remove(order);
+            Order item = db.Orders.Find(id);
+            if (item != null)
+                db.Orders.Remove(item);
         }
 
         public int GetCount()
         {
             return db.Orders.Count();
+        }
+
+        public void RemoveRange(IEnumerable<Order> items)
+        {
+            db.Orders.RemoveRange(items);
         }
     }
 }

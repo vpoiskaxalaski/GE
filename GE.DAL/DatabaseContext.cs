@@ -12,7 +12,6 @@ namespace GE.DAL
         public DbSet<City> Cities { get; set; }
         public DbSet<ImagesGallery> ImagesGalleries { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<Point> Points { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Operation> Operations { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
