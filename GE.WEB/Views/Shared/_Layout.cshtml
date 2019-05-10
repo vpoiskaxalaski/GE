@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="shortcut icon" />
+    <link href="~/img/wind.png" rel="shortcut icon" />
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
     <!-- Stylesheets -->
@@ -107,23 +107,31 @@
         }
     </script>
     <div id="wrapper" class="wrapper">
-        <div id="header" class="header">
+        <div id="header" class="header" onload="getBon()">
             <!-- Header section -->
             <header class="header-section">
                 <div class="header-top">
                     <div class="container">
-                        <div class="row">
                             <div class="col-lg-2 text-center text-lg-left">
                                 <!-- logo -->
                                 <div class="site-logo">
                                     <img src="~/images/2013gyre_logo_final-1024x359.jpg" width="200px" />
                                 </div>
                             </div>
+                            <!--Search-->
                             <div class="col-xl-6 col-lg-5">
                                 <form class="header-search-form">
                                     <input type="text" placeholder="Search on divisima ....">
-                                    <button><i class="flaticon-search"></i></button>
+                                    <button>
+                                    <img class="icon" src="~/img/search.png" />
+                                    </button>
                                 </form>
+                            </div>
+                            <!--User-->
+                            <div class="bonusbox__title">
+                                <img class="icon" src="~/img/list.png" />
+                                Бонусы:
+                                <span class="count" id="BonusValue">25</span>
                             </div>
                             <div class="col-xl-4 col-lg-5">
                                 <div class="user-panel">
@@ -133,34 +141,32 @@
                                         <div class="dropdown dropdown--right langs">
                                             <a class="dropdown-toggle langs-title" data-toggle="dropdown">
                                                 @User.Identity.Name.ToString()
-                                            </a>
-                                            <div class="dropdown-menu">
-                                                <ul class="langs-list">
-                                                    @if (User.IsInRole("Admin"))
-                                                    {
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Admin/Index">Админ панель</a></li>
-                                                    }
-                                                    else if (User.IsInRole("User"))
-                                                    {
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/CreatePost">Создать объявление</a></li>
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/Posts">Мои объявления</a></li>
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/RequestPost">Корзина</a></li>
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/ResponsePost">Объявления на рассмотрении</a></li>
-                                                    }
-                                                    else if (User.IsInRole("Moderator"))
-                                                    {
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Moderator/Index">Панель модератора</a></li>
-                                                    }
-                                                    <li class="langs-item">
-                                                        @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                                <div class="dropdown-menu">
+                                                    <ul class="langs-list">
+                                                        @if (User.IsInRole("Admin"))
                                                         {
-                                                            <a class="langs-item-title" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Admin/Index">Админ панель</a></li>
                                                         }
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                                        else if (User.IsInRole("User"))
+                                                        {
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/CreatePost">Создать объявление</a></li>
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/Posts">Мои объявления</a></li>
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/RequestPost">Корзина</a></li>
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/ResponsePost">Объявления на рассмотрении</a></li>
+                                                        }
+                                                        else if (User.IsInRole("Moderator"))
+                                                        {
+                                                            <li class="langs-item"><a class="langs-item-title" href="/Moderator/Index">Панель модератора</a></li>
+                                                        }
+                                                        <li class="langs-item">
+                                                            @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                                            {
+                                                                <a class="langs-item-title" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                                                            }
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                         </div>
-                                        @*</div>*@
                                     }
                                     else
                                     {
@@ -172,17 +178,9 @@
                                             @*<a href="/Account/LoginModal">Sign In</a> or <a href="/Acco">Create Account</a>*@
                                         </div>
                                     }
-                                    @*<div class="up-item">
-
-                                        <i class="flaticon-profile"></i>
-                                        @Html.ActionLink("Войти", "LoginModal", "Account", null, new { @class = "link loginLink", @id = "serviceLoginLink" })
-                                        или
-                                        @Html.ActionLink("Зарегестрироваться", "RegisterModal", "Account", null, new { @class = "link registerLink", @id = "serviceRegisterLink" })
-                                        @*<a href="/Account/LoginModal">Sign In</a> or <a href="/Acco">Create Account</a>*@
-                                    @*</div>*@
-                                </div>
+                                </div>                               
                             </div>
-                        </div>
+
                     </div>
                 </div>
                 <nav class="main-navbar">

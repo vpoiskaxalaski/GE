@@ -333,18 +333,20 @@ ol {
 ---------------------*/
 
 .header-top {
-    padding: 18px 0 14px;
+    padding-left: 120px;
+    padding-top: 10px;
     background-color: white;
 }
 
 .site-logo {
-	display: inline-block;
+    display: block;
+    margin: auto;
 }
 
 .header-search-form {
-	width: 37rem;
-	position: relative;
-	padding: 0 20px;
+    width: 45rem;
+    display: block;
+    margin: auto;
 }
 
 .header-search-form input {
@@ -370,8 +372,8 @@ ol {
 }
 
 .user-panel .up-item {
-	display: inline-block;
-	font-size: 14px;
+    display: inline-block;
+    font-size: 14px;
 }
 
 .user-panel .up-item i {
@@ -384,14 +386,27 @@ ol {
 }
 
     .user-panel .up-item:first-child {
-        margin-top: 12px;
         width: max-content;
         color: #fdae55;
     }
 
+.bonusbox__title {
+    display: flex;
+    width: auto;
+    margin: 15px 20px;
+    align-items: center;
+}
+
+.user-panel {
+    width: auto;
+    display: block;
+    padding:20px;
+    /*margin: 6px 20px 15px 18px;*/
+}
+
 .shopping-card {
-	display: inline-block;
-	position: relative;
+    display: inline-block;
+    position: relative;
 }
 
 .shopping-card span {
@@ -2249,6 +2264,7 @@ ol {
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.site-logo {
 		margin-bottom: 20px;
+        float:left;
 	}
 	.header-search-form {
 		margin-bottom: 15px;
@@ -2308,6 +2324,7 @@ ol {
 @media only screen and (max-width: 767px) {
 	.site-logo {
 		margin-bottom: 20px;
+        float:left;
 	}
 	.header-search-form {
 		margin-bottom: 15px;

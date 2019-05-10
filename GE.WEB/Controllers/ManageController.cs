@@ -86,7 +86,6 @@ namespace GE.WEB.Controllers
         {
             var user = _accountService.GetByUserName(User.Identity.Name);
             ViewBag.User = user;
-            ViewBag.HistoryOperations = _operationService.GetAll().Where(x=>x.UserId == user.Id).ToList();
             return View();
         }
 

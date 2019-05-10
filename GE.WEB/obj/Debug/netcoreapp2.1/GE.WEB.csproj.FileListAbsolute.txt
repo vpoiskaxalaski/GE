@@ -93,3 +93,4 @@ E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.Views.pdb
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\GE.WEB.csproj.CopyComplete
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\Post.g.cshtml.cs
 E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\ChangePost.g.cshtml.cs
+E:\UNIVER\CourseProject\GE\GE.WEB\obj\Debug\netcoreapp2.1\Razor\Views\Manage\Profile.g.cshtml.cs
