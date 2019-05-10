@@ -38,7 +38,7 @@ namespace GE.SL.Servives
         {
             var account = _userManager.FindByNameAsync(name).Result;
 
-            return new ApplicationUserVM {Id = account.Id, UserName = account.UserName, Email = account.Email, PhoneNumber = account.PhoneNumber };
+            return new ApplicationUserVM { Id = account.Id, UserName = account.UserName, Email = account.Email, PhoneNumber = account.PhoneNumber, Points = account.Points };
         }
 
         //public string GetRole(string email)

@@ -22,7 +22,7 @@
 
     <title>Gyre</title>
 </head>
-<body class="brand brand_embed">
+<body class="brand brand_embed" onload="getBon()">
     <script type="text/javascript">
         function getBon() {
             $.ajax({
@@ -107,7 +107,7 @@
         }
     </script>
     <div id="wrapper" class="wrapper">
-        <div id="header" class="header" onload="getBon()">
+        <div id="header" class="header">
             <!-- Header section -->
             <header class="header-section">
                 <div class="header-top">
@@ -133,7 +133,7 @@
                             <div class="bonusbox__title">
                                 <img class="icon" src="~/img/list.png" />
                                 Бонусы:
-                                <span class="count" id="BonusValue">25</span>
+                                <span class="count" id="BonusValue"></span>
                             </div>
                         }
                         <div class="col-xl-4 col-lg-5">

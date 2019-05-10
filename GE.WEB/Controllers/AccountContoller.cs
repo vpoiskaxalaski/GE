@@ -77,7 +77,8 @@ namespace GE.WEB.Controllers
                 {
                     UserName = model.Name,
                     Email = model.Email,
-                    PhoneNumber = model.PhoneNumber
+                    PhoneNumber = model.PhoneNumber,
+                    Points = 25
                 };
 
                 var config = new MapperConfiguration(cfg => {
@@ -152,7 +153,8 @@ namespace GE.WEB.Controllers
                 {
                     UserName = model.Name,
                     Email = model.Email,
-                    PhoneNumber = model.PhoneNumber
+                    PhoneNumber = model.PhoneNumber,
+                    Points = 25
                 };
 
                 var config = new MapperConfiguration(cfg => {
