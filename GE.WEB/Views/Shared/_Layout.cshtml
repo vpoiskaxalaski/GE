@@ -112,74 +112,77 @@
             <header class="header-section">
                 <div class="header-top">
                     <div class="container">
-                            <div class="col-lg-2 text-center text-lg-left">
-                                <!-- logo -->
-                                <div class="site-logo">
-                                    <img src="~/images/2013gyre_logo_final-1024x359.jpg" width="200px" />
-                                </div>
+                        <div class="col-lg-2 text-center text-lg-left">
+                            <!-- logo -->
+                            <div class="site-logo">
+                                <img src="~/images/2013gyre_logo_final-1024x359.jpg" width="200px" />
                             </div>
-                            <!--Search-->
-                            <div class="col-xl-6 col-lg-5">
-                                <form class="header-search-form">
-                                    <input type="text" placeholder="Search on divisima ....">
-                                    <button>
+                        </div>
+                        <!--Search-->
+                        <div class="col-xl-6 col-lg-5">
+                            <form class="header-search-form">
+                                <input type="text" placeholder="Search on divisima ....">
+                                <button>
                                     <img class="icon" src="~/img/search.png" />
-                                    </button>
-                                </form>
-                            </div>
-                            <!--User-->
+                                </button>
+                            </form>
+                        </div>
+                        <!--User-->
+                        @if (User.IsInRole("User"))
+                        {
                             <div class="bonusbox__title">
                                 <img class="icon" src="~/img/list.png" />
                                 Бонусы:
                                 <span class="count" id="BonusValue">25</span>
                             </div>
-                            <div class="col-xl-4 col-lg-5">
-                                <div class="user-panel">
-                                    @if (User.IsInRole("User"))
-                                    {
-                                        @*<div class="header-item header-item--right">*@
-                                        <div class="dropdown dropdown--right langs">
-                                            <a class="dropdown-toggle langs-title" data-toggle="dropdown">
-                                                @User.Identity.Name.ToString()
-                                                <div class="dropdown-menu">
-                                                    <ul class="langs-list">
-                                                        @if (User.IsInRole("Admin"))
+                        }
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="user-panel">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    @*<div class="header-item header-item--right">*@
+                                    <div class="dropdown dropdown--right langs">
+                                        <a class="dropdown-toggle langs-title" data-toggle="dropdown">
+                                            @User.Identity.Name.ToString()
+                                            <div class="dropdown-menu">
+                                                <ul class="langs-list">
+                                                    @if (User.IsInRole("Admin"))
+                                                    {
+                                                        <li class="langs-item"><a class="langs-item-title" href="/Admin/Index">Админ панель</a></li>
+                                                    }
+                                                    else if (User.IsInRole("User"))
+                                                    {
+                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/CreatePost">Создать объявление</a></li>
+                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/Posts">Мои объявления</a></li>
+                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/RequestPost">Корзина</a></li>
+                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/ResponsePost">Объявления на рассмотрении</a></li>
+                                                    }
+                                                    else if (User.IsInRole("Moderator"))
+                                                    {
+                                                        <li class="langs-item"><a class="langs-item-title" href="/Moderator/Index">Панель модератора</a></li>
+                                                    }
+                                                    <li class="langs-item">
+                                                        @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
                                                         {
-                                                            <li class="langs-item"><a class="langs-item-title" href="/Admin/Index">Админ панель</a></li>
+                                                            <a class="langs-item-title" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
                                                         }
-                                                        else if (User.IsInRole("User"))
-                                                        {
-                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/CreatePost">Создать объявление</a></li>
-                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/Posts">Мои объявления</a></li>
-                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/RequestPost">Корзина</a></li>
-                                                            <li class="langs-item"><a class="langs-item-title" href="/Manage/ResponsePost">Объявления на рассмотрении</a></li>
-                                                        }
-                                                        else if (User.IsInRole("Moderator"))
-                                                        {
-                                                            <li class="langs-item"><a class="langs-item-title" href="/Moderator/Index">Панель модератора</a></li>
-                                                        }
-                                                        <li class="langs-item">
-                                                            @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                                            {
-                                                                <a class="langs-item-title" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
-                                                            }
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="up-item">
-                                            <i class="flaticon-profile"></i>
-                                            @Html.ActionLink("Войти", "LoginModal", "Account", null, new { @class = "link loginLink", @id = "serviceLoginLink" })
-                                            или
-                                            @Html.ActionLink("Зарегестрироваться", "RegisterModal", "Account", null, new { @class = "link registerLink", @id = "serviceRegisterLink" })
-                                            @*<a href="/Account/LoginModal">Sign In</a> or <a href="/Acco">Create Account</a>*@
-                                        </div>
-                                    }
-                                </div>                               
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="up-item">
+                                        <i class="flaticon-profile"></i>
+                                        @Html.ActionLink("Войти", "LoginModal", "Account", null, new { @class = "link loginLink", @id = "serviceLoginLink" })
+                                        или
+                                        @Html.ActionLink("Зарегестрироваться", "RegisterModal", "Account", null, new { @class = "link registerLink", @id = "serviceRegisterLink" })
+                                        @*<a href="/Account/LoginModal">Sign In</a> or <a href="/Acco">Create Account</a>*@
+                                    </div>
+                                }
                             </div>
+                        </div>
 
                     </div>
                 </div>

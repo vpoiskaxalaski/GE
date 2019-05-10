@@ -46,6 +46,7 @@ namespace GE.DAL.Repositories
             {
                 result.Name = item.Name;
                 result.Description = item.Description;
+                result.Status = item.Status;
             }
         }
 

@@ -775,9 +775,9 @@ namespace GE.DAL.Initialize
                         }
                     }
                 });
-            }
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
 
             if (!context.Categories.Any())
             {
@@ -1114,29 +1114,30 @@ namespace GE.DAL.Initialize
                         }
                        }
                    });
+
+                context.SaveChanges();
             }
 
-            context.SaveChanges();
-
-            if (!context.ApplicationUsers.Any())
-            {
-                ApplicationUser admin = new ApplicationUser { UserName = "admin", Email = "admin@gmail.com" };
-                userManager.CreateAsync(admin, ".System99");
-                IdentityResult roleResult = roleManager.CreateAsync(new IdentityRole("Admin")).Result;
-                if (roleResult.Succeeded)
-                {
-                    userManager.AddToRoleAsync(admin, "Admin");
-                }
+            //if (!context.ApplicationUsers.)
+            //{
+                //ApplicationUser admin = new ApplicationUser { UserName = "admin", Email = "admin@gmail.com" };
+                //userManager.CreateAsync(admin, ".System99");
+                //IdentityResult roleResult = roleManager.CreateAsync(new IdentityRole("Admin")).Result;
+                //if (roleResult.Succeeded)
+                //{
+                //    userManager.AddToRoleAsync(admin, "Admin");
+                //}
 
 
-                ApplicationUser manager = new ApplicationUser { UserName = "moderator", Email = "moderator@gmail.com" };
-                userManager.CreateAsync(manager, ".System99");
-                IdentityResult roleResult1 = roleManager.CreateAsync(new IdentityRole("Moderator")).Result;
-                if (roleResult1.Succeeded)
-                {
-                    userManager.AddToRoleAsync(manager, "Moderator");
-                }
-            }
+                //ApplicationUser manager = new ApplicationUser { UserName = "moderator", Email = "moderator@gmail.com" };
+                //userManager.CreateAsync(manager, ".System99");
+
+                //IdentityResult roleResult = roleManager.CreateAsync(new IdentityRole("Moderator")).Result;
+                //if (roleResult.Succeeded)
+                //{
+                //    userManager.AddToRoleAsync(manager, "Moderator");
+                //}
+            //}
         }
 
     }

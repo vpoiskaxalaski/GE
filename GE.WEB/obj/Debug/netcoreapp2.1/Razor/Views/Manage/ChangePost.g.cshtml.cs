@@ -103,7 +103,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\r\n        </h3>\r\n    </div>\r\n    <div class=\"videos-mask\">\r\n        ");
             EndContext();
             BeginContext(486, 1471, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bf9965ced58a48f5a78e421dd150b5cc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8ca1264393b44f4abbd7db61e2eb6478", async() => {
                 BeginContext(600, 72, true);
                 WriteLiteral("\r\n            <input id=\"Id\" name=\"Id\" style=\"display: none\" type=\"text\"");
                 EndContext();

@@ -20,6 +20,7 @@
     <Compile Include="Controllers\AccountContoller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ModeratorController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -50,6 +51,7 @@
   <ItemGroup>
     <None Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <None Include="Views\Manage\CreatePost.cshtml" />
+    <None Include="Views\Moderator\Index.cshtml" />
     <None Include="wwwroot\Scripts\bootstrap-sortable.js" />
     <None Include="wwwroot\Scripts\bootstrap.js" />
     <None Include="wwwroot\Scripts\bootstrap.min.js" />

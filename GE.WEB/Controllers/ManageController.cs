@@ -17,24 +17,32 @@ namespace GE.WEB.Controllers
         private readonly IOrderService _orderService;
         private readonly IOperationService _operationService;
         private readonly IImageGalleryService _imageGalleryService;
+        private readonly ICategoryService _categoryService;
 
         public ManageController(IAccountService accountService, 
             IPostService postService, 
             IOrderService orderService, 
             IOperationService operationService,
-            IImageGalleryService imageGalleryService)
+            IImageGalleryService imageGalleryService,
+            ICategoryService categoryService)
         {
             _accountService = accountService;
             _postService = postService;
             _orderService = orderService;
             _operationService = operationService;
             _imageGalleryService = imageGalleryService;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
         public ActionResult CreatePost()
         {
+            
             GetCacheData();
+            if(ViewBag.Categories == null)
+            {
+                ViewBag.Categories = _categoryService.GetAll();
+            }
             return View();
         }
 
@@ -49,7 +57,7 @@ namespace GE.WEB.Controllers
             }
             else
             {
-                //    GetCacheData();
+                GetCacheData();
                 return View();
             }
         }
@@ -102,6 +110,7 @@ namespace GE.WEB.Controllers
         {
             ViewBag.Message = TempData["Message"];
             string userName = User.Identity.Name;
+            GetCacheData();
             ViewBag.Posts = _postService.GetAll().Where(x => x.User.UserName == userName); 
             return View();
         }
@@ -282,8 +291,7 @@ namespace GE.WEB.Controllers
                 var orders = _orderService.GetAll().Where(x => x.PostId == Id).ToList();
                 if (orders.Count > 0)
                     _orderService.RemoveRange(orders);
-                //db.Posts.Remove(post);
-                //db.SaveChanges();
+
                 TempData["Message"] = "Пост был успешно удален";
             }
             else TempData["Message"] = "Что-то пошло не так";
