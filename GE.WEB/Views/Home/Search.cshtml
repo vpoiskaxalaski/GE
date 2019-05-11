@@ -1,0 +1,98 @@
+﻿@*@model PagedList.IPagedList<diplom.Models.Post>
+@using PagedList.Mvc;*@
+@if (ViewBag.Posts ==  null)
+{
+    <div align="center">
+        <div class="view-header">
+            <h1 class="view__title" style="margin:unset">
+                По данному запросу ничего не найдено
+            </h1>
+        </div>
+    </div>
+}
+else
+{
+        <div class="videos-mask">
+            <div id="content">
+                <ul class="videos-list vois">
+                    @foreach (GE.Models.PostVM post in ViewBag.Posts)
+                    {
+                        <li class="voi">
+                            <a href="/Home/Post/@post.Id" title="@post.Name">                              
+                                <img class='voi__poster' src="@string.Concat("/Images/" + post.UserId + "/", post.ImagesGallery.ToList().First().Name)" width='162' height='228' />
+                            </a>
+                            <div class="voi__content">
+                                <p class="voi__title">
+                                    <a class="voi__title-link" href="/Home/Post/@post.Id">
+                                        @post.Name
+                                    </a>
+                                </p>
+                                <p class="voi__info">
+                                    @post.Subcategory.Points, @post.Subcategory.Name
+                                </p>
+                            </div>
+                            <div class="overlay" original-title="">
+                                <a class="overlay-link" href="/Home/Post/@post.Id"></a>
+                            </div>
+
+                        </li>
+                    }
+                </ul>
+                <hr style="    color: #ddd;">
+            </div>
+        </div>
+}
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        $("#categoryPart").on("click", ".cat", function () {
+            $(".Fi__subcategory").css("display", "none");
+            $("#attSub").val("");
+        });
+        $("#categoryPart").on("click", ".valueSub", function () {
+            var id = $(this).attr('id');
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetSubcategories")/' + id,
+                    success: function (data) {
+                        $('#subcategoryPart').replaceWith(data);
+                    }
+            });
+                if (id != "all") {
+                    $(".Fi__subcategory").css("display", "block");
+                    $("span.ncat").text(id);
+                }
+                else {
+                    $("span.ncat").text("Любая");
+                }
+
+                $("#attCat").val(id);
+        });
+        $("#regionPart").on("click", ".reg", function () {
+            $(".Fi__city").css("display", "none");
+            $("#attCit").val("");
+        });
+        $("#regionPart").on("click", ".valueSub", function () {
+            var id = $(this).attr('id');
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetCities")/' + id,
+                    success: function (data) {
+                        $('#cityPart').replaceWith(data);
+                    }
+            });
+                if (id != "all") {
+                    $(".Fi__city").css("display", "block");
+                    $("span.nreg").text(id);
+
+                }
+                else {
+                    $("span.nreg").text("Любая");
+                }
+                $("#attReg").val(id);
+
+        });
+    </script>
+}

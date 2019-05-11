@@ -8,3 +8,4 @@ E:\UNIVER\CourseProject\GE\GE.Models\obj\Debug\netcoreapp2.1\GE.Models.AssemblyI
 E:\UNIVER\CourseProject\GE\GE.Models\obj\Debug\netcoreapp2.1\GE.Models.AssemblyInfo.cs
 E:\UNIVER\CourseProject\GE\GE.Models\obj\Debug\netcoreapp2.1\GE.Models.dll
 E:\UNIVER\CourseProject\GE\GE.Models\obj\Debug\netcoreapp2.1\GE.Models.pdb
+E:\UNIVER\CourseProject\GE\GE.Models\obj\Debug\netcoreapp2.1\GE.Models.csprojAssemblyReference.cache

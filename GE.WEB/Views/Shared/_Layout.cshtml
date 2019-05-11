@@ -120,10 +120,10 @@
                         </div>
                         <!--Search-->
                         <div class="col-xl-6 col-lg-5">
-                            <form class="header-search-form">
-                                <input type="text" placeholder="Search on divisima ....">
+                            <form class="header-search-form" action="/Home/Search/">
+                                <input type="text" name="q" placeholder="Search on gyre ....">
                                 <button>
-                                    <img class="icon" src="~/img/search.png" />
+                                    <img class="icon" src="~/img/search.png"/>
                                 </button>
                             </form>
                         </div>
@@ -183,7 +183,6 @@
                                 }
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <nav class="main-navbar">
@@ -197,11 +196,11 @@
                                     foreach (var item in categories)
                                     {
                                         <li>
-                                            <a href="#">@item.Name</a>
+                                            <a href="@item.Name">@item.Name</a>
                                             <ul class="sub-menu">
                                                 @foreach (var subitem in @item.Subcategories)
                                                 {
-                                                    <li><a href="#">@subitem.Name</a></li>
+                                                    <li><a href="@(subitem.Id)">@subitem.Name</a></li>
                                                 }
                                             </ul>
                                         </li>

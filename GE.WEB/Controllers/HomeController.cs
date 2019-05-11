@@ -7,9 +7,11 @@ using System.IO;
 using System.Globalization;
 using GE.SL.Interfaces;
 using GE.Models;
+using System.Collections.Generic;
 
 namespace GE.WEB.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly IPostService _postsService;
@@ -19,12 +21,11 @@ namespace GE.WEB.Controllers
         {
             _postsService = postService;
             _accountService = accountService;
-            
         }
 
         public IActionResult Index()
-        {         
-            ViewBag.posts = _postsService.GetAll().Where( x => x.Status == "1" );
+        {
+            ViewBag.posts = _postsService.GetAll().Where(x => x.Status == "1");
 
             return View();
         }
@@ -34,8 +35,49 @@ namespace GE.WEB.Controllers
         {
             ViewBag.User = _accountService.GetByUserName(User.Identity.Name);
             ViewBag.Post = _postsService.GetAll().FirstOrDefault(i => i.Id == Id);
- 
+
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Search(int? page, string q)
+        {
+            if (q != "" && q != null)
+            {
+                var posts = _postsService.GetAll().Where(x => x.Name.Contains(q)).ToList();
+                if (posts.Count() == 0)
+                    ViewBag.Posts = null;
+                else
+                    ViewBag.Posts = posts;
+
+                //ViewBag.Categories = System.Runtime.Caching.MemoryCache.Default["Categories"] as IList<CategoryVM>;
+                //ViewBag.Regions = System.Runtime.Caching.MemoryCache.Default["Regions"] as IList<RegionVM>;
+                //int pageSize = 10;
+                //int pageNumber = (page ?? 1);
+                ViewBag.Q = q;
+                //return View(db.Posts.Where(x => x.Name.Contains(q) == true && x.Status != "0").ToList().ToPagedList(pageNumber, pageSize));
+                return View();
+            }
+            else return RedirectToAction("Index");
+        }
+
+        //[HttpGet("{id}")]
+        [Route("/{id}")]
+        public ActionResult Search(int id)
+        {
+            var posts = _postsService.GetAll().Where(x => x.SubcategoryId == id).ToList();
+            if (posts.Count() == 0)
+            {
+                ViewBag.Posts = null;
+                return View();
+            }                    
+
+            ViewBag.Posts = posts;
+            return View();
+            //int pageSize = 10;
+            //int pageNumber = (page ?? 1);
+            //return View(db.Posts.Where(x => x.Name.Contains(q) == true && x.Status != "0").ToList().ToPagedList(pageNumber, pageSize));
+
         }
 
         public IActionResult About()

@@ -95,8 +95,6 @@ namespace GE.WEB
 
             app.UseSession();
 
-
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
