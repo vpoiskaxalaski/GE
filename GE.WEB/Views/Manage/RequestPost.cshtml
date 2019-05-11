@@ -2,7 +2,8 @@
     <div class="view-header">
         <div class="container">
             <h1 class="view__title">
-                Мои запросы(Я прошу у других)
+                <img class="icon" src="~/img/bag.png" />
+                Корзина
             </h1>
         </div>
     </div>
@@ -10,8 +11,6 @@
         <h3 style="color:red">
             @ViewBag.Message
         </h3>
-    </div>
-    <div class="F__category">
     </div>
     @if (((IEnumerable<OrderVM>)ViewBag.Orders).Count() > 0)
     {

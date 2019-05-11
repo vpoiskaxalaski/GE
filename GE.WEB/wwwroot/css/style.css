@@ -447,7 +447,7 @@ ol {
 
 .main-menu li a {
 	display: inline-block;
-	font-size: 16px;
+	font-size: 20px;
 	color: #ffffff;
 	margin-right: 50px;
 	line-height: 1;
@@ -511,7 +511,7 @@ ol {
 }
 
     .main-menu .sub-menu li a:hover {
-        color: #f4841a;
+        color: #cb95aa;
     }
 
 .nav-switch {
@@ -775,14 +775,39 @@ ol {
 	transform: rotate(30deg);
 }
 
+
+.post {
+    display: grid;
+    grid-template-columns: 2fr 2fr 3fr;
+    grid-auto-rows: auto;
+    grid-gap: 50px;
+}
+
+.post-image {
+    padding: 50px
+}
+
+.view-images {
+    margin-left: 50px;
+}
+
+    .view-images .title {
+        margin: 16px 0;
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+.action-button {
+    margin-bottom: 30px;
+    color:whitesmoke;
+}
 /* ------------------
   Features section
 ---------------------*/
-
 .feature {
-	text-align: center;
-	background: #f8f8f8;
-	height: 100%;
+    text-align: center;
+    background: #f8f8f8;
+    height: 100%;
 }
 
 .feature:nth-child(2) {

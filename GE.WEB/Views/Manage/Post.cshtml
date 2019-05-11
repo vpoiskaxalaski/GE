@@ -1,122 +1,99 @@
 ﻿<div class="view">
-    <div class="view-header">
-        <div class="container">
-            <h1 class="view__title">
-                @ViewBag.Post.Name
-            </h1>
+    <div class="container">
+        <h1 class="view__title">
+            @ViewBag.Post.Name
+        </h1>
+    </div>
+    <div class="post">
+        <div class="post-image">
+            <img class="voi__poster" src="/images/12968556-6418-4e10-9aec-8f444b01778d/mkGeNouGnsU.jpg" width="162" height="228" style="    max-height: 390px;">
         </div>
-    </div>
-    <div align="center">
-        <h3 style="color:red">
-            @ViewBag.Error
-        </h3>
-    </div>
-    <div class="F__category">
-    </div>
-    <div class="view-watch player">
-        <div class="container">
-            <div class="view-side">
-                <div class="thumbnail">
-                    <div class="thumb">
-  
-                        <img class='voi__poster' src="@string.Concat("/images/" + ViewBag.Post.UserId + "/", ViewBag.Post.ImagesGallery[0].Name)" width='162' height='228' style="    max-height: 390px;" />
-                    </div>
+        <div class="info info_summary" style="all:unset">
+            <div class="infoi">
+                <h4 class="infoi__title">
+                    Дата:
+                </h4>
+                <div class="infoi__content">
+                    @ViewBag.Post.DateCreatePost
                 </div>
             </div>
-            
-        </div>
-    </div>
-    <div class="container">       
-            <div class="view-side" style="margin-left:300px">
-                <div class="info info_summary" style="all:unset">
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Дата:
-                        </h4>
-                        <div class="infoi__content">
-                            @ViewBag.Post.DateCreatePost
-                        </div>
-                    </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Категория:
-                        </h4>
-                        <div class="infoi__content">
-                            @ViewBag.Post.Subcategory.Name ,  @ViewBag.Post.Subcategory.CategoryName
-                        </div>
-                    </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Город:
-                        </h4>
-                        <div class="infoi__content">
-                            @ViewBag.Post.City.Name ,  @ViewBag.Post.City.RegionName область
-                        </div>
-                    </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Цена:
-                        </h4>
-                        <div class="infoi__content">
-                            @ViewBag.Post.Subcategory.Points
-                        </div>
-                    </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Номер телефона:
-                        </h4>
-                        <div class="infoi__content">
-                            @ViewBag.Post.User.PhoneNumber
-                        </div>
-                    </div>
+            <div class="infoi">
+                <h4 class="infoi__title">
+                    Категория:
+                </h4>
+                <div class="infoi__content">
+                    @ViewBag.Post.Subcategory.Name ,  @ViewBag.Post.Subcategory.CategoryName
                 </div>
             </div>
-            <div class="view-side">
-                <div class="view-story">
-                    <h3 class="infoi__title" style="float:unset">
-                        Описание
-                    </h3>
-                    <div class="expand">
-                        <div class="expandContent">
-                            @ViewBag.Post.Description
-                        </div>
-                    </div>
+            <div class="infoi">
+                <h4 class="infoi__title">
+                    Город:
+                </h4>
+                <div class="infoi__content">
+                    @ViewBag.Post.City.Name ,  @ViewBag.Post.City.RegionName область
                 </div>
             </div>
-            <div class="view-images" style="margin-left:300px">
-                <h3 class="title">
-                    Галерея
+            <div class="infoi">
+                <h4 class="infoi__title">
+                    Цена:
+                </h4>
+                <div class="infoi__content">
+                    @ViewBag.Post.Subcategory.Points
+                </div>
+            </div>
+            <div class="infoi">
+                <h4 class="infoi__title">
+                    Номер телефона:
+                </h4>
+                <div class="infoi__content">
+                    @ViewBag.Post.User.PhoneNumber
+                </div>
+            </div>
+            <div class="infoi">
+                <h3 class="infoi__title" style="float:unset">
+                    Описание
                 </h3>
-                <div class="gallery-thumbnails clearfix">
-                    @foreach (var item in ViewBag.Post.ImagesGallery)
-                    {
-                        <span>                     
-                            <img class='voi__poster' src="@string.Concat("/images/" + ViewBag.Post.UserId + "/", ViewBag.Post.ImagesGallery[0].Name)" width='162' height='228' onclick="openImg(this);" />
-                        </span>
-                    }
+                <div class="expand">
+                    <div class="expandContent">
+                        @ViewBag.Post.Description
+                    </div>
                 </div>
             </div>
+        </div>
+        <!--Image Gallery-->
+        <div class="view-images">
+            <h3 class="title">
+                Галерея
+            </h3>
+            <div class="gallery-thumbnails clearfix">
+                @foreach (var item in ViewBag.Post.ImagesGallery)
+                {
+                    <span>
+                        <img class='voi__poster' src="@string.Concat("/images/" + ViewBag.Post.UserId + "/", item.Name)" width='162' height='228' onclick="openImg(this);" />
+                    </span>
+                }
+            </div>
+        </div>
     </div>
     <div class="container">
         <div class="containerImage" style="padding: 0px 0px 10px 0px;">
-            <b class="closebtn" onclick="this.parentElement.style.display='none'"></b>          
+            <b class="closebtn" onclick="this.parentElement.style.display='none'"></b>
             <img id="expandedImg" style="width:50%; display:block; margin-left:auto; margin-right:auto">
             <div id="imgtext"></div>
         </div>
     </div>
     <div class="container">
-        <div class="container">
+        <div class="action-button">
             <form action="/Manage/ChangePost" method="get" style="display:inline">
                 <input type="hidden" name="postId" value="@ViewBag.Post.Id">
-                <button style="margin-bottom: 30px;border-color: #ff6600 !important; background-color: #ff6600 !important; color:white; padding: 6px 0px; width: 49.5%; border: 1px solid #cccccc;" type="submit">Изменить</button>
-            </form>            
+                <button class="btn btn-dark" style="background-color:#216100" type="submit">Изменить</button>
+            </form>
             <form action="/Manage/DeletePost" method="post" style="display: inline">
                 <input type="hidden" name="Id" value="@ViewBag.Post.Id">
-                <button style="margin-bottom: 30px; border-color: crimson !important; background-color: crimson !important; color:white; padding: 6px 0px; width: 49.5%; border: 1px solid #cccccc;" type="submit">Удалить</button>
+                <button class="btn btn-danger" style="background-color:#b40129" type="submit">Удалить</button>
             </form>
         </div>
     </div>
-</div>
 
     @section scripts{
         <script type="text/javascript">

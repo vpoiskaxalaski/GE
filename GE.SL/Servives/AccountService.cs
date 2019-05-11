@@ -31,7 +31,7 @@ namespace GE.SL.Servives
         {
             var account = _userManager.FindByIdAsync(id).Result;
 
-            return new ApplicationUserVM { Id = account.Id, UserName = account.UserName, Email = account.Email, PhoneNumber = account.PhoneNumber };
+            return new ApplicationUserVM { Id = account.Id, UserName = account.UserName, Email = account.Email, PhoneNumber = account.PhoneNumber, Points = account.Points };
         }
 
         public ApplicationUserVM GetByUserName(string name)
@@ -41,39 +41,11 @@ namespace GE.SL.Servives
             return new ApplicationUserVM { Id = account.Id, UserName = account.UserName, Email = account.Email, PhoneNumber = account.PhoneNumber, Points = account.Points };
         }
 
-        //public string GetRole(string email)
-        //{
-        //    return _unitOfWork.ApplicationUsers.GetRole(email);
-        //}
-
-        //public bool Login(LoginViewModel model)
-        //{
-        //    return _unitOfWork.ApplicationUsers.Login(model.Email, model.Password);
-        //}
-
-        //public async Task<ApplicationUserVM> Registration(RegisterViewModel model)
-        //{
-        //    ApplicationUser newUser = new ApplicationUser
-        //    {
-        //        UserName = model.Name,
-        //        Email = model.Email,
-        //        PhoneNumber = model.PhoneNumber
-        //    };
-        //    var result = await _userManager.CreateAsync(newUser, model.Password);
-
-        //    if (result.Succeeded)
-        //    {
-        //        var config = new MapperConfiguration(cfg => {
-        //            cfg.CreateMap<ApplicationUser, ApplicationUserVM>();
-        //        });
-
-        //        var map = config.CreateMapper();
-
-        //        return map.Map<ApplicationUser, ApplicationUserVM>(newUser);
-        //    }
-
-        //    return null;
-        //}
-
+        public void UpdateUserPoints(ApplicationUserVM u)
+        {
+            var user = _userManager.FindByIdAsync(u.Id).Result;
+            user.Points = u.Points;
+            _userManager.UpdateAsync(user);
+        }
     }
 }

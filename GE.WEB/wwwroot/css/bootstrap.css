@@ -290,7 +290,7 @@
 }
 
 .closebtn {
-    background-image: url(~/img/remove.png);
+    background-image: url(../img/remove.png);
     background-size: 30px;
     position: absolute;
     top: 10px;
@@ -315,7 +315,6 @@
 
 
 .form_section {
-    background-color: #dbdbe1;
     padding: 10px 60px 10px 10px;
 }
 
@@ -529,7 +528,7 @@
 }
 
 .image_delete {
-    background-image: url(~/img/remove.png);
+    background-image: url(../img/remove.png);
     background-size: 19px;
     left: 30%;
 }
@@ -548,7 +547,7 @@
     background-repeat: no-repeat;
     background-position: center;
     top: 50%;
-    margin: -15px 0 0 -15px;
+    margin: -15px 0 0 20px;
     opacity: 0.7;
 }
 
@@ -1037,6 +1036,7 @@ img {
 
 .page {
     padding: 50px;
+    background: whitesmoke;
 }
 
 .page_pt_20 {
@@ -1418,7 +1418,8 @@ img {
 
 .brand {
     margin: 0 auto;
-    height: auto
+    height: auto;
+    background: whitesmoke;
 }
 
     .brand .wrapper {
@@ -2598,8 +2599,8 @@ a.label.active, a.label:active {
 
 .dropdown-menu {
     float: left;
-    display: flex;
     top: 100%;
+    left: 61px;
     -webkit-box-shadow: 0 1px 2px -1px #777;
     -moz-box-shadow: 0 1px 2px -1px #777;
     box-shadow: 0 1px 2px -1px #777;
@@ -2629,7 +2630,7 @@ a.label.active, a.label:active {
 }
 
 .dropdown--right > .dropdown-menu {
-
+    z-index: 5;
 }
 
 .nav, .nav-item {
@@ -6859,8 +6860,8 @@ ul.pagination li a:hover:not(.active) {
 }
 
 .bCi__poster, .voi__poster {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px
 }
 
 .voit-content {
@@ -6951,7 +6952,8 @@ ul.pagination li a:hover:not(.active) {
     display: inline-block;
     margin-bottom: 30px;
     margin-left: 42px;
-    width: 162px;
+    width: 200px;
+    height: 250px;
     font-size: 16px
 }
 
@@ -7121,9 +7123,9 @@ ul.pagination li a:hover:not(.active) {
 
 .voi__poster {
     display: block;
-    border-radius: 3px;
-    width: 100%;
-    height: 200px;
+    border-radius: 15px;
+    width: auto;
+    margin: auto;
     background-color: #ddd;
     background-repeat: no-repeat;
     background-position: center center;
@@ -11469,10 +11471,10 @@ ul.pagination li a:hover:not(.active) {
 }
 
 .view__title {
-    margin: 6px 200px 6px 0;
-    line-height: 32px;
-    font-size: 32px;
-    font-weight: 400
+    margin: 6px 150px 6px 0;
+    line-height: 45px;
+    font-size: 55px;
+    font-weight: 400;
 }
 
 .view__title2 {

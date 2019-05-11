@@ -131,7 +131,7 @@
                 <output style="margin-left:10px">Поле должно содержать хотя бы одну фотографию*</output>
             </div>
             <br />
-            <button style="margin-bottom: 30px;border-color: #ff6600 !important; background-color: #ff6600 !important; color:white; padding: 6px 12px; width: 100%; border: 1px solid #cccccc;" type="submit">Добавить</button>
+            <button class="btn" style="margin-left: 400px;background-color: #216100 !important; color:whitesmoke;" type="submit">Добавить</button>
         }
     </div>
 </div>
@@ -171,7 +171,7 @@
                 var reader = new FileReader();
                 reader.onload = (function (theFile) {
                     return function (e) {
-                        document.getElementById('image-' + evt.target.id).innerHTML = ['<div id="' + evt.target.id + '"> <img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/><b  class="image_delete" id="' + evt.target.id + '" onclick="removeImg(this);"></b><b  class="image_rotate" id="' + evt.target.id + '" onclick="rotateImg(this);"></b></div>'].join('');
+                        document.getElementById('image-' + evt.target.id).innerHTML = ['<div id="' + evt.target.id + '"> <img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/><b  class="image_delete" id="' + evt.target.id + '" onclick="removeImg(this);"></b></div>'].join('');
                     };
                 })(f);
                 reader.readAsDataURL(f);

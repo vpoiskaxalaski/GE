@@ -136,26 +136,26 @@ namespace GE.WEB.Controllers
         [HttpPost]
         public IActionResult RequestPost(int postId)
         {
-            string userId = _accountService.GetByUserName(User.Identity.Name).Id;
-            var post = _postService.GetAll().Find(x => x.UserId == userId);
+            var user = _accountService.GetByUserName(User.Identity.Name);
+            var post = _postService.GetAll().Find(x => x.Id == postId);
 
-            if (post != null)
+            if (post != null && user.Points>= post.Subcategory.Points)
             {
-                var orders = _orderService.GetAll().Where(x => x.PostId == postId && x.UserId == userId);//db.Orders.Where(i => i.PostId == postId).ToList().Where(i => i.UserId == userId).ToList(); //all orders from this postid and userid
+                var orders = _orderService.GetAll().Where(x => x.PostId == postId && x.UserId == user.Id);//db.Orders.Where(i => i.PostId == postId).ToList().Where(i => i.UserId == userId).ToList(); //all orders from this postid and userid
                 if (orders.Count() == 0)
                 {
                     _orderService.Create(new OrderVM
                     {
                         PostId = postId,
-                        UserId = userId,
+                        UserId = user.Id,
                         Post = _postService.GetAll().FirstOrDefault(x => x.Id == postId),
-                        User = _accountService.GetById(userId)
+                        User = _accountService.GetById(user.Id)
                     });
-                    TempData["Message"] = "Пост был успешно добавлен в запросы";
                 }
                 else TempData["Message"] = "Вы не можете запросить повторно один и тот же пост";
             }
-            else TempData["Message"] = "Что-то пошло не так";
+            TempData["Message"] = "У вас недостаточно бонусов";
+
             return RedirectToAction("RequestPost");
         }
 
@@ -189,8 +189,10 @@ namespace GE.WEB.Controllers
                     if (requestUser.Points >= points)
                     {
                         requestUser.Points -= points;
+                        _accountService.UpdateUserPoints(requestUser);
                         _operationService.Create(CreateOperation(true, points, requestUser.Id));
                         currentUser.Points += points;
+                        _accountService.UpdateUserPoints(currentUser);
                         _operationService.Create(CreateOperation(false, points, requestUser.Id));
                         _orderService.Delete(order.Id);
                         TempData["Message"] = "Операция произведена успешно";

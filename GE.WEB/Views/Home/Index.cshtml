@@ -8,9 +8,7 @@
             {
             <li class="voi">
                 <a href="Home/Post/@post.Id" title="@post.Name">
-
-                    @*@Html.Raw("<img class='voi__poster' src=\"data:image/jpeg;base64," + Convert.ToBase64String(post.ImagesGallery.ToList()[0].ImageData) + "\" width='162' height='228' />")*@
-                    <img class='voi__poster' src="@string.Concat("/images/" + post.User.Id + "/", post.ImagesGallery.ToList().First().Name)" />
+                    <img class='voi__poster' style="height: 200px;" src="@string.Concat("/images/" + post.User.Id + "/", post.ImagesGallery.ToList().First().Name)" />
                 </a>
                 <div class="voi__content">
                     <p class="voi__title">

@@ -38,7 +38,7 @@ namespace GE.WEB.Controllers
             _postService.Update(post);
             TempData["Message"] = "Пост был успешно одобрен";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Moderator");
         }
 
         [HttpPost]

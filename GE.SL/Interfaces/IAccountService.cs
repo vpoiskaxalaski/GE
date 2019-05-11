@@ -12,6 +12,8 @@ namespace GE.SL.Interfaces
 
         ApplicationUserVM GetById(string id);
 
+        void UpdateUserPoints(ApplicationUserVM user);
+
         //bool Login(LoginViewModel model);
 
         //Task<ApplicationUserVM> Registration(RegisterViewModel model);
