@@ -9,15 +9,13 @@
     <meta name="keywords" content="divisima, eCommerce, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Favicon -->
+    <!-- Icon -->
     <link href="~/img/wind.png" rel="shortcut icon" />
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="~/css/bootstrap.min.css" />-->
     <link rel="stylesheet" href="~/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/style.css" />
-
+    <!--Jquery-->
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 
     <title>Gyre</title>
@@ -112,12 +110,10 @@
             <header class="header-section">
                 <div class="header-top">
                     <div class="container">
-                        <div class="col-lg-2 text-center text-lg-left">
                             <!-- logo -->
                             <div class="site-logo">
-                                <img src="~/images/2013gyre_logo_final-1024x359.jpg" width="200px" />
+                                <a href="https://localhost:44355/"><img src="~/images/2013gyre_logo_final-1024x359.jpg" /></a>
                             </div>
-                        </div>
                         <!--Search-->
                         <div class="col-xl-6 col-lg-5">
                             <form class="header-search-form" action="/Home/Search/">
@@ -126,40 +122,36 @@
                                     <img class="icon" src="~/img/search.png"/>
                                 </button>
                             </form>
-                        </div>
-                        <!--User-->
+                        </div>                        
                         @if (User.IsInRole("User"))
                         {
+                            <!--Bonus-->
                             <div class="bonusbox__title">
                                 <img class="icon" src="~/img/list.png" />
                                 Бонусы:
                                 <span class="count" id="BonusValue"></span>
                             </div>
                         }
-                        <div class="col-xl-4 col-lg-5">
+
                             <div class="user-panel">
+                                <!--Roles-->
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    @*<div class="header-item header-item--right">*@
                                     <div class="dropdown dropdown--right langs">
-                                        <a class="dropdown-toggle langs-title" data-toggle="dropdown">
+                                        <a class="dropdown-toggle langs-title" data-toggle="dropdown"/>
                                             @User.Identity.Name.ToString()
                                             <div class="dropdown-menu">
                                                 <ul class="langs-list">
-                                                    @if (User.IsInRole("Admin"))
+                                                    @if (User.IsInRole("Moderator"))
                                                     {
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Admin/Index">Админ панель</a></li>
+                                                        <li class="langs-item"><a class="langs-item-title" href="/Moderator/Index">Панель модератора</a></li>
                                                     }
                                                     else if (User.IsInRole("User"))
                                                     {
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/CreatePost">Создать объявление</a></li>
+                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/CreatePost">Создать объявление</a>                                                     </li>
                                                         <li class="langs-item"><a class="langs-item-title" href="/Manage/Posts">Мои объявления</a></li>
                                                         <li class="langs-item"><a class="langs-item-title" href="/Manage/RequestPost">Корзина</a></li>
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/ResponsePost">Объявления на рассмотрении</a></li>
-                                                    }
-                                                    else if (User.IsInRole("Moderator"))
-                                                    {
-                                                        <li class="langs-item"><a class="langs-item-title" href="/Moderator/Index">Панель модератора</a></li>
+                                                        <li class="langs-item"><a class="langs-item-title" href="/Manage/ResponsePost">Запросы на обмен</a></li>
                                                     }
                                                     <li class="langs-item">
                                                         @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
@@ -182,7 +174,6 @@
                                     </div>
                                 }
                             </div>
-                        </div>
                     </div>
                 </div>
                 <nav class="main-navbar">
@@ -196,7 +187,7 @@
                                     foreach (var item in categories)
                                     {
                                         <li>
-                                            <a href="@item.Name">@item.Name</a>
+                                            <a>@item.Name</a>
                                             <ul class="sub-menu">
                                                 @foreach (var subitem in @item.Subcategories)
                                                 {

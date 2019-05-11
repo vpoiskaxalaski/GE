@@ -821,7 +821,7 @@ button, input, select, textarea {
 }
 
     .link:hover, a:hover {
-        color: #fdae55;
+        color: #cb95aa;
         text-decoration: none
     }
 
@@ -889,6 +889,8 @@ img {
     width: auto;
     flex-flow: row;
     justify-content: space-between;
+    padding: 10px;
+    margin-left: 5rem;
 }
 
 .containers {
@@ -1834,7 +1836,7 @@ img {
 
     .btn_color.hover, .btn_color:hover {
         background-color: #58cef5;
-        color: #fdae55
+        color: #cb95aa
     }
 
     .btn_color.active, .btn_color:active {
@@ -4411,18 +4413,18 @@ a.label.active, a.label:active {
     }
 
 .langs-list {
-    margin: 20px 0
+    margin: 20px 0;
 }
 
 .langs-title {
     display: block;
     letter-spacing: 1px;
-    font-size: 16px;
-    color: #a6a6a6
+    font-size: 20px;
+    color: #633e5a;
 }
 
     .langs-title:hover {
-        color: #fdae55;
+        color: #cb95aa;
     }
 
 .langs {
@@ -4824,7 +4826,7 @@ a.label.active, a.label:active {
 }
 
     .header-item--right:hover {
-        color: #fdae55;
+        color: #cb95aa;
     }
 
 .touch .header {

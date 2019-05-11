@@ -9,11 +9,11 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
-
 html,
 body {
 	height: 100%;
-	font-family: 'Josefin Sans', sans-serif;
+	font-family: Calibri, sans-serif;
+    font-size: 16px;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -333,7 +333,7 @@ ol {
 ---------------------*/
 
 .header-top {
-    padding-left: 120px;
+    padding-left: 10px;
     padding-top: 10px;
     background-color: white;
 }
@@ -341,67 +341,70 @@ ol {
 .site-logo {
     display: block;
     margin: auto;
+    width: 135px;
 }
 
 .header-search-form {
-    width: 45rem;
+    width: min-content;
     display: block;
-    margin: auto;
+    margin-left: auto;
 }
 
-.header-search-form input {
-	width: 100%;
-	height: 44px;
-	font-size: 14px;
-	border-radius: 50px;
-	border: none;
-	padding: 0 19px;
-	background: #f0f0f0;
-}
+    .header-search-form input {
+        width: 35rem;
+        height: 44px;
+        font-size: 14px;
+        border-radius: 50px;
+        border: none;
+        padding: 0 19px;
+        background: #f0f0f0;
+    }
 
-.header-search-form button {
-	position: absolute;
-	height: 100%;
-	right: 18px;
-	top: 0;
-	font-size: 26px;
-	color: #000;
-	border: none;
-	cursor: pointer;
-	background-color: transparent;
-}
+    .header-search-form button {
+        position: relative;
+        display: inline;
+        margin-top: -33px;
+        float: right;
+        font-size: 26px;
+        color: #000;
+        border: none;
+        cursor: pointer;
+        background-color: transparent;
+    }
 
 .user-panel .up-item {
     display: inline-block;
-    font-size: 14px;
+    font-size: 15px;
+    color: #cb95aa;
 }
 
 .user-panel .up-item i {
 	font-size: 22px;
 }
 
-.user-panel .up-item a {
-	font-size: 14px;
-	color: #000;
-}
+    .user-panel .up-item a {
+        font-size: 20px;
+        color: #633e5a;
+    }
 
     .user-panel .up-item:first-child {
         width: max-content;
-        color: #fdae55;
+        color: #cb95aa;
     }
 
 .bonusbox__title {
     display: flex;
     width: auto;
-    margin: 15px 20px;
-    align-items: center;
+    margin: 10px 20px;
+    margin-left: auto;
+    align-items: center
 }
 
 .user-panel {
     width: auto;
     display: block;
-    padding:20px;
-    /*margin: 6px 20px 15px 18px;*/
+    padding: 15px;
+    margin-left: 2rem;
 }
 
 .shopping-card {
@@ -474,7 +477,7 @@ ol {
 }
 
     .main-menu li:hover > a {
-        color: #fdae55;
+        color: #cb95aa;
     }
 
 .main-menu .sub-menu {
