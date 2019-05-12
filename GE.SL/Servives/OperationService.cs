@@ -2,9 +2,7 @@
 using GE.DAL.Model;
 using GE.Models;
 using GE.SL.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GE.SL.Servives
 {
@@ -30,7 +28,7 @@ namespace GE.SL.Servives
 
             foreach (Operation operation in operations)
             {
-                operationsVM.Add(new OperationVM {  Id = operation.Id, Date = operation.Date, Earned = operation.Earned, UserId = operation.UserId, Spent = operation.Spent });
+                operationsVM.Add(new OperationVM { Id = operation.Id, Date = operation.Date, Earned = operation.Earned, UserId = operation.UserId, Spent = operation.Spent });
             }
 
             return operationsVM;

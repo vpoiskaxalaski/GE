@@ -1,21 +1,19 @@
-﻿using GE.DAL.Model;
-using GE.DAL.Interfaces;
+﻿using GE.DAL.Interfaces;
+using GE.DAL.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace GE.DAL.Repositories
 {
-    class SubcategoryRepository : IRepository<Subcategory>
+    internal class SubcategoryRepository : IRepository<Subcategory>
     {
         private DatabaseContext db;
 
         public SubcategoryRepository(DatabaseContext context)
         {
-            this.db = context;
+            db = context;
         }
 
         public IEnumerable<Subcategory> GetAll()
@@ -37,7 +35,7 @@ namespace GE.DAL.Repositories
         {
             db.Entry(subcategory).State = EntityState.Modified;
         }
-        public IEnumerable<Subcategory> Find(Func<Subcategory, Boolean> predicate)
+        public IEnumerable<Subcategory> Find(Func<Subcategory, bool> predicate)
         {
             return db.Subcategories.Where(predicate).ToList();
         }
@@ -45,7 +43,9 @@ namespace GE.DAL.Repositories
         {
             Subcategory subcategory = db.Subcategories.Find(id);
             if (subcategory != null)
+            {
                 db.Subcategories.Remove(subcategory);
+            }
         }
 
         public int GetCount()

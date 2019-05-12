@@ -11,6 +11,7 @@
     <Compile Include="ErrorViewModel.cs" />
     <Compile Include="ImagesGalleryVM.cs" />
     <Compile Include="LoginViewModel.cs" />
+    <Compile Include="PostAPI.cs" />
     <Compile Include="RegisterPostViewModel.cs" />
     <Compile Include="OperationVM.cs" />
     <Compile Include="OrderVM.cs" />

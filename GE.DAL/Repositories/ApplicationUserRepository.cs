@@ -1,8 +1,8 @@
-﻿using GE.DAL.Model;
-using GE.DAL.Interfaces;
-using System.Linq;
+﻿using GE.DAL.Interfaces;
+using GE.DAL.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GE.DAL.Repositories
 {
@@ -41,43 +41,10 @@ namespace GE.DAL.Repositories
             return new ApplicationUser();
         }
 
-        //public string GetRole(string email)
-        //{
-        //    return "";
-        //}
-
         public bool IsExists(string email)
         {
             return _context.ApplicationUsers.FirstOrDefault(i => i.Email == email) != null ? true : false;
         }
-
-        //public bool Login(string email, string password)
-        //{
-        //    string passwordHash = Crypto.Crypto.Sha256(password + email);
-        //    var user = _context.ApplicationUsers.Where(x => x.Email == email && x.PasswordHash == passwordHash).FirstOrDefault();
-        //    if (user != null && user.EmailConfirmed == true)
-        //        return true;
-        //    return false;
-        //}
-
-        //public bool Registration(ApplicationUser model)
-        //{
-        //    if (!IsExists(model.Email))
-        //    {
-        //        var account = _context.ApplicationUsers.Add(new ApplicationUser()
-        //        {
-        //            UserName = model.UserName,
-        //            Email = model.Email,
-        //            PasswordHash = Crypto.Crypto.Sha256(model.PasswordHash + model.Email)
-        //        });
-
-        //        _context.SaveChanges();
-
-        //        return true;
-        //    }
-
-        //    return false;
-        //}
 
     }
 }

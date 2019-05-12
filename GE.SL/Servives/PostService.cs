@@ -101,8 +101,6 @@ namespace GE.SL.Servives
             return imagesGallery;
         }
 
-
-
         private static string GetTime()
         {
             string localDateTime = "";
@@ -167,5 +165,6 @@ namespace GE.SL.Servives
             _unitOfWork.Posts.Update(dbPost);
             _unitOfWork.Save();
         }
+                
     }
 }

@@ -1,23 +1,19 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using GE.DAL;
+using GE.DAL.Interfaces;
+using GE.DAL.Model;
+using GE.DAL.Repositories;
+using GE.SL.Interfaces;
+using GE.SL.Servives;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using GE.DAL.Interfaces;
-using GE.DAL.Repositories;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using GE.DAL;
-using GE.SL.Servives;
-using GE.SL.Interfaces;
-using AutoMapper;
-using GE.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using GE.DAL.Model;
-using Microsoft.AspNetCore.Hosting.Internal;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace GE.WEB
 {

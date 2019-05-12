@@ -1,38 +1,10 @@
 ﻿@model GE.Models.PostVM
 @{
     Layout = null;
- }
+}
 <h2>Информация об объявлении</h2>
 <div class="F__category">
 </div>
-@*<table class="table">
-        <thead>
-            <tr>
-                <th>Наименование поста</th>
-                <th>Статус</th>
-                <th>Цена</th>
-                <th>Категория</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var room in Model)
-            {
-                <tr>
-                    <td>@room.Number</td>
-                    <td>@room.Status</td>
-                    <td>@room.Price</td>
-                    <td>@room.Category.Name</td>
-                    <td>
-                        @using (Html.BeginForm("DeleteHotelRoom", "Admin", FormMethod.Post))
-                        {
-                            <input type="hidden" name="Id" value="@room.Id" />
-                            <input type="submit" value="Удалить" class="btn btn-danger" style="width:75px" />
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>*@
 
 <div class="view">
     <div class="view-header">
@@ -42,14 +14,12 @@
             </h1>
         </div>
     </div>
-    @*<div class="F__category">
-        </div>*@
+
     <div class="view-watch player">
         <div class="container">
             <div class="view-side">
                 <div class="thumbnail">
                     <div class="thumb">
-                        @*@Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.ImagesGallery.ToList()[0].ImageData) + "\" width='300' style='min-height:250px;' />")*@
                         <img class='voi__poster' src="@string.Concat("/images/" + Model.UserId + "/", Model.ImagesGallery.ToList().First().Name)" width='162' height='228' style="    max-height: 390px;" />
                     </div>
                 </div>
@@ -57,81 +27,79 @@
         </div>
     </div>
     <div class="container">
-            <div class="view-side" style="margin-left:300px">
-                <div class="info info_summary" style="all:unset">
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Дата:
-                        </h4>
-                        <div class="infoi__content">
-                            @Model.DateCreatePost
-                        </div>
+        <div class="view-side" style="margin-left:300px">
+            <div class="info info_summary" style="all:unset">
+                <div class="infoi">
+                    <h4 class="infoi__title">
+                        Дата:
+                    </h4>
+                    <div class="infoi__content">
+                        @Model.DateCreatePost
                     </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Категория:
-                        </h4>
-                        <div class="infoi__content">
-                            @Model.Subcategory.Name ,  @Model.Subcategory.CategoryName
-                        </div>
+                </div>
+                <div class="infoi">
+                    <h4 class="infoi__title">
+                        Категория:
+                    </h4>
+                    <div class="infoi__content">
+                        @Model.Subcategory.Name ,  @Model.Subcategory.CategoryName
                     </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Город:
-                        </h4>
-                        <div class="infoi__content">
-                            @Model.City.Name ,  @Model.City.RegionName область
-                        </div>
+                </div>
+                <div class="infoi">
+                    <h4 class="infoi__title">
+                        Город:
+                    </h4>
+                    <div class="infoi__content">
+                        @Model.City.Name ,  @Model.City.RegionName область
                     </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Цена:
-                        </h4>
-                        <div class="infoi__content">
-                            @Model.Subcategory.Points
-                        </div>
+                </div>
+                <div class="infoi">
+                    <h4 class="infoi__title">
+                        Цена:
+                    </h4>
+                    <div class="infoi__content">
+                        @Model.Subcategory.Points
                     </div>
-                    <div class="infoi">
-                        <h4 class="infoi__title">
-                            Номер телефона:
-                        </h4>
-                        <div class="infoi__content">
-                            @Model.User.PhoneNumber
-                        </div>
+                </div>
+                <div class="infoi">
+                    <h4 class="infoi__title">
+                        Номер телефона:
+                    </h4>
+                    <div class="infoi__content">
+                        @Model.User.PhoneNumber
                     </div>
                 </div>
             </div>
-            <div class="view-side" style="    width: 400px">
-                <div class="view-story" style="margin:unset">
-                    <h3 class="infoi__title" style="float:unset">
-                        Описание
-                    </h3>
-                    <div class="expand">
-                        <div class="expandContent">
-                            @Model.Description
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="view-images" style="margin-left:300px">
-                <h3 class="title">
-                    Галерея
+        </div>
+        <div class="view-side" style="    width: 400px">
+            <div class="view-story" style="margin:unset">
+                <h3 class="infoi__title" style="float:unset">
+                    Описание
                 </h3>
-                <div class="gallery-thumbnails clearfix">
-                    @foreach (var item in Model.ImagesGallery)
-                    {
-                        <span>
-                            @*@Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.ImageData) + "\"onclick=" + "openImg(this);" + " />")*@
-                            <img class='voi__poster' src="@string.Concat("/images/" + Model.UserId + "/", item.Name)" width='162' height='228' onclick="openImg(this);" />
-                        </span>
-                    }
+                <div class="expand">
+                    <div class="expandContent">
+                        @Model.Description
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="view-images" style="margin-left:300px">
+            <h3 class="title">
+                Галерея
+            </h3>
+            <div class="gallery-thumbnails clearfix">
+                @foreach (var item in Model.ImagesGallery)
+                {
+                    <span>
+                        <img class='voi__poster' src="@string.Concat("/images/" + Model.UserId + "/", item.Name)" width='162' height='228' onclick="openImg(this);" />
+                    </span>
+                }
+            </div>
+        </div>
     </div>
     <div class="container">
         <div class="containerImage">
             <b class="closebtn" onclick="this.parentElement.style.display='none'"></b>
-            @*<span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>*@
             <img id="expandedImg" style="width:50%; display:block; margin-left:auto; margin-right:auto">
             <div id="imgtext"></div>
         </div>

@@ -19,7 +19,7 @@ namespace GE.WEB.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public AccountController(
-            IAccountService accountService, 
+            IAccountService accountService,
             IEmailService emailService,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
@@ -44,9 +44,9 @@ namespace GE.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _userManager.FindByEmailAsync(model.Email).Result;
+                ApplicationUser user = _userManager.FindByEmailAsync(model.Email).Result;
                 await _signInManager.CreateUserPrincipalAsync(user);
-                var result = _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false).Result;
+                Microsoft.AspNetCore.Identity.SignInResult result = _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false).Result;
 
 
                 if (result.Succeeded)
@@ -81,16 +81,17 @@ namespace GE.WEB.Controllers
                     Points = 25
                 };
 
-                var config = new MapperConfiguration(cfg => {
+                MapperConfiguration config = new MapperConfiguration(cfg =>
+                {
                     cfg.CreateMap<ApplicationUserVM, ApplicationUser>();
                 });
-                var map = config.CreateMapper();
-                var user =  map.Map<ApplicationUserVM, ApplicationUser>(newUser);
+                IMapper map = config.CreateMapper();
+                ApplicationUser user = map.Map<ApplicationUserVM, ApplicationUser>(newUser);
 
                 if (user != null)
                 {
-                    var result = await _userManager.CreateAsync(user, model.Password);
-                    var roleCheck = await _roleManager.RoleExistsAsync("User");
+                    IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+                    bool roleCheck = await _roleManager.RoleExistsAsync("User");
                     if (!roleCheck)
                     {
                         await _roleManager.CreateAsync(new IdentityRole("User"));
@@ -117,18 +118,18 @@ namespace GE.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _userManager.FindByEmailAsync(model.Email).Result;
-                if(user != null)
+                ApplicationUser user = _userManager.FindByEmailAsync(model.Email).Result;
+                if (user != null)
                 {
                     await _signInManager.CreateUserPrincipalAsync(user);
-                    var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
+                    Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
 
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");
                         //return Json(new { success = true });
                     }
-                }              
+                }
 
                 ModelState.AddModelError("", "Неверный Email или пароль");
                 ModelState.AddModelError("", "Подтвердите Email");
@@ -157,16 +158,17 @@ namespace GE.WEB.Controllers
                     Points = 25
                 };
 
-                var config = new MapperConfiguration(cfg => {
+                MapperConfiguration config = new MapperConfiguration(cfg =>
+                {
                     cfg.CreateMap<ApplicationUserVM, ApplicationUser>();
                 });
-                var map = config.CreateMapper();
-                var user = map.Map<ApplicationUserVM, ApplicationUser>(newUser);
-                var result = await _userManager.CreateAsync(user, model.Password);
+                IMapper map = config.CreateMapper();
+                ApplicationUser user = map.Map<ApplicationUserVM, ApplicationUser>(newUser);
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    var roleCheck = await _roleManager.RoleExistsAsync("User");
+                    bool roleCheck = await _roleManager.RoleExistsAsync("User");
                     if (!roleCheck)
                     {
                         IdentityResult roleResult = await _roleManager.CreateAsync(new IdentityRole("User"));
@@ -190,15 +192,14 @@ namespace GE.WEB.Controllers
 
         public async void SendMessage(ApplicationUser user)
         {
-            var u = _userManager.FindByEmailAsync(user.Email).Result;
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(u);
-            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { email = user.Email, code }, protocol: Request.Scheme);
-            ViewBag.Messages = callbackUrl.ToString();
+            ApplicationUser u = _userManager.FindByEmailAsync(user.Email).Result;
+            string code = await _userManager.GenerateEmailConfirmationTokenAsync(u);
+            string callbackUrl = Url.Action("ConfirmEmail", "Account", new { email = user.Email, code }, protocol: Request.Scheme);
             try
             {
-               await _emailService.SendEmailAsync(user.Email, "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\"> завершить регистрацию</a>");
+                await _emailService.SendEmailAsync(user.Email, "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\"> завершить регистрацию</a>");
             }
-            catch(Exception ex) {  }
+            catch (Exception) { }
 
         }
 
@@ -206,11 +207,11 @@ namespace GE.WEB.Controllers
         {
             if (email != null && code != null)
             {
-                var result = _userManager.ConfirmEmailAsync( _userManager.FindByEmailAsync(email).Result , code).Result;
+                IdentityResult result = _userManager.ConfirmEmailAsync(_userManager.FindByEmailAsync(email).Result, code).Result;
 
                 return View(result.Succeeded ? "ConfirmEmail" : "Error");
             }
- 
+
             return View("Error");
         }
 

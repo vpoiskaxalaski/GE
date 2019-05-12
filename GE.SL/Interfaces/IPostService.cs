@@ -15,5 +15,6 @@ namespace GE.SL.Interfaces
         void Update(PostVM post);
 
         void CreatePost(RegisterPostViewModel model, IEnumerable<IFormFile> images, ApplicationUserVM user);
+
     }
 }

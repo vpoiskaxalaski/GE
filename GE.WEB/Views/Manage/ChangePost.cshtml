@@ -23,7 +23,7 @@
                 <ul>
                     <li style="display:none"></li>
                 </ul>
-            </div>            
+            </div>
             <div class="form_section">
                 <label class="form_section form_tag">Имя продукта</label>
                 <input class="form_controlinput" id="Name" name="Name" pattern=".{3,}" placeholder="например HTC" required="required" type="text" value="@ViewBag.Post.Name">
@@ -38,65 +38,5 @@
         </form>
     </div>
 </div>
-
-@section scripts{
-    <script type="text/javascript">
-        @*$("#categoryPart").on("click", ".valueSub", function () {
-            var id = $(this).attr('id');
-                $.ajax({
-                    type: 'GET',
-                    url: '@Url.Action("GetSubcategories")/' + id,
-                    success: function (data) {
-                        $('#subcategoryPart').replaceWith(data);
-                    }
-            });
-                $(".Fi__subcategory").css("display", "block");
-                $("span.ncat").text(id);
-                //$("div").find("li#" + id).addClass("__active");
-
-        });
-        $("#regionPart").on("click", ".valueSub", function () {
-            var id = $(this).attr('id');
-                $.ajax({
-                    type: 'GET',
-                    url: '@Url.Action("GetCities")/' + id,
-                    success: function (data) {
-                        $('#cityPart').replaceWith(data);
-                    }
-            });
-                $(".Fi__city").css("display", "block");
-                $("span.nreg").text(id);
-        });*@
-        //function handleFileSelect(evt) {
-        //    var files = evt.target.files;
-        //    for (var i = 0, f; f = files[i]; i++) {
-        //        if (!f.type.match('image.*')) {continue;}
-        //        var reader = new FileReader();
-        //        reader.onload = (function (theFile) {
-        //            return function (e) {
-        //                document.getElementById('image-' + evt.target.id).innerHTML = ['<div id="' + evt.target.id + '"> <img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/><b  class="image_delete" id="' + evt.target.id + '" onclick="removeImg(this);"></b><b  class="image_rotate" id="' + evt.target.id + '" onclick="rotateImg(this);"></b></div>'].join('');
-        //            };
-        //        })(f);
-        //        reader.readAsDataURL(f);
-        //        //document.getElementById("image-" + evt.target.id).onclick = "none";
-        //    }
-        //}
-        //document.getElementById('1').addEventListener('change', handleFileSelect, false);
-        //document.getElementById('2').addEventListener('change', handleFileSelect, false);
-        //document.getElementById('3').addEventListener('change', handleFileSelect, false);
-        //function removeImg(elem) {
-        //    $('div#' + elem.id + '').remove();
-        //    document.getElementById(elem.id).addEventListener('change', handleFileSelect, false);
-        //}
-        //function getValueSub(elem) {
-        //    $("#Subcategory").val(elem.id);
-        //    $("span.nsub").text(elem.id);
-        //}
-        //function getValueCit(elem) {
-        //    $("#City").val(elem.id);
-        //    $("span.ncit").text(elem.id);
-        //}
-    </script>
-}
 
 

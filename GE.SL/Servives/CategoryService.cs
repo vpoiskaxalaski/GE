@@ -27,24 +27,25 @@ namespace GE.SL.Servives
 
             IEnumerable<Category> categories = _unitOfWork.Categories.GetAll();
 
-            var config = new MapperConfiguration(cfg => {
+            MapperConfiguration config = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<Subcategory, SubcategoryVM>();
             });
 
 
-            var map = config.CreateMapper();
+            IMapper map = config.CreateMapper();
 
             foreach (Category category in categories)
             {
                 categoryVM = new CategoryVM { Name = category.Name };
 
-                subcategoryVMs = map.Map<ICollection<Subcategory>, ICollection<SubcategoryVM>> (category.Subcategories);
+                subcategoryVMs = map.Map<ICollection<Subcategory>, ICollection<SubcategoryVM>>(category.Subcategories);
 
                 categoryVM.Subcategories = subcategoryVMs;
                 categoriesVM.Add(categoryVM);
             }
 
-            return categoriesVM;            
+            return categoriesVM;
         }
     }
 }

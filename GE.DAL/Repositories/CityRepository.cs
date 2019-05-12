@@ -1,10 +1,9 @@
-﻿using GE.DAL.Model;
-using GE.DAL.Interfaces;
+﻿using GE.DAL.Interfaces;
+using GE.DAL.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GE.DAL.Repositories
 {
@@ -14,7 +13,7 @@ namespace GE.DAL.Repositories
 
         public CityRepository(DatabaseContext context)
         {
-            this.db = context;
+            db = context;
         }
         public void Create(City item)
         {
@@ -25,7 +24,9 @@ namespace GE.DAL.Repositories
         {
             City item = db.Cities.Find(id);
             if (item != null)
+            {
                 db.Cities.Remove(item);
+            }
         }
 
         public IEnumerable<City> Find(Func<City, bool> predicate)

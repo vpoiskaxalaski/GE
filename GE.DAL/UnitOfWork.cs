@@ -1,7 +1,7 @@
 ﻿using GE.DAL.Interfaces;
-using System;
-using Microsoft.EntityFrameworkCore;
 using GE.DAL.Model;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 
 namespace GE.DAL.Repositories
@@ -19,7 +19,7 @@ namespace GE.DAL.Repositories
         private PostRepository postRepository;
         private ApplicationUserRepository userRepository;
         private OperationRepository operationRepository;
-        
+
 
         public UnitOfWork(DbContextOptions<DatabaseContext> options)
         {
@@ -39,7 +39,7 @@ namespace GE.DAL.Repositories
             }
         }
 
-        public IRepository<Category> Categories 
+        public IRepository<Category> Categories
         {
             get
             {
@@ -51,13 +51,16 @@ namespace GE.DAL.Repositories
                 return categoryRepository;
             }
         }
-        
+
         public IRepository<Order> Orders
         {
             get
             {
                 if (orderRepository == null)
+                {
                     orderRepository = new OrderRepository(db);
+                }
+
                 return orderRepository;
             }
         }
@@ -67,7 +70,10 @@ namespace GE.DAL.Repositories
             get
             {
                 if (regionRepository == null)
+                {
                     regionRepository = new RegionRepository(db);
+                }
+
                 return regionRepository;
             }
         }
@@ -77,7 +83,10 @@ namespace GE.DAL.Repositories
             get
             {
                 if (cityRepository == null)
+                {
                     cityRepository = new CityRepository(db);
+                }
+
                 return cityRepository;
             }
         }
@@ -87,7 +96,10 @@ namespace GE.DAL.Repositories
             get
             {
                 if (postRepository == null)
+                {
                     postRepository = new PostRepository(db);
+                }
+
                 return postRepository;
             }
         }
@@ -97,7 +109,10 @@ namespace GE.DAL.Repositories
             get
             {
                 if (imagesGlleryRepository == null)
+                {
                     imagesGlleryRepository = new ImagesGalleryRepository(db);
+                }
+
                 return imagesGlleryRepository;
             }
         }
@@ -107,7 +122,10 @@ namespace GE.DAL.Repositories
             get
             {
                 if (userRepository == null)
+                {
                     userRepository = new ApplicationUserRepository(db);
+                }
+
                 return userRepository;
             }
         }
@@ -117,7 +135,10 @@ namespace GE.DAL.Repositories
             get
             {
                 if (operationRepository == null)
+                {
                     operationRepository = new OperationRepository(db);
+                }
+
                 return operationRepository;
             }
         }
@@ -131,13 +152,13 @@ namespace GE.DAL.Repositories
 
         public virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
                     db.Dispose();
                 }
-                this.disposed = true;
+                disposed = true;
             }
         }
 

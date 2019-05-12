@@ -1,15 +1,14 @@
-﻿using System;
+﻿using GE.DAL;
+using GE.DAL.Initialize;
+using GE.DAL.Model;
+using GE.SL.Interfaces;
+using GE.SL.Servives;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using GE.DAL;
-using GE.DAL.Initialize;
-using GE.WEB.Controllers;
-using GE.SL.Servives;
-using GE.SL.Interfaces;
-using Microsoft.AspNetCore.Identity;
-using GE.DAL.Model;
+using System;
 
 namespace GE.WEB
 {
@@ -18,17 +17,17 @@ namespace GE.WEB
         public static void Main(string[] args)
         {
             //CreateWebHostBuilder(args).Build().Run();
-            var host = CreateWebHostBuilder(args).Build();
+            IWebHost host = CreateWebHostBuilder(args).Build();
 
-            using (var scope = host.Services.CreateScope())
+            using (IServiceScope scope = host.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
+                IServiceProvider services = scope.ServiceProvider;
                 try
                 {
 
-                    var context = services.GetRequiredService<DatabaseContext>();
-                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                    DatabaseContext context = services.GetRequiredService<DatabaseContext>();
+                    RoleManager<IdentityRole> roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    UserManager<ApplicationUser> userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     SampleData.Initialize(context, roleManager, userManager);
 
                     ICategoryService categoryService = services.GetRequiredService<ICategoryService>();
@@ -37,11 +36,11 @@ namespace GE.WEB
                     cacheService.CacheCategories(categoryService);
                     cacheService.CacheRegions(regionService);
 
-                    var a = context.ApplicationUsers;
+                    Microsoft.EntityFrameworkCore.DbSet<ApplicationUser> a = context.ApplicationUsers;
                 }
                 catch (Exception ex)
                 {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    ILogger<Program> logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred while seeding the database.");
                 }
             }
@@ -54,8 +53,10 @@ namespace GE.WEB
             throw new NotImplementedException();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
+                          .UseStartup<Startup>();
+        }
     }
 }

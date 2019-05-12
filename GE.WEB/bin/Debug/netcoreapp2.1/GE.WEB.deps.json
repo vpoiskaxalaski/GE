@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "18a91d09b750cc37c274fe6afbbc4b54301dd5d9"
+    "signature": "6b325026e3644858e57d6eee669825e020f4b5e3"
   },
   "compilationOptions": {
     "defines": [
@@ -38,6 +38,7 @@
           "PagedList.Core.Mvc": "1.2.0",
           "System.Data.Common": "4.3.0",
           "System.Runtime.Caching": "4.5.0",
+          "System.Runtime.Serialization.Json": "4.3.0",
           "X.PagedList.Mvc.Core": "7.6.0",
           "jQuery": "1.10.2"
         },
@@ -988,6 +989,13 @@
         },
         "compile": {
           "ref/netstandard2.0/System.Runtime.Caching.dll": {}
+        }
+      },
+      "System.Runtime.Serialization.Json/4.3.0": {
+        "dependencies": {
+          "System.IO": "4.3.0",
+          "System.Private.DataContractSerialization": "4.3.0",
+          "System.Runtime": "4.3.0"
         }
       },
       "System.Security.Cryptography.ProtectedData/4.5.0": {
@@ -4312,6 +4320,13 @@
       "sha512": "sha512-95j9KShuaAENf2gLbQ/9YoJDHIWAnoaFYA71xo4QVQyLkOMginn34cD1+6RcYIrqJamLkMXgvgUnOzwzBk+U0w==",
       "path": "system.runtime.caching/4.5.0",
       "hashPath": "system.runtime.caching.4.5.0.nupkg.sha512"
+    },
+    "System.Runtime.Serialization.Json/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CpVfOH0M/uZ5PH+M9+Gu56K0j9lJw3M+PKRegTkcrY/stOIvRUeonggxNrfBYLA5WOHL2j15KNJuTuld3x4o9w==",
+      "path": "system.runtime.serialization.json/4.3.0",
+      "hashPath": "system.runtime.serialization.json.4.3.0.nupkg.sha512"
     },
     "System.Security.Cryptography.ProtectedData/4.5.0": {
       "type": "package",

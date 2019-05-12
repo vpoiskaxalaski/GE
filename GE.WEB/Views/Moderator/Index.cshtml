@@ -1,6 +1,4 @@
-﻿@*@model PagedList.Core.IPagedList<GE.Models.PostVM>
-@using PagedList.Core.Mvc;*@
-<div class="videos-inner">
+﻿<div class="videos-inner">
     <div class="view-header">
         <div class="container">
             <h1 class="view__title">
@@ -45,6 +43,5 @@
     </table>
 
     <hr style="    color: #ddd;">
-    @*@PagedList.Core.BasePagedList(Model, page => Url.Action("Index", new { page = page }), new PagedList.Mvc.PagedListRenderOptions { MaximumPageNumbersToDisplay = 10 })*@
     <div id="postInformation"></div>
 </div>

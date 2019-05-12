@@ -1,12 +1,8 @@
-﻿using System;
+﻿using GE.SL.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using GE.SL.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using PagedList.Core;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GE.WEB.Controllers
 {
@@ -25,43 +21,47 @@ namespace GE.WEB.Controllers
         [Route("/Moderator")]
         [Route("/Moderator/Index")]
         public ActionResult Index(int? page)
-        { 
+        {
             ViewBag.Message = TempData["Message"];
-            int pageSize = 20;
-            int pageNumber = (page ?? 1);
             ViewBag.Posts = _postService.GetAll().Where(i => i.Status == "0");
-            return View();//View(_postService.GetAll().Where(i => i.Status == "0").ToList().ToPagedList(pageNumber, pageSize));
+
+            return View();
         }
 
         [HttpPost]
         public IActionResult ResolvePost(int id)
         {
-            var post = _postService.FindById(id); 
+            Models.PostVM post = _postService.FindById(id);
             post.Status = "1";
             _postService.Update(post);
             TempData["Message"] = "Пост был успешно одобрен";
 
-            //return View("Index");
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult RejectPost(int id)
-        { 
-            var post = _postService.FindById(id);
+        {
+            Models.PostVM post = _postService.FindById(id);
             if (post != null)
             {
                 _postService.Remove(id);
-
-                var images = _imageGalleryService.Find(id).ToList();
+                List<Models.ImagesGalleryVM> images = _imageGalleryService.Find(id).ToList();
                 if (images.Count == 1)
+                {
                     _imageGalleryService.RemoveItem(images[0]);
+                }
                 else
+                {
                     _imageGalleryService.RemoveRange(images);
+                }
 
                 TempData["Message"] = "Пост был успешно отклонен";
             }
-            else TempData["Message"] = "Что-то пошло не так";
+            else
+            {
+                TempData["Message"] = "Что-то пошло не так";
+            }
 
             return RedirectToAction("Index");
         }

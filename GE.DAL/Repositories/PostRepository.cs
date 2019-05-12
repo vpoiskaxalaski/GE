@@ -1,10 +1,9 @@
-﻿using GE.DAL.Model;
-using GE.DAL.Interfaces;
+﻿using GE.DAL.Interfaces;
+using GE.DAL.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GE.DAL.Repositories
 {
@@ -14,7 +13,7 @@ namespace GE.DAL.Repositories
 
         public PostRepository(DatabaseContext context)
         {
-            this.db = context;
+            db = context;
         }
 
         public IEnumerable<Post> GetAll()
@@ -28,8 +27,8 @@ namespace GE.DAL.Repositories
 
         public Post Get(int id)
         {
-            var imageGallery = db.ImagesGalleries.Where(x => x.PostId == id);
-            var post = db.Posts.Find(id);
+            IQueryable<ImagesGallery> imageGallery = db.ImagesGalleries.Where(x => x.PostId == id);
+            Post post = db.Posts.Find(id);
             post.ImagesGallery = imageGallery.ToList();
             return post;
         }
@@ -41,7 +40,7 @@ namespace GE.DAL.Repositories
 
         public void Update(Post item)
         {
-            var result = Get(item.Id);
+            Post result = Get(item.Id);
             if (result != null)
             {
                 result.Name = item.Name;
@@ -50,16 +49,18 @@ namespace GE.DAL.Repositories
             }
         }
 
-        public IEnumerable<Post> Find(Func<Post, Boolean> predicate)
+        public IEnumerable<Post> Find(Func<Post, bool> predicate)
         {
             return db.Posts.Where(predicate).ToList();
         }
 
         public void Delete(int id)
         {
-            Post lot  = db.Posts.Find(id);
+            Post lot = db.Posts.Find(id);
             if (lot != null)
+            {
                 db.Posts.Remove(lot);
+            }
         }
 
         public int GetCount()

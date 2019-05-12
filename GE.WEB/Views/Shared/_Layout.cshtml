@@ -12,7 +12,6 @@
     <!-- Icon -->
     <link href="~/img/wind.png" rel="shortcut icon" />
     <!-- Stylesheets -->
-    <!--<link rel="stylesheet" href="~/css/bootstrap.min.css" />-->
     <link rel="stylesheet" href="~/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <!--Jquery-->
@@ -170,7 +169,6 @@
                                         @Html.ActionLink("Войти", "LoginModal", "Account", null, new { @class = "link loginLink", @id = "serviceLoginLink" })
                                         или
                                         @Html.ActionLink("Зарегестрироваться", "RegisterModal", "Account", null, new { @class = "link registerLink", @id = "serviceRegisterLink" })
-                                        @*<a href="/Account/LoginModal">Sign In</a> or <a href="/Acco">Create Account</a>*@
                                     </div>
                                 }
                             </div>
@@ -204,22 +202,8 @@
             </header>
             <!-- Header section end -->
         </div>
-        <!--<div class="footer-bottom">
-            <div class="container">
-                <div class="footer-item footer-item--left">
-                    <div class="mU mU--color mU--footer">
-                        <ul class="mU-list">
-                            <li class="mU-item mU-item--main">
-                                <a class="link mU-item-link" id="menuFooterMainLink" href="http://localhost:52723/">Gyre</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>-->
+ 
     </div>
-
-    @*<partial name="_CookieConsentPartial" />*@
     <div class="page">
         @RenderBody()
     </div>

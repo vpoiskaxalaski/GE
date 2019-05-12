@@ -3,9 +3,7 @@ using GE.DAL.Interfaces;
 using GE.DAL.Model;
 using GE.Models;
 using GE.SL.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GE.SL.Servives
 {
@@ -20,12 +18,13 @@ namespace GE.SL.Servives
 
         public List<ImagesGalleryVM> Find(int postId)
         {
-            var items = _unitOfWork.ImagesGallery.GetAll();
-            var config = new MapperConfiguration(cfg => {
+            IEnumerable<ImagesGallery> items = _unitOfWork.ImagesGallery.GetAll();
+            MapperConfiguration config = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<ImagesGallery, ImagesGalleryVM>();
             });
-            var map = config.CreateMapper();
-            var images = map.Map<IEnumerable<ImagesGallery>, ICollection<ImagesGalleryVM>>(items);
+            IMapper map = config.CreateMapper();
+            ICollection<ImagesGalleryVM> images = map.Map<IEnumerable<ImagesGallery>, ICollection<ImagesGalleryVM>>(items);
             List<ImagesGalleryVM> result = new List<ImagesGalleryVM>();
             result.AddRange(images);
 
@@ -40,11 +39,12 @@ namespace GE.SL.Servives
 
         public void RemoveRange(IEnumerable<ImagesGalleryVM> items)
         {
-            var config = new MapperConfiguration(cfg => {
+            MapperConfiguration config = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<ImagesGalleryVM, ImagesGallery>();
             });
-            var map = config.CreateMapper();
-            var images = map.Map<IEnumerable<ImagesGalleryVM>, ICollection<ImagesGallery>>(items);
+            IMapper map = config.CreateMapper();
+            ICollection<ImagesGallery> images = map.Map<IEnumerable<ImagesGalleryVM>, ICollection<ImagesGallery>>(items);
 
             _unitOfWork.ImagesGallery.RemoveRange(images);
         }

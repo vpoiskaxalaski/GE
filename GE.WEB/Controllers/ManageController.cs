@@ -19,9 +19,9 @@ namespace GE.WEB.Controllers
         private readonly IImageGalleryService _imageGalleryService;
         private readonly ICategoryService _categoryService;
 
-        public ManageController(IAccountService accountService, 
-            IPostService postService, 
-            IOrderService orderService, 
+        public ManageController(IAccountService accountService,
+            IPostService postService,
+            IOrderService orderService,
             IOperationService operationService,
             IImageGalleryService imageGalleryService,
             ICategoryService categoryService)
@@ -37,9 +37,9 @@ namespace GE.WEB.Controllers
         [HttpGet]
         public ActionResult CreatePost()
         {
-            
+
             GetCacheData();
-            if(ViewBag.Categories == null)
+            if (ViewBag.Categories == null)
             {
                 ViewBag.Categories = _categoryService.GetAll();
             }
@@ -49,15 +49,16 @@ namespace GE.WEB.Controllers
         [HttpPost]
         public IActionResult CreatePost(RegisterPostViewModel model, IEnumerable<IFormFile> images)
         {
-            if (ModelState.IsValid) //&& !(images.All(i => Equals(i, null))))
+            if (ModelState.IsValid)
             {
-                var user = _accountService.GetByUserName(User.Identity.Name);
+                ApplicationUserVM user = _accountService.GetByUserName(User.Identity.Name);
                 _postService.CreatePost(model, images, user);
                 return RedirectToAction("Posts");
             }
             else
             {
                 GetCacheData();
+
                 return View();
             }
         }
@@ -75,6 +76,7 @@ namespace GE.WEB.Controllers
             IList<SubcategoryVM> subcategoryVMs = new List<SubcategoryVM>();
             categoryVM.ToList().ForEach(i => i.Subcategories.ToList().ForEach(y => { if (y.CategoryName == Id) { subcategoryVMs.Add(y); } }));
             ViewBag.Subcategories = subcategoryVMs.ToList();
+
             return PartialView();
         }
 
@@ -85,6 +87,7 @@ namespace GE.WEB.Controllers
             IList<CityVM> cityVM = new List<CityVM>();
             regionVM.ToList().ForEach(i => i.Cities.ToList().ForEach(y => { if (y.RegionName == Id) { cityVM.Add(y); } }));
             ViewBag.Cities = cityVM;
+
             return PartialView();
         }
 
@@ -92,15 +95,17 @@ namespace GE.WEB.Controllers
         [HttpGet]
         public ActionResult Profile()
         {
-            var user = _accountService.GetByUserName(User.Identity.Name);
+            ApplicationUserVM user = _accountService.GetByUserName(User.Identity.Name);
             ViewBag.User = user;
+
             return View();
         }
 
         [HttpGet]
         public string GetBonus()
         {
-            var user = _accountService.GetByUserName(User.Identity.Name);
+            ApplicationUserVM user = _accountService.GetByUserName(User.Identity.Name);
+
             return user.Points.ToString();
         }
 
@@ -111,7 +116,8 @@ namespace GE.WEB.Controllers
             ViewBag.Message = TempData["Message"];
             string userName = User.Identity.Name;
             GetCacheData();
-            ViewBag.Posts = _postService.GetAll().Where(x => x.User.UserName == userName); 
+            ViewBag.Posts = _postService.GetAll().Where(x => x.User.UserName == userName);
+
             return View();
         }
 
@@ -130,18 +136,19 @@ namespace GE.WEB.Controllers
             ViewBag.Message = TempData["Message"];
             string userId = _accountService.GetByUserName(User.Identity.Name).Id;
             ViewBag.Orders = _orderService.GetAll().Where(x => x.UserId == userId).ToList();
+
             return View();
         }
 
         [HttpPost]
         public IActionResult RequestPost(int postId)
         {
-            var user = _accountService.GetByUserName(User.Identity.Name);
-            var post = _postService.GetAll().Find(x => x.Id == postId);
+            ApplicationUserVM user = _accountService.GetByUserName(User.Identity.Name);
+            PostVM post = _postService.GetAll().Find(x => x.Id == postId);
 
-            if (post != null && user.Points>= post.Subcategory.Points)
+            if (post != null && user.Points >= post.Subcategory.Points)
             {
-                var orders = _orderService.GetAll().Where(x => x.PostId == postId && x.UserId == user.Id);//db.Orders.Where(i => i.PostId == postId).ToList().Where(i => i.UserId == userId).ToList(); //all orders from this postid and userid
+                IEnumerable<OrderVM> orders = _orderService.GetAll().Where(x => x.PostId == postId && x.UserId == user.Id);//db.Orders.Where(i => i.PostId == postId).ToList().Where(i => i.UserId == userId).ToList(); //all orders from this postid and userid
                 if (orders.Count() == 0)
                 {
                     _orderService.Create(new OrderVM
@@ -152,9 +159,13 @@ namespace GE.WEB.Controllers
                         User = _accountService.GetById(user.Id)
                     });
                 }
-                else TempData["Message"] = "Вы не можете запросить повторно один и тот же пост";
+                else
+                {
+                    TempData["Message"] = "Вы не можете запросить повторно один и тот же пост";
+                }
             }
-            TempData["Message"] = "У вас недостаточно бонусов";
+            else
+                TempData["Message"] = "У вас недостаточно бонусов";
 
             return RedirectToAction("RequestPost");
         }
@@ -165,6 +176,7 @@ namespace GE.WEB.Controllers
             ViewBag.Message = TempData["Message"];
             string userId = _accountService.GetByUserName(User.Identity.Name).Id;
             ViewBag.Orders = _orderService.GetAll().Where(x => x.Post.UserId == userId);
+
             return View();
         }
 
@@ -177,12 +189,12 @@ namespace GE.WEB.Controllers
         [HttpPost]
         public ActionResult ResolveRequest(int id)//orderId
         {
-            var user = _accountService.GetByUserName(User.Identity.Name);
-            var order = _orderService.GetAll().Where(x => x.Id == id).FirstOrDefault();
+            ApplicationUserVM user = _accountService.GetByUserName(User.Identity.Name);
+            OrderVM order = _orderService.GetAll().Where(x => x.Id == id).FirstOrDefault();
             if (order != null)
             {
-                var currentUser = user;
-                var requestUser = _accountService.GetById(order.UserId);
+                ApplicationUserVM currentUser = user;
+                ApplicationUserVM requestUser = _accountService.GetById(order.UserId);
                 int points = order.Post.Subcategory.Points;
                 if (requestUser != null)
                 {
@@ -197,11 +209,20 @@ namespace GE.WEB.Controllers
                         _orderService.Delete(order.Id);
                         TempData["Message"] = "Операция произведена успешно";
                     }
-                    else TempData["Message"] = "Вы не можете совершить обмен с данным пользователем";
+                    else
+                    {
+                        TempData["Message"] = "Вы не можете совершить обмен с данным пользователем";
+                    }
                 }
-                else TempData["Message"] = "Такого пользователя не существует";
+                else
+                {
+                    TempData["Message"] = "Такого пользователя не существует";
+                }
             }
-            else TempData["Message"] = "Такого запроса не существует";
+            else
+            {
+                TempData["Message"] = "Такого запроса не существует";
+            }
 
             return RedirectToAction("ResponsePost");
         }
@@ -209,14 +230,17 @@ namespace GE.WEB.Controllers
         [HttpPost]
         public ActionResult RejectRequest(int id)//orderId
         {
-            var user = _accountService.GetByUserName(User.Identity.Name);
-            var order = _orderService.GetAll().Where(x => x.Id == id).FirstOrDefault();
+            ApplicationUserVM user = _accountService.GetByUserName(User.Identity.Name);
+            OrderVM order = _orderService.GetAll().Where(x => x.Id == id).FirstOrDefault();
             if (order != null)
             {
                 _orderService.Delete(order.Id);
                 TempData["Message"] = "Операция произведена успешно";
             }
-            else TempData["Message"] = "Такого запроса не существует";
+            else
+            {
+                TempData["Message"] = "Такого запроса не существует";
+            }
 
             return RedirectToAction("ResponsePost");
         }
@@ -224,9 +248,6 @@ namespace GE.WEB.Controllers
         [HttpGet]
         public ActionResult ChangePost(int postId)
         {
-            //Tuple<IList<Category>, IList<Region>> tuple = HomeController.GetDataFromCatReg();
-            //ViewBag.Categories = tuple.Item1;
-            //ViewBag.Regions = tuple.Item2;
             ViewBag.Post = _postService.FindById(postId);
 
             return View();
@@ -235,80 +256,58 @@ namespace GE.WEB.Controllers
         [HttpPost]
         public ActionResult ChangePost(PostVM model)
         {
-            var user = _accountService.GetByUserName(User.Identity.Name);
-            var post = _postService.FindById(model.Id);// db.Posts.FirstOrDefault(i => i.Id == model.Id);
-            //if (!(images.All(i => Equals(i, null))))
-            //{
-            //db = new ApplicationDbContext();
-            //var user = db.Users.Find(User.Identity.GetUserId());
-            //var post = db.Posts.FirstOrDefault(i => i.Id == model.Id);
-            //if (post != null)
-            //{
+            ApplicationUserVM user = _accountService.GetByUserName(User.Identity.Name);
+            PostVM post = _postService.FindById(model.Id);
             if (model.Description.Count() >= 5)
             {
                 post.Name = model.Name;
                 post.Description = model.Description;
-                //post.City = db.Cities.First(i => i.Name == model.City.Name);
-                //post.DateCreatePost = DateTime.Now.ToString();
-                //post.ImagesGallery = AddImagesInDb(images, user.Id);                
                 post.Status = "0";
                 _postService.Update(post);
-                _orderService.RemoveRange(_orderService.GetAll().Where(x=>x.PostId==model.Id).ToList());
-                //_orderService.Delete(post.Id);
-                //post.Subcategory = db.Subcategories.First(i => i.Name == model.Subcategory),
+                _orderService.RemoveRange(_orderService.GetAll().Where(x => x.PostId == model.Id).ToList());
                 ViewBag.Message = "Пост успешно изменен";
                 ViewBag.Post = _postService.FindById(model.Id);
 
                 return RedirectToAction("Posts");
             }
             ViewBag.Error = "Описание должно иметь не менее 5 символов";
+
             return RedirectToAction("Posts");
-            //}
-            //ViewBag.Error = "Что-то пошло не так";
-            //return View(post);
-            //}
-            //else
-            //{
-            //    ViewBag.Error = "Добавьте хотя бы одну фотографию";
-            //    return View(post);
-            //}
         }
 
         [HttpPost]
         public ActionResult DeletePost(int Id)
         {
-            var post = _postService.GetAll().FirstOrDefault( x => x.Id == Id );// db.Posts.Find(postId);
+            PostVM post = _postService.GetAll().FirstOrDefault(x => x.Id == Id);
             if (post != null)
             {
-                //db.ImagesGallery.RemoveRange(db.ImagesGallery.Where(i => i.PostId == post.Id).ToList());
-
-                //db.Orders.RemoveRange(db.Orders.Where(i => i.PostId == post.Id).ToList());
                 _postService.Remove(Id);
-
-                var images = _imageGalleryService.Find(Id).ToList();
+                List<ImagesGalleryVM> images = _imageGalleryService.Find(Id).ToList();
                 if (images.Count == 1)
+                {
                     _imageGalleryService.RemoveItem(images[0]);
+                }
                 else
+                {
                     _imageGalleryService.RemoveRange(images);
+                }
 
-                var orders = _orderService.GetAll().Where(x => x.PostId == Id).ToList();
+                List<OrderVM> orders = _orderService.GetAll().Where(x => x.PostId == Id).ToList();
                 if (orders.Count > 0)
+                {
                     _orderService.RemoveRange(orders);
+                }
 
                 TempData["Message"] = "Пост был успешно удален";
             }
-            else TempData["Message"] = "Что-то пошло не так";
+            else
+            {
+                TempData["Message"] = "Что-то пошло не так";
+            }
 
             return RedirectToAction("Posts");
         }
 
-
-        public bool RemoveImg(string path)
-        {
-
-
-            return true;
-        }
 
         private OperationVM CreateOperation(bool SpentOrEarned, int valueOfBonus, string userId)
         {
@@ -336,7 +335,7 @@ namespace GE.WEB.Controllers
 
         private void AddErrors(IdentityResult result)
         {
-            foreach (var error in result.Errors)
+            foreach (IdentityError error in result.Errors)
             {
                 ModelState.AddModelError("", error.ToString());
             }

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using System.Net.Sockets;
-using System.IO;
-using System.Globalization;
+﻿using GE.Models;
 using GE.SL.Interfaces;
-using GE.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Net.Sockets;
 
 namespace GE.WEB.Controllers
 {
@@ -40,48 +40,48 @@ namespace GE.WEB.Controllers
         }
 
         [HttpGet]
-        //[Route("/Search")]
         public ActionResult Search(int? page, string q)
         {
             if (q != "" && q != null)
             {
-                var posts = _postsService.GetAll().Where(x => {
+                List<PostVM> posts = _postsService.GetAll().Where(x =>
+                {
                     string n = x.Name.ToUpper(), s = q.ToUpper();
                     return n.Contains(s);
                 }).ToList();
                 if (posts.Count() == 0)
+                {
                     ViewBag.Posts = null;
+                }
                 else
+                {
                     ViewBag.Posts = posts;
-
-                //ViewBag.Categories = System.Runtime.Caching.MemoryCache.Default["Categories"] as IList<CategoryVM>;
-                //ViewBag.Regions = System.Runtime.Caching.MemoryCache.Default["Regions"] as IList<RegionVM>;
-                //int pageSize = 10;
-                //int pageNumber = (page ?? 1);
+                }
                 ViewBag.Q = q;
-                //return View(db.Posts.Where(x => x.Name.Contains(q) == true && x.Status != "0").ToList().ToPagedList(pageNumber, pageSize));
+
                 return View();
             }
-            else return RedirectToAction("Index");
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
 
         [Route("/{id}")]
         public ActionResult Search(int id)
         {
-            var posts = _postsService.GetAll().Where(x => x.SubcategoryId == id).ToList();
+            List<PostVM> posts = _postsService.GetAll().Where(x => x.SubcategoryId == id).ToList();
             if (posts.Count() == 0)
             {
                 ViewBag.Posts = null;
+
                 return View();
-            }                    
+            }
 
             ViewBag.Posts = posts;
-            return View();
-            //int pageSize = 10;
-            //int pageNumber = (page ?? 1);
-            //return View(db.Posts.Where(x => x.Name.Contains(q) == true && x.Status != "0").ToList().ToPagedList(pageNumber, pageSize));
 
+            return View();
         }
 
         public IActionResult About()
@@ -111,14 +111,15 @@ namespace GE.WEB.Controllers
 
         public static string GetTime()
         {
-            var client = new TcpClient("time.nist.gov", 13);
+            TcpClient client = new TcpClient("time.nist.gov", 13);
             string localDateTime = "";
-            using (var streamReader = new StreamReader(client.GetStream()))
+            using (StreamReader streamReader = new StreamReader(client.GetStream()))
             {
-                var response = streamReader.ReadToEnd();
-                var utcDateTimeString = response.Substring(7, 17);
+                string response = streamReader.ReadToEnd();
+                string utcDateTimeString = response.Substring(7, 17);
                 localDateTime = DateTime.ParseExact(utcDateTimeString, "yy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal).ToString();
             }
+
             return localDateTime;
         }
     }

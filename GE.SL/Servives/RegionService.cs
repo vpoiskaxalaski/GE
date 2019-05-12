@@ -27,10 +27,11 @@ namespace GE.SL.Servives
 
             IEnumerable<Region> regions = _unitOfWork.Regions.GetAll();
 
-            var config = new MapperConfiguration(cfg => {
+            MapperConfiguration config = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<City, CityVM>();
             });
-            var map = config.CreateMapper();
+            IMapper map = config.CreateMapper();
 
             foreach (Region region in regions)
             {

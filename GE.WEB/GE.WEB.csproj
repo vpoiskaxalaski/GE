@@ -18,63 +18,20 @@
 
   <ItemGroup>
     <Compile Include="Controllers\AccountContoller.cs" />
-    <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModeratorController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\pfdindisplayprobold.woff" />
-    <Content Include="Content\fonts\pfdindisplaypromedium.woff" />
-    <Content Include="Content\fonts\pfdindisplayproregular.woff" />
-    <Content Include="Content\img\avatar\g.png" />
-    <Content Include="Content\img\icon-arrow-8x12.png" />
-    <Content Include="Content\img\icon-close-12x12.png" />
-    <Content Include="Content\img\icon-close-24x24.png" />
-    <Content Include="Content\img\icon-ok-20.png" />
-    <Content Include="Content\img\icon-search-16x16.png" />
-    <Content Include="Content\img\logo.png" />
-    <Content Include="Content\img\plus.png" />
-    <Content Include="Content\img\remove.png" />
-    <Content Include="Content\img\rotate.png" />
-    <Content Include="Content\img\star23x21.png" />
-    <Content Include="Content\PagedList.css" />
-    <Content Include="Content\Site.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <None Include="Views\Manage\CreatePost.cshtml" />
     <None Include="Views\Moderator\Index.cshtml" />
     <None Include="wwwroot\Scripts\bootstrap-sortable.js" />
     <None Include="wwwroot\Scripts\bootstrap.js" />
-    <None Include="wwwroot\Scripts\bootstrap.min.js" />
-    <None Include="wwwroot\Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="wwwroot\Scripts\jquery-1.10.2.js" />
-    <None Include="wwwroot\Scripts\jquery-1.10.2.min.js" />
-    <None Include="wwwroot\Scripts\jquery-1.10.2.min.map" />
-    <None Include="wwwroot\Scripts\jquery.maskedinput.js" />
-    <None Include="wwwroot\Scripts\jquery.maskedinput.min.js" />
-    <None Include="wwwroot\Scripts\jquery.unobtrusive-ajax.js" />
-    <None Include="wwwroot\Scripts\jquery.unobtrusive-ajax.min.js" />
-    <None Include="wwwroot\Scripts\jquery.validate-vsdoc.js" />
-    <None Include="wwwroot\Scripts\jquery.validate.js" />
-    <None Include="wwwroot\Scripts\jquery.validate.min.js" />
-    <None Include="wwwroot\Scripts\jquery.validate.unobtrusive.js" />
-    <None Include="wwwroot\Scripts\jquery.validate.unobtrusive.min.js" />
-    <None Include="wwwroot\Scripts\modernizr-2.6.2.js" />
-    <None Include="wwwroot\Scripts\respond.js" />
-    <None Include="wwwroot\Scripts\respond.min.js" />
-    <None Include="wwwroot\icon-fonts\Flaticon.svg" />
-    <None Include="wwwroot\icon-fonts\fontawesome-webfont.svg" />
-    <None Include="wwwroot\icon-fonts\fontawesome-webfont.woff2" />
     <None Include="wwwroot\Source\bootstrap-4.2.1-dist.zip" />
     <None Include="wwwroot\Source\Flaticon.zip" />
     <None Include="wwwroot\Source\font-awesome-4.7.0.zip" />
@@ -98,6 +55,7 @@
     <PackageReference Include="PagedList.Core.Mvc" Version="1.2.0" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Caching" Version="4.5.0" />
+    <PackageReference Include="System.Runtime.Serialization.Json" Version="4.3.0" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="7.6.0" />
   </ItemGroup>
 

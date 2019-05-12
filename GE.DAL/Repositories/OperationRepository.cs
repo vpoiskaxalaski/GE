@@ -1,11 +1,9 @@
-﻿using GE.DAL.Model;
-using GE.DAL.Interfaces;
+﻿using GE.DAL.Interfaces;
+using GE.DAL.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace GE.DAL.Repositories
 {
@@ -15,7 +13,7 @@ namespace GE.DAL.Repositories
 
         public OperationRepository(DatabaseContext context)
         {
-            this.db = context;
+            db = context;
         }
         public void Create(Operation item)
         {
@@ -26,7 +24,9 @@ namespace GE.DAL.Repositories
         {
             Operation item = db.Operations.Find(id);
             if (item != null)
+            {
                 db.Operations.Remove(item);
+            }
         }
 
         public IEnumerable<Operation> Find(Func<Operation, bool> predicate)

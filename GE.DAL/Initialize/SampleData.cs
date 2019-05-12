@@ -1118,26 +1118,17 @@ namespace GE.DAL.Initialize
                 context.SaveChanges();
             }
 
-            //if (!context.ApplicationUsers.)
-            //{
-                //ApplicationUser admin = new ApplicationUser { UserName = "admin", Email = "admin@gmail.com" };
-                //userManager.CreateAsync(admin, ".System99");
-                //IdentityResult roleResult = roleManager.CreateAsync(new IdentityRole("Admin")).Result;
-                //if (roleResult.Succeeded)
-                //{
-                //    userManager.AddToRoleAsync(admin, "Admin");
-                //}
+            if (!context.ApplicationUsers.Any())
+            {
+                ApplicationUser manager = new ApplicationUser { UserName = "moderator", Email = "moderator@gmail.com" };
+                userManager.CreateAsync(manager, ".System99");
 
-
-                //ApplicationUser manager = new ApplicationUser { UserName = "moderator", Email = "moderator@gmail.com" };
-                //userManager.CreateAsync(manager, ".System99");
-
-                //IdentityResult roleResult = roleManager.CreateAsync(new IdentityRole("Moderator")).Result;
-                //if (roleResult.Succeeded)
-                //{
-                //    userManager.AddToRoleAsync(manager, "Moderator");
-                //}
-            //}
+                IdentityResult roleResult = roleManager.CreateAsync(new IdentityRole("Moderator")).Result;
+                if (roleResult.Succeeded)
+                {
+                    userManager.AddToRoleAsync(manager, "Moderator");
+                }
+            }
         }
 
     }

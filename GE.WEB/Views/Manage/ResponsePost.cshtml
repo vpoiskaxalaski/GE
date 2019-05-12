@@ -2,7 +2,7 @@
     <div class="view-header">
         <div class="container">
             <h1 class="view__title">
-                <img class="icon" src="~/img/icons8-колокол-48.png"/>
+                <img class="icon" src="~/img/icons8-колокол-48.png" />
                 Запросы на обмен от других пользователей
             </h1>
         </div>
@@ -47,34 +47,6 @@
             </tbody>
         </table>
         <div id="postInformation"></div>
-        @*<div class="videos-mask">
-                <div id="content">
-                    <ul class="videos-list vois">
-                        @foreach (diplom.Models.Order order in ViewBag.Orders)
-                        {
-                            <li class="voi">
-                                <a href="/Manage/ResponsePostInformatoin/@order.Id" title="@order.Post.Name">
-                                    <img class='voi__poster' src="@string.Concat("/Images/" + order.Post.UserId + "/", order.Post.ImagesGallery.ToList().First().Title, ".jpg")" />
-                                </a>
-                                <div class="voi__content">
-                                    <p class="voi__title">
-                                        <a class="voi__title-link" href="/Home/Post/@order.Id">
-                                            @order.Post.Name
-                                        </a>
-                                    </p>
-                                    <p class="voi__info">
-                                        @order.Post.Subcategory.Points, @order.Post.Subcategory.Name
-                                    </p>
-                                </div>
-                                <div class="overlay" original-title="">
-                                        <a class="overlay-link" href="/Manage/Post/@Post.Id"></a>
-                                    </div>
-
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>*@
     }
     else
     {

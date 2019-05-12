@@ -1,10 +1,9 @@
-﻿using GE.DAL.Model;
-using GE.DAL.Interfaces;
+﻿using GE.DAL.Interfaces;
+using GE.DAL.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GE.DAL.Repositories
 {
@@ -14,7 +13,7 @@ namespace GE.DAL.Repositories
 
         public ImagesGalleryRepository(DatabaseContext context)
         {
-            this.db = context;
+            db = context;
         }
         public void Create(ImagesGallery item)
         {
@@ -25,7 +24,9 @@ namespace GE.DAL.Repositories
         {
             ImagesGallery item = db.ImagesGalleries.Find(id);
             if (item != null)
+            {
                 db.ImagesGalleries.Remove(item);
+            }
         }
 
         public IEnumerable<ImagesGallery> Find(Func<ImagesGallery, bool> predicate)

@@ -1,5 +1,4 @@
 ﻿using GE.Models;
-using System.Threading.Tasks;
 
 namespace GE.SL.Interfaces
 {
@@ -14,8 +13,5 @@ namespace GE.SL.Interfaces
 
         void UpdateUserPoints(ApplicationUserVM user);
 
-        //bool Login(LoginViewModel model);
-
-        //Task<ApplicationUserVM> Registration(RegisterViewModel model);
     }
 }

@@ -14,5 +14,7 @@ namespace GE.SL.Interfaces
         void Delete(int id);
 
         void RemoveRange(ICollection<OrderVM> items);
+
+        void Update(int id, OrderVM order);
     }
 }

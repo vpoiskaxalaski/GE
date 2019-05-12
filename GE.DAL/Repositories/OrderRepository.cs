@@ -1,10 +1,9 @@
-﻿using GE.DAL.Model;
-using GE.DAL.Interfaces;
+﻿using GE.DAL.Interfaces;
+using GE.DAL.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GE.DAL.Repositories
 {
@@ -15,17 +14,24 @@ namespace GE.DAL.Repositories
 
         public OrderRepository(DatabaseContext context)
         {
-            this.db = context;
+            db = context;
         }
 
         public IEnumerable<Order> GetAll()
         {
-            return db.Orders.Include(x=>x.Post).Include(x=>x.User);
+            return db.Orders.Include(x => x.Post).Include(x => x.User);
         }
 
         public Order Get(int id)
         {
-            return db.Orders.FirstOrDefault(x=>x.PostId==id);
+            var o = db.Orders.FirstOrDefault(x => x.Id == id);
+            if (o != null)
+            {
+                o.Post = db.Posts.FirstOrDefault(x => x.Id == o.PostId);
+                o.User = db.ApplicationUsers.FirstOrDefault(x => x.Id == o.UserId);
+            }
+
+            return o;
         }
 
         public void Create(Order order)
@@ -37,7 +43,7 @@ namespace GE.DAL.Repositories
         {
             db.Entry(order).State = EntityState.Modified;
         }
-        public IEnumerable<Order> Find(Func<Order, Boolean> predicate)
+        public IEnumerable<Order> Find(Func<Order, bool> predicate)
         {
             return db.Orders.Where(predicate);
         }
@@ -45,7 +51,9 @@ namespace GE.DAL.Repositories
         {
             Order item = db.Orders.Find(id);
             if (item != null)
+            {
                 db.Orders.Remove(item);
+            }
         }
 
         public int GetCount()
