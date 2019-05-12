@@ -40,11 +40,15 @@ namespace GE.WEB.Controllers
         }
 
         [HttpGet]
+        //[Route("/Search")]
         public ActionResult Search(int? page, string q)
         {
             if (q != "" && q != null)
             {
-                var posts = _postsService.GetAll().Where(x => x.Name.Contains(q)).ToList();
+                var posts = _postsService.GetAll().Where(x => {
+                    string n = x.Name.ToUpper(), s = q.ToUpper();
+                    return n.Contains(s);
+                }).ToList();
                 if (posts.Count() == 0)
                     ViewBag.Posts = null;
                 else
@@ -61,7 +65,7 @@ namespace GE.WEB.Controllers
             else return RedirectToAction("Index");
         }
 
-        //[HttpGet("{id}")]
+
         [Route("/{id}")]
         public ActionResult Search(int id)
         {

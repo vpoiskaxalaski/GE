@@ -7456,7 +7456,9 @@ ul.pagination li a:hover:not(.active) {
 
 .videos-mask {
     position: relative;
-    margin-top: -5px
+    margin-top: -5px;
+   margin-left: 90px;
+}
 }
 
 .videos_carousel .videos-mask {
@@ -11471,7 +11473,7 @@ ul.pagination li a:hover:not(.active) {
 }
 
 .view__title {
-    margin: 6px 150px 6px 0;
+    margin: 6px 150px 0px 150px;
     line-height: 45px;
     font-size: 55px;
     font-weight: 400;

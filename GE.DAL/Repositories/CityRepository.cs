@@ -30,7 +30,7 @@ namespace GE.DAL.Repositories
 
         public IEnumerable<City> Find(Func<City, bool> predicate)
         {
-            return db.Cities;
+            return db.Cities.Where(predicate).ToList();
         }
 
         public City Get(int id)

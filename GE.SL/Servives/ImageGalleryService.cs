@@ -28,6 +28,7 @@ namespace GE.SL.Servives
             var images = map.Map<IEnumerable<ImagesGallery>, ICollection<ImagesGalleryVM>>(items);
             List<ImagesGalleryVM> result = new List<ImagesGalleryVM>();
             result.AddRange(images);
+
             return result.FindAll(x => x.PostId == postId);
         }
 

@@ -21,6 +21,9 @@ namespace GE.WEB.Controllers
             _imageGalleryService = imageGalleryService;
         }
 
+        [HttpGet]
+        [Route("/Moderator")]
+        [Route("/Moderator/Index")]
         public ActionResult Index(int? page)
         { 
             ViewBag.Message = TempData["Message"];
@@ -31,14 +34,15 @@ namespace GE.WEB.Controllers
         }
 
         [HttpPost]
-        public ActionResult ResolvePost(int id)
+        public IActionResult ResolvePost(int id)
         {
             var post = _postService.FindById(id); 
             post.Status = "1";
             _postService.Update(post);
             TempData["Message"] = "Пост был успешно одобрен";
 
-            return RedirectToAction("Index", "Moderator");
+            //return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

@@ -258,10 +258,11 @@ namespace GE.WEB.Controllers
                 //post.Subcategory = db.Subcategories.First(i => i.Name == model.Subcategory),
                 ViewBag.Message = "Пост успешно изменен";
                 ViewBag.Post = _postService.FindById(model.Id);
-                return View();
+
+                return RedirectToAction("Posts");
             }
             ViewBag.Error = "Описание должно иметь не менее 5 символов";
-            return View();
+            return RedirectToAction("Posts");
             //}
             //ViewBag.Error = "Что-то пошло не так";
             //return View(post);
@@ -299,6 +300,14 @@ namespace GE.WEB.Controllers
             else TempData["Message"] = "Что-то пошло не так";
 
             return RedirectToAction("Posts");
+        }
+
+
+        public bool RemoveImg(string path)
+        {
+
+
+            return true;
         }
 
         private OperationVM CreateOperation(bool SpentOrEarned, int valueOfBonus, string userId)

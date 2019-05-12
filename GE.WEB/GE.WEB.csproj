@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Compile Include="Controllers\AccountContoller.cs" />
+    <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModeratorController.cs" />

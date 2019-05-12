@@ -101,6 +101,8 @@ namespace GE.SL.Servives
             return imagesGallery;
         }
 
+
+
         private static string GetTime()
         {
             string localDateTime = "";
