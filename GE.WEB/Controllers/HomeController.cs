@@ -23,6 +23,7 @@ namespace GE.WEB.Controllers
             _accountService = accountService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             ViewBag.posts = _postsService.GetAll().Where(x => x.Status == "1");
@@ -69,6 +70,7 @@ namespace GE.WEB.Controllers
 
 
         [Route("/{id}")]
+        [HttpGet]
         public ActionResult Search(int id)
         {
             List<PostVM> posts = _postsService.GetAll().Where(x => x.SubcategoryId == id).ToList();
@@ -82,31 +84,6 @@ namespace GE.WEB.Controllers
             ViewBag.Posts = posts;
 
             return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         public static string GetTime()
