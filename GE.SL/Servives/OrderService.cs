@@ -102,10 +102,13 @@ namespace GE.SL.Servives
         public void Update(int id, OrderVM order)
         {
             var o = _unitOfWork.Orders.Get(id);
-            o.PostId = order.PostId;
-            o.UserId = order.UserId;
-            _unitOfWork.Orders.Update(o);
-            _unitOfWork.Save();
+            if (o != null)
+            {
+                o.PostId = order.PostId;
+                o.UserId = order.UserId;
+                _unitOfWork.Orders.Update(o);
+                _unitOfWork.Save();
+            }
         }
     }
 }

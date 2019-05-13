@@ -72,7 +72,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("<div class=\"autH\">\r\n    <div class=\"modal-header\">\r\n        <h3 class=\"title\">\r\n            Вход\r\n        </h3>\r\n    </div>\r\n    ");
             EndContext();
             BeginContext(162, 801, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1672ecb57c2a45aa90faac5a318db340", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "31ef98760db2458583ef6170c2ceab52", async() => {
                 BeginContext(240, 10, true);
                 WriteLiteral("\r\n        ");
                 EndContext();

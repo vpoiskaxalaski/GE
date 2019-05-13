@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace GE.WEB.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class OrderController : Controller
     {
         private IOrderService _orderService;
 
-        public ValuesController(IOrderService orderService)
+        public OrderController(IOrderService orderService)
         {
             _orderService = orderService;
         }
@@ -45,7 +45,7 @@ namespace GE.WEB.Controllers
         public void Put(int id, [FromBody]OrderVM value)
         {
             _orderService.Update(id, value);
-        }
+     }
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]

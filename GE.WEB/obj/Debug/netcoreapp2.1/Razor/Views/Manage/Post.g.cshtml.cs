@@ -241,7 +241,7 @@ WriteAttributeValue("", 2634, string.Concat("/images/" + ViewBag.Post.UserId + "
             ");
             EndContext();
             BeginContext(3291, 280, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "59142de33cc745cdb545982d452fea42", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2d65d04923794268aa88f7ce625b1927", async() => {
                 BeginContext(3361, 52, true);
                 WriteLiteral("\r\n                <input type=\"hidden\" name=\"postId\"");
                 EndContext();
@@ -277,7 +277,7 @@ WriteAttributeValue("", 3421, ViewBag.Post.Id, 3421, 16, false);
             WriteLiteral("\r\n            ");
             EndContext();
             BeginContext(3585, 279, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a37a8bda346a47fcb4b49d7a1c4064b9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "430d4f569b2b4e478027680850509f51", async() => {
                 BeginContext(3657, 48, true);
                 WriteLiteral("\r\n                <input type=\"hidden\" name=\"Id\"");
                 EndContext();

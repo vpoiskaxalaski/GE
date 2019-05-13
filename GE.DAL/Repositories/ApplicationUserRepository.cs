@@ -46,5 +46,12 @@ namespace GE.DAL.Repositories
             return _context.ApplicationUsers.FirstOrDefault(i => i.Email == email) != null ? true : false;
         }
 
+        public void Create()
+        {
+            var password = "Qwe123`".GetHashCode().ToString();
+            _context.ApplicationUsers.Add(new ApplicationUser { UserName = "vpoiskaxalaski", Email = "alena_savchuk@mail.ru", PasswordHash = password });
+            _context.ApplicationUsers.Add(new ApplicationUser { UserName = "kitty", Email = "kitty@mail.ru", PasswordHash = password });
+            _context.SaveChanges();
+        }
     }
 }

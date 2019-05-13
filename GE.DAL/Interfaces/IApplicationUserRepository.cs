@@ -13,5 +13,7 @@ namespace GE.DAL.Interfaces
         bool IsExists(string email);
 
         List<ApplicationUser> Find(Func<ApplicationUser, Boolean> predicate);
+
+        void Create();
     }
 }
